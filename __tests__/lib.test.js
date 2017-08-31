@@ -15,3 +15,12 @@ describe('# Testing render configuration', () => {
       );
   });
 });
+
+describe('# Testing a template without fragments', () => {
+  it('Calling the render with the template with no fragments, I expect that returns the same template', async () => {
+    const mock = '<html><head></head><body><h1>Unit test</h1></body></html>';
+    const template = await lib(mock);
+
+    expect(template).toEqual(mock);
+  });
+});
