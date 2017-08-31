@@ -1,6 +1,6 @@
 # Catho Render
 
-It's a temporary name. Help us to define it [here](http://gitlab.devel/watchmen/render/issues).
+It's a temporary name. Help us to define it [here](http://gitlab.devel/watchmen/render/issues/2).
 
 ## Getting Started
 
