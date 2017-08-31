@@ -1,4 +1,4 @@
-# Catho Render
+# Render
 
 It's a temporary name. Help us to define it [here](http://gitlab.devel/watchmen/render/issues/2).
 
