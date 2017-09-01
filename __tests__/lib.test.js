@@ -10,6 +10,7 @@ const mockServer = http.createServer((req, res) => {
 });
 beforeEach(() => {
   mockServer.listen(8000);
+  document.body.innerHTML = null;
 });
 afterEach(() => {
   mockServer.close();
@@ -33,10 +34,11 @@ describe('# Testing render configuration', () => {
 
 describe('# Testing a template without fragments', async () => {
   it('Calling the lib with the template with no fragments, I expect that returns the same template', async () => {
-    const mock = '<html><head></head><body><h1>Unit test</h1></body></html>';
-    const template = await lib(mock);
+    const originalTemplate = '<html><head></head><body><h1>Unit test</h1></body></html>';
+    const template = await lib(originalTemplate);
 
-    expect(template).toEqual(mock);
+    document.body.innerHTML = template;
+    expect(document.body.innerHTML).toMatchSnapshot();
   });
 });
 
@@ -46,19 +48,7 @@ describe('# Testing a template with fragments', async () => {
     const response = require('../__mocks__/fragment.js');
 
     const template = await lib(mock);
-    expect(template).toEqual(`<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Unit Test</title>
-  </head>
-  <body>
-    <section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-  </body>
-</html>`)
+    document.body.innerHTML = template;
+    expect(document.body.innerHTML).toMatchSnapshot();
   });
 });
