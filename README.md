@@ -28,6 +28,8 @@ Runs the tests
 
 ```sh
 npm test
+# or
+npm run coverage
 ```
 
 ### Contributing
