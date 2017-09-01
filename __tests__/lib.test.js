@@ -1,5 +1,10 @@
 const lib = require('../lib/index.js');
+const fs = require('fs');
 const ParameterException = require('../lib/exceptions/parameterException.js');
+
+beforeEach(() => {
+  document.body.innerHTML = null;
+});
 
 describe('# Testing render configuration', () => {
   it('Calling the render without the template parameter, I expect that returns a exception', () => {
@@ -16,11 +21,25 @@ describe('# Testing render configuration', () => {
   });
 });
 
-describe('# Testing a template without fragments', () => {
-  it('Calling the render with the template with no fragments, I expect that returns the same template', async () => {
-    const mock = '<html><head></head><body><h1>Unit test</h1></body></html>';
-    const template = await lib(mock);
+describe('# Testing a template without fragments', async () => {
+  it('Calling the lib with the template with no fragments, I expect that returns the same template', async () => {
+    const originalTemplate = '<html><head></head><body><h1>Unit test</h1></body></html>';
+    const renderedTemplate = await lib(originalTemplate);
 
-    expect(template).toEqual(mock);
+    document.body.innerHTML = renderedTemplate;
+    expect(document.body.innerHTML).toMatchSnapshot();
+  });
+});
+
+describe('# Testing a template with fragments', async () => {
+  it('Calling the render with the template with fragments, I expect that returns the template with the fragments rendered', async () => {
+    const originalTemplate = require('../__mocks__/simple-fragment.js');
+    const mockServer = require('../__mocks__/server.js')('../__mocks__/fragment.js');
+    mockServer.listen(8000);
+
+    const renderedTemplate = await lib(originalTemplate);
+    document.body.innerHTML = renderedTemplate;
+    expect(document.body.innerHTML).toMatchSnapshot();
+    mockServer.close();
   });
 });
