@@ -54,19 +54,18 @@ const template = 'your template code';
 const getRenderedTemplate = async () => await Render(template);
 ```
 
-## Getting Started
+## Development
+The first step is read the [contribution guide](http://gitlab.devel/watchmen/render/blob/master/CONTRIBUTING.MD).
+
+### Getting Started
 Prerequisites:
 - [Git](https://git-scm.com/);
 - [Node.js](https://nodejs.org/en/);
 
 Start with the following command lines:
-
 ```sh
 git clone http://gitlab.devel/watchmen/render
 ```
-
-## Development
-The first step is read the [contribution guide](http://gitlab.devel/watchmen/render/blob/master/CONTRIBUTING.MD).
 
 ### Dependencies instalation
 After you clone the project, you need access the folder and install the project's dependencies, for it runs the command below:
