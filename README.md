@@ -4,7 +4,7 @@ It's a temporary name. Help us to define it [here](http://gitlab.devel/watchmen/
 ## Instalation
 For install the project execute de command below:
 ```sh
-npm install --save render
+npm install --save @cathodevel/render
 ```
 
 ## How it works
@@ -48,7 +48,7 @@ The Render will return:
 
 #### The code example
 ```javascript
-const Render = require('render');
+const Render = require('@cathodevel/render');
 const template = 'your template code';
 
 const getRenderedTemplate = async () => await Render(template);
