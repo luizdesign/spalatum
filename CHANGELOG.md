@@ -9,7 +9,7 @@
 - Basic documentation
 
 ## v0.1.0 - August/2017
-###Added
+### Added
 - Basic fragment parser
 - Code Lint with Airbnb pattern
 - Editorconfig
