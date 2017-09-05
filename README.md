@@ -20,7 +20,7 @@ Do you have a template:
     <title>Template Example</title>
   </head>
   <body>
-    <fragment href="http://example.fragment.com/"></fragment>
+    <fragment href="http://example.fragment.com/" />
   </body>
 </html>
 ```
