@@ -5,6 +5,6 @@ module.exports = `<!DOCTYPE html>
     <title>Unit Test</title>
   </head>
   <body>
-    <fragment href="http://localhost:8000/"></fragment>
+    <fragment href="http://localhost:8000/" />
   </body>
 </html>`;
