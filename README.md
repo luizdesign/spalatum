@@ -46,6 +46,11 @@ The Render will return:
 </html>
 ```
 
+It's possible to set a proxy server as a fragment attribute, if needed:
+```html
+  <fragment href="http://example.fragment.com/" proxy="example.proxyserver.com" />
+```
+
 #### The code example
 ```javascript
 const Render = require('@cathodevel/render');
