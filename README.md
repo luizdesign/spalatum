@@ -4,21 +4,16 @@ It's a temporary name. Help us to define it [here](http://gitlab.devel/watchmen/
 ## Instalation
 For install the project execute de command below:
 ```sh
-npm install --save @cathodevel/render
+yarn add @cathodevel/render
 ```
 
 ## How it works
 The Render is a lib to render fragments in a template.
 
 ### Example
-Do you have a template:
+Given you have this template:
 ```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Template Example</title>
-  </head>
+<html>
   <body>
     <fragment href="http://example.fragment.com/" />
   </body>
@@ -32,12 +27,7 @@ If the route http://example.fragment.com/ response with:
 ```
 The Render will return:
 ```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Template Example</title>
-  </head>
+<html>
   <body>
     <header>
       <h1>This is a Fragment</h1>
@@ -50,6 +40,9 @@ It's possible to set a proxy server as a fragment attribute, if needed:
 ```html
   <fragment href="http://example.fragment.com/" proxy="example.proxyserver.com" />
 ```
+
+It's possible to use multiple fragments together to assembly an application:
+
 
 #### The code example
 ```javascript
