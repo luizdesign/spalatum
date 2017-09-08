@@ -56,5 +56,6 @@ describe('# Testing a template with fragments using proxy', async () => {
     document.body.innerHTML = renderedTemplate;
     expect(document.body.innerHTML).toMatchSnapshot();
     mockServer.close();
+    mockProxyServer.close();
   });
 });
