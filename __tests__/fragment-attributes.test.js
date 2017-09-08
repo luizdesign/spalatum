@@ -24,4 +24,15 @@ describe('# Testing the fragment-attributes module', () => {
         proxy: null,
       });
   });
+
+  it('Calling the module with multline fragment, I expect that returns an object with the atrributes href and proxy but proxy empty', () => {
+    const fragment = `<fragment href="localhost:3000"
+      proxy="localhost:2000"
+    />`;
+    expect(attributesModule(fragment))
+      .toEqual({
+        href: 'localhost:3000',
+        proxy: 'localhost:2000',
+      });
+  });
 });
