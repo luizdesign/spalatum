@@ -42,6 +42,16 @@ It's possible to set a proxy server as a fragment attribute, if needed:
 ```
 
 It's possible to use multiple fragments together to assembly an application:
+```html
+<html>
+  <body>
+    <fragment href="http://header.fragment.com/" />
+    <div>Main Localy Rendered App</div>
+    <fragment href="http://banner.fragment.com/" proxy="proxyserver.com" />
+    <fragment href="http://footer.fragment.com/" />
+  </body>
+</html>
+```
 
 
 #### The code example
