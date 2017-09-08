@@ -20,7 +20,7 @@ Do you have a template:
     <title>Template Example</title>
   </head>
   <body>
-    <fragment href="http://example.fragment.com/"></fragment>
+    <fragment href="http://example.fragment.com/" />
   </body>
 </html>
 ```
@@ -44,6 +44,11 @@ The Render will return:
     </header>
   </body>
 </html>
+```
+
+It's possible to set a proxy server as a fragment attribute, if needed:
+```html
+  <fragment href="http://example.fragment.com/" proxy="example.proxyserver.com" />
 ```
 
 #### The code example
