@@ -3,6 +3,9 @@
   "version": "0.2.0",
   "description": "Render template and fragments",
   "main": "index.js",
+  "engines" : {
+    "node" : ">=7.10.0"
+  },
   "scripts": {
     "test": "node_modules/.bin/jest",
     "coverage": "node_modules/.bin/jest --coverage",
