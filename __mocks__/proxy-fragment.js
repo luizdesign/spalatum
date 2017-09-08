@@ -5,6 +5,6 @@ module.exports = `<!DOCTYPE html>
     <title>Unit Test</title>
   </head>
   <body>
-    <fragment href="http://localhost:7000/" proxy="localhost:5000"></fragment>
+    <fragment href="http://localhost:7000/" proxy="localhost:5000" />
   </body>
 </html>`;
