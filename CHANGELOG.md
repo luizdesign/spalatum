@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.1 - September/2017
+### Fixes
+- Proxy requests
+### Changed
+- Refactoring snapshot tests
+- Use superagent to make simply requests
+
 ## v0.2.0 - September/2017
 ### Added
 - Support to proxy attribute
