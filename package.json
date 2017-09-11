@@ -1,10 +1,10 @@
 {
   "name": "@cathodevel/render",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Render template and fragments",
   "main": "index.js",
-  "engines" : {
-    "node" : ">=7.10.0"
+  "engines": {
+    "node": ">=7.10.0"
   },
   "scripts": {
     "test": "node_modules/.bin/jest",
@@ -22,6 +22,10 @@
   ],
   "author": "Watchmen",
   "license": "MIT",
+  "dependencies": {
+    "superagent": "^3.6.0",
+    "superagent-proxy": "^1.0.2"
+  },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "eslint": "^3.14.1",
