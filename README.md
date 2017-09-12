@@ -5,7 +5,7 @@ It's a temporary name. Help us to define it [here](http://gitlab.devel/watchmen/
 The Render is a lib to render fragments in a template.
 
 ## Instalation
-For install execute de command below:
+To install execute de command below:
 ```sh
 # You can use npm, as well
 yarn add @cathodevel/render
