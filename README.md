@@ -55,7 +55,7 @@ You can use multiple fragments together to assembly a web application:
 ```
 
 
-#### This nodejs example call the Render function, passing to it a template string and get the return value as a Promise instance, which will be resolved with the parsed html:
+This nodejs example call the Render function, passing to it a template string and get the return value as a Promise instance, which will be resolved with the parsed html:
 ```javascript
 const Render = require('@cathodevel/render');
 const express = require('express');
