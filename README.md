@@ -1,14 +1,15 @@
 # Render
 It's a temporary name. Help us to define it [here](http://gitlab.devel/watchmen/render/issues/2).
 
-## Instalation
-For install the project execute de command below:
-```sh
-yarn add @cathodevel/render
-```
-
 ## How it works
 The Render is a lib to render fragments in a template.
+
+## Instalation
+For install execute de command below:
+```sh
+# You can use npm, as well
+yarn add @cathodevel/render
+```
 
 ### Example
 Given you have this template:
@@ -19,7 +20,7 @@ Given you have this template:
   </body>
 </html>
 ```
-If the route http://example.fragment.com/ response with:
+And the route http://example.fragment.com/ responds with:
 ```html
 <header>
   <h1>This is a Fragment</h1>
@@ -38,56 +39,68 @@ The Render will return:
 
 It's possible to set a proxy server as a fragment attribute, if needed:
 ```html
-  <fragment href="http://example.fragment.com/" proxy="example.proxyserver.com" />
+  <!-- Note that it's required to set the protocol (`http(s)`) in the proxy url attribute -->
+  <fragment href="http://example.fragment.com/" proxy="http://example.proxyserver.com" />
 ```
-
-It's possible to use multiple fragments together to assembly an application:
+You can use multiple fragments together to assembly a web application:
 ```html
 <html>
   <body>
     <fragment href="http://header.fragment.com/" />
     <div>Main Localy Rendered App</div>
-    <fragment href="http://banner.fragment.com/" proxy="proxyserver.com" />
+    <fragment href="http://banner.fragment.com/" proxy="http://proxyserver.com" />
     <fragment href="http://footer.fragment.com/" />
   </body>
 </html>
 ```
 
 
-#### The code example
+#### This nodejs example call the Render function, passing to it a template string and get the return value as a Promise instance, which will be resolved with the parsed html:
 ```javascript
 const Render = require('@cathodevel/render');
-const template = 'your template code';
+const express = require('express');
 
-const getRenderedTemplate = async () => await Render(template);
+const app = express();
+
+app.get('/', async (req, res) => {
+  const template = `
+    <html>
+      <body>
+        <fragment href="www.catho.com.br" />
+      </body>
+    </html>
+  `;
+
+  const templateResult = await Render(template);
+  res.send(templateResult);
+});
+
+app.listen(3000);
+
 ```
 
-## Development
-The first step is read the [contribution guide](http://gitlab.devel/watchmen/render/blob/master/CONTRIBUTING.MD).
+## Contributing
 
-### Getting Started
-Prerequisites:
-- [Git](https://git-scm.com/);
-- [Node.js](https://nodejs.org/en/);
+- Check the [issues](http://gitlab.devel/watchmen/render/issues) to ensure that there is not someone already working on it
+- Check our [contribution guide](http://gitlab.devel/watchmen/render/blob/master/CONTRIBUTING.MD)
 
-Start with the following command lines:
+### Technical prerequisites
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/en/)
+
+Clone this repository:
 ```sh
 git clone http://gitlab.devel/watchmen/render
 ```
 
-### Dependencies instalation
-After you clone the project, you need access the folder and install the project's dependencies, for it runs the command below:
+Access the folder and install the project's dependencies:
 ```sh
 cd render && npm install
 ```
 
-### Running the tests
-Before send a Pull Request, always runs the tests, for it execute the command below:
+Before send a pull request, always runs the unit tests:
 ```sh
 npm test
 # or
 npm run coverage
 ```
-
-## Contributing
-Use [GitLab issues](http://gitlab.devel/watchmen/render/issues) for requests. Learn how to [contribute](http://gitlab.devel/watchmen/render/blob/master/CONTRIBUTING.MD).
