@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`# Testing a cached request Calling the render with a cached request, I expect that returns the same template without request this fragment again 1`] = `
+"<body>
+    <section>
+  <header>
+    <h1>This is a Fragment</h1>
+  </header>
+</section>
+  
+</body>"
+`;
+
 exports[`# Testing a template with fragments Calling the render with the template with fragments, I expect that returns the template with the fragments rendered 1`] = `
 "<body>
     <section>

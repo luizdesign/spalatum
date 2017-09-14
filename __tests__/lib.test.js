@@ -59,3 +59,25 @@ describe('# Testing a template with fragments using proxy', async () => {
     mockProxyServer.close();
   });
 });
+
+describe('# Testing a cached request', async () => {
+  it('Calling the render with a cached request, I expect that returns the same template without request this fragment again', async () => {
+    const originalTemplate = require('../__mocks__/cache-template.js');
+    const mockServer = require('../__mocks__/server.js')('../__mocks__/fragment.js');
+    mockServer.listen(8000);
+
+    const renderedTemplate = await lib(originalTemplate);
+    const objectContains = jasmine.objectContaining;
+    document.body.outerHTML = renderedTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
+    expect(Object.keys(cache).length)
+      .toEqual(1);
+    expect(cache[Object.keys(cache)[0]])
+      .toEqual(objectContains({
+        content: expect.any(String),
+        timestamp: expect.any(String),
+      }));
+
+    mockServer.close();
+  });
+});
