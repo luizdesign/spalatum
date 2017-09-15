@@ -7,8 +7,8 @@ The Render is a lib to render fragments in a template.
 ## Instalation
 To install execute de command below:
 ```sh
-# You can use npm, as well
-yarn add @cathodevel/render
+# You can use yarn, as well
+npm install @cathodevel/render
 ```
 
 ### Example
