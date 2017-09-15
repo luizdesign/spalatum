@@ -59,7 +59,7 @@ Example:
 ---
 
 ## Instalation
-To insta *Render Lib*, use the command below:
+To install *Render Lib*, use the command below:
 ```sh
 # You can use npm, as well
 yarn add @cathodevel/render
