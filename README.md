@@ -32,6 +32,8 @@ Example:
 #### cache *(optional)*
 *Render Lib* represent cache lifetime as *[Momentjs](http://momentjs.com/docs/)* does.
 
+If you want to know how cache works "under the hood", see the [cache diagram](https://drive.google.com/file/d/0B4FRF2kGUDbcTTlrbFNsZnNCZW8/view) for more details.
+
 Example: 
 
 | Time	| Cache attribute |
