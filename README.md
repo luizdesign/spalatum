@@ -30,14 +30,15 @@ Example:
 ```
 
 #### cache *(optional)*
-*Render Lib* represent cache lifetime as *[Momentjs](http://momentjs.com/docs/)* does.
+The presence of **cache** attribute is optional, if you use, the fragment will be cached as you specify, if you don't, the fragment will be requested each time the page is loaded. 
 
-If you want to know how cache works "under the hood", see the [cache diagram](https://drive.google.com/file/d/0B4FRF2kGUDbcTTlrbFNsZnNCZW8/view) for more details.
+*Render Lib* represent cache lifetime as *[Momentjs](http://momentjs.com/docs/)* does.
 
 Example: 
 
 | Time	| Cache attribute |
 |-----|:-----------|
+| no cache	| don't use the cache attribute |
 | 10 years	| 10y |
 | 3 quarters | 	3Q |
 | 6 months | 	6M |
@@ -57,6 +58,18 @@ Example:
 <fragment href="http://example.fragment.com/" cache="10m" />
 ```
 
+#### Caching the fragment for 10 days:
+```
+<fragment href="http://example.fragment.com/" cache="10d" />
+```
+
+#### No Cache:
+If you don't want to use cache, just ommit the attribute:
+```
+<fragment href="http://example.fragment.com/" />
+```
+
+If you want to know how this cache works "under the hood", see the [cache diagram](https://drive.google.com/file/d/0B4FRF2kGUDbcTTlrbFNsZnNCZW8/view) for more details.
 
 ---
 
