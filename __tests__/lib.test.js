@@ -1,9 +1,23 @@
 const lib = require('../lib/index.js');
 const fs = require('fs');
+const mockdate = require('mockdate');
+const superagentProxy = require('superagent-proxy');
 const ParameterException = require('../lib/exceptions/parameterException.js');
+const responseMock = require('../__mocks__/response');
 
+let mockContentType = 'text/html';
+
+global.superagent = require('superagent');
+superagentProxy(superagent);
 beforeEach(() => {
   document.body.outerHTML = null;
+});
+
+afterEach(() => {
+  superagent = require('superagent');
+  superagentProxy(superagent);
+  cache = {};
+  mockdate.reset();
 });
 
 describe('# Testing render configuration', () => {
@@ -31,19 +45,6 @@ describe('# Testing a template without fragments', async () => {
   });
 });
 
-describe('# Testing a template with fragments', async () => {
-  it('Calling the render with the template with fragments, I expect that returns the template with the fragments rendered', async () => {
-    const originalTemplate = require('../__mocks__/simple-template.js');
-    const mockServer = require('../__mocks__/server.js')('../__mocks__/fragment.js');
-    mockServer.listen(8000);
-
-    const renderedTemplate = await lib(originalTemplate);
-    document.body.outerHTML = renderedTemplate;
-    expect(document.body.outerHTML).toMatchSnapshot();
-    mockServer.close();
-  });
-});
-
 describe('# Testing a template with fragments using proxy', async () => {
   it('Calling the render with the template with fragments using proxy, I expect that returns the template with the fragments rendered', async () => {
     const originalTemplate = require('../__mocks__/proxy-template.js');
@@ -57,5 +58,79 @@ describe('# Testing a template with fragments using proxy', async () => {
     expect(document.body.outerHTML).toMatchSnapshot();
     mockServer.close();
     mockProxyServer.close();
+  });
+});
+
+describe('# Testing a template with fragments', async () => {
+  it('Calling the render with the template with fragments, I expect that returns the template with the fragments rendered', async () => {
+    const originalTemplate = require('../__mocks__/simple-template.js');
+    superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, require('../__mocks__/fragment.js'), mockContentType)
+    );
+
+    const renderedTemplate = await lib(originalTemplate);
+    document.body.outerHTML = renderedTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
+  });
+});
+
+describe('# Testing a cached request', async () => {
+  it('Calling the render with a cached request, I expect that returns the same template without request this fragment again', async () => {
+    const cacheObject = {};
+    const originalTemplate = require('../__mocks__/cache-template.js');
+
+    superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, require('../__mocks__/fragment.js'), mockContentType)
+    );
+
+    let renderedTemplate = await lib(originalTemplate, cacheObject);
+    const objectContains = jasmine.objectContaining;
+    document.body.outerHTML = renderedTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
+
+    expect(Object.keys(cacheObject).length)
+      .toEqual(1);
+    expect(cacheObject[Object.keys(cacheObject)[0]])
+      .toEqual(objectContains({
+        content: expect.any(String),
+        timestamp: expect.any(String),
+      }));
+
+    expect(superagent.get).toHaveBeenCalledTimes(1);
+
+    const mockedDate = new Date();
+    mockedDate.setMinutes(mockedDate.getMinutes() + 5);
+    mockdate.set(mockedDate);
+
+    renderedTemplate = await lib(originalTemplate, cacheObject);
+    document.body.outerHTML = renderedTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
+
+    expect(superagent.get).toHaveBeenCalledTimes(1);
+  });
+
+  it('Calling the render with a cached but expired request, I expect the fragment is requested again', async () => {
+    const cacheObject = {};
+    const originalTemplate = require('../__mocks__/cache-template.js');
+
+    superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, require('../__mocks__/fragment.js'), mockContentType)
+    );
+
+    let renderedTemplate = await lib(originalTemplate, cacheObject);
+    const objectContains = jasmine.objectContaining;
+    document.body.outerHTML = renderedTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
+    expect(superagent.get).toHaveBeenCalledTimes(1);
+
+    const mockedDate = new Date();
+    mockedDate.setMinutes(mockedDate.getMinutes() + 11);
+    mockdate.set(mockedDate);
+
+    renderedTemplate = await lib(originalTemplate, cacheObject);
+    document.body.outerHTML = renderedTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
+
+    expect(superagent.get).toHaveBeenCalledTimes(2);
   });
 });
