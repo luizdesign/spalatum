@@ -23,6 +23,7 @@
   "author": "Watchmen",
   "license": "MIT",
   "dependencies": {
+    "bunyan": "^1.8.12",
     "mockdate": "^2.0.2",
     "moment": "^2.18.1",
     "superagent": "^3.6.0",
