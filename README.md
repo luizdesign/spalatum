@@ -76,8 +76,8 @@ If you want to know how this cache works "under the hood", see the [cache diagra
 ## Instalation
 To install *Render Lib*, use the command below:
 ```sh
-# You can use npm, as well
-yarn add @cathodevel/render
+# You can use yarn, as well
+npm install @cathodevel/render
 ```
 
 ## Getting Started
