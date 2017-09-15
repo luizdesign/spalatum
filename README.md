@@ -8,37 +8,6 @@ Some of RenderLib's features and benefits:
 * **Composes pre-rendered markup on the backend**. This is important for SEO and fastens the initial render.
 * **Enforces performance budget**. This is quite challenging otherwise, because there is no single point where you can control performance.
 
-
-## How it works
-The Render Lib parse fragments, reperesented by ```<fragment />```, in your template.
-
-### Example
-
-Given you have this template:
-```html
-<html>
-  <body>
-    <fragment href="http://example.fragment.com/" />
-  </body>
-</html>
-```
-And the route http://example.fragment.com/ responds with:
-```html
-<header>
-  <h1>This is a Fragment</h1>
-</header>
-```
-The Render will return:
-```html
-<html>
-  <body>
-    <header>
-      <h1>This is a Fragment</h1>
-    </header>
-  </body>
-</html>
-```
-
 ## Fragment
 
 A fragment is an http(s) server that renders only the part of the page and sets `Link` header to provide urls to CSS and JavaScript resources. Check our **[example app using *Render Lib*](http://gitlab.devel/frontend-platform/render-scaffolding)** for the skeleton implementation.
@@ -98,7 +67,6 @@ yarn add @cathodevel/render
 
 ## Getting Started
 To get started, you can create your own app using ```"@cathodevel/render": "^VERSION"``` as dependencie in your ```package.json```; or clone the **[app skeleton using nodejs and *Render Lib* (RECOMENDED)](http://gitlab.devel/frontend-platform/render-scaffolding)** that we provide.
-
 
 ### Example
 Given you have this template:
