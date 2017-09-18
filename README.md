@@ -16,12 +16,15 @@ We understand "Fragment" as every endpoint hosted on http(s) server that provide
 You can represent a Fragment using  the ```<fragment />``` tag with this attributes: href, proxy, cache.
 
 #### href *(needed)*
-Represent the endpoint that provide the content you want to include in your page. 
+Represent the endpoint that provide the content you want to include in your page.
+
+This endpoint must returns `200` as status code and `text/html` as content-type. Otherwise it will not be rendered.
+
 Example:
 ```
 <fragment href="http://example.fragment.com/" />
 ```
-#### proxy *(optional)* 
+#### proxy *(optional)*
 If your *href* need to be accessed via proxy, use the complete proxy url as *PROTOCOL*://*HOST*:*PORT*
 
 Example:
@@ -30,11 +33,11 @@ Example:
 ```
 
 #### cache *(optional)*
-The presence of **cache** attribute is optional, if you use, the fragment will be cached as you specify, if you don't, the fragment will be requested each time the page is loaded. 
+The presence of **cache** attribute is optional, if you use, the fragment will be cached as you specify, if you don't, the fragment will be requested each time the page is loaded.
 
 *Render Lib* represent cache lifetime as *[Momentjs](http://momentjs.com/docs/)* does.
 
-Example: 
+Example:
 
 | Time	| Cache attribute |
 |-----|:-----------|
