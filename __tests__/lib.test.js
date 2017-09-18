@@ -37,12 +37,17 @@ describe('# Testing render configuration', () => {
 
 describe('# Testing a template with error in fragment request', async () => {
   it('Calling the render with error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    const originalTemplate = require('../__mocks__/error-template.js');
+    const genericErrorTemplate = require('../__mocks__/error-template.js');
+    const renderedGenericErrorTemplate = await lib(genericErrorTemplate, {});
+    document.body.outerHTML = renderedGenericErrorTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
 
-    const renderedTemplate = await lib(originalTemplate, {});
-    document.body.outerHTML = renderedTemplate;
+    const notFoundErrorTemplate = require('../__mocks__/notfound-template.js');
+    const renderedNotFoundErrorTemplate = await lib(notFoundErrorTemplate);
+    document.body.outerHTML = renderedNotFoundErrorTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
   });
+
 });
 
 describe('# Testing a template without fragments', async () => {
