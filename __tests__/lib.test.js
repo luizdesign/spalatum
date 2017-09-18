@@ -1,21 +1,19 @@
 const lib = require('../lib/index.js');
 const fs = require('fs');
 const mockdate = require('mockdate');
+const originalSuperagent = require('superagent');
 const superagentProxy = require('superagent-proxy');
 const ParameterException = require('../lib/exceptions/parameterException.js');
 const responseMock = require('../__mocks__/response');
 
-let mockContentType = 'text/html';
+const originalGet = originalSuperagent.get;
+const mockContentType = 'text/html';
 
-global.superagent = require('superagent');
-superagentProxy(superagent);
 beforeEach(() => {
   document.body.outerHTML = null;
-});
-
-afterEach(() => {
-  superagent = require('superagent');
+  global.superagent = originalSuperagent;
   superagentProxy(superagent);
+  superagent.get = originalGet;
   cache = {};
   mockdate.reset();
 });
@@ -46,15 +44,22 @@ describe('# Testing a template with error in fragment request', async () => {
     const renderedNotFoundErrorTemplate = await lib(notFoundErrorTemplate);
     document.body.outerHTML = renderedNotFoundErrorTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
-  });
 
+    const simpleTemplate = require('../__mocks__/simple-template.js');
+    superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, simpleTemplate, 'application/json')
+    );
+
+    const renderedSimpleTemplate = await lib(simpleTemplate);
+    document.body.outerHTML = renderedSimpleTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
+  });
 });
 
 describe('# Testing a template without fragments', async () => {
   it('Calling the lib with the template with no fragments, I expect that returns the same template', async () => {
     const originalTemplate = '<html><head></head><body><h1>Unit test</h1></body></html>';
     const renderedTemplate = await lib(originalTemplate);
-
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
   });
@@ -135,6 +140,7 @@ describe('# Testing a cached request', async () => {
     let renderedTemplate = await lib(originalTemplate, cacheObject);
     const objectContains = jasmine.objectContaining;
     document.body.outerHTML = renderedTemplate;
+
     expect(document.body.outerHTML).toMatchSnapshot();
     expect(superagent.get).toHaveBeenCalledTimes(1);
 

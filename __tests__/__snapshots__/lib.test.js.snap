@@ -64,6 +64,13 @@ exports[`# Testing a template with error in fragment request Calling the render 
 </body>"
 `;
 
+exports[`# Testing a template with error in fragment request Calling the render with error in the fragment request, I expect that returns the template with the fragments rendered in blank 3`] = `
+"<body>
+    
+  
+</body>"
+`;
+
 exports[`# Testing a template with fragments Calling the render with the template with fragments, I expect that returns the template with the fragments rendered 1`] = `
 "<body>
     <section>
