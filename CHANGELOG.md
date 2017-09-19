@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.0 - September/2017
+### Added
+- Error Handler to fragment request
+- Log the erros in stdout and file (**logs/**)
+
 ## v0.3.0 - September/2017
 ### Added
 - Cache system based on memory (see more in [#16](http://gitlab.devel/watchmen/render/merge_requests/16))
