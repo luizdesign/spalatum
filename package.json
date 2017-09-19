@@ -1,6 +1,6 @@
 {
   "name": "@cathodevel/render",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Render template and fragments",
   "main": "index.js",
   "engines": {
@@ -23,6 +23,7 @@
   "author": "Watchmen",
   "license": "MIT",
   "dependencies": {
+    "bunyan": "^1.8.12",
     "mockdate": "^2.0.2",
     "moment": "^2.18.1",
     "superagent": "^3.6.0",
