@@ -2,7 +2,7 @@
 
 ## v0.4.1 - September/2017
 ### Changed
-- Duplicated logic on error hander function
+- Removing duplicated logic on error hander function
 
 ## v0.4.0 - September/2017
 ### Added
