@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.1 - September/2017
+### Changed
+- Removing duplicated logic on error hander function
+
 ## v0.4.0 - September/2017
 ### Added
 - Error Handler to fragment request
