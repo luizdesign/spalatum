@@ -1,5 +1,5 @@
-const cachingModule = require('../lib/fragment-caching');
-const responseMock = require('../__mocks__/response');
+const cachingModule = require('../../lib/fragment-caching');
+const responseMock = require('../../__mocks__/response');
 
 let mockResponseSmaller50 = 'unit test unit test unit test unit test unit test';
 let mockResponseGreather50 = `${mockResponseSmaller50} test unit test`;
