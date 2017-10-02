@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.2 - September/2017
+### Added
+- HTPS integration test
+
 ## v0.4.1 - September/2017
 ### Changed
 - Removing duplicated logic on error hander function
