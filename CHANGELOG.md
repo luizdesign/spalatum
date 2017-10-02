@@ -2,7 +2,7 @@
 
 ## v0.4.2 - October/2017
 ### Added
-- HTPS integration test
+- HTPS integration test #20
 
 ## v0.4.1 - September/2017
 ### Changed
