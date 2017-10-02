@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.4.2 - September/2017
+## v0.4.2 - October/2017
 ### Added
 - HTPS integration test
 
