@@ -1,4 +1,3 @@
-const originalSuperagent = require('superagent');
 const lib = require('../../lib/index.js');
 const mockPath = '../../__mocks__';
 
