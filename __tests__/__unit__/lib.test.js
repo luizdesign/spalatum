@@ -1,10 +1,12 @@
-const lib = require('../lib/index.js');
 const fs = require('fs');
 const mockdate = require('mockdate');
 const originalSuperagent = require('superagent');
 const superagentProxy = require('superagent-proxy');
-const ParameterException = require('../lib/exceptions/parameterException.js');
-const responseMock = require('../__mocks__/response');
+const lib = require('../../lib/index.js');
+const ParameterException = require('../../lib/exceptions/parameterException.js');
+
+const mockPath = '../../__mocks__';
+const responseMock = require(`${mockPath}/response`);
 
 const originalGet = originalSuperagent.get;
 const mockContentType = 'text/html';
@@ -35,17 +37,17 @@ describe('# Testing render configuration', () => {
 
 describe('# Testing a template with error in fragment request', async () => {
   it('Calling the render with error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    const genericErrorTemplate = require('../__mocks__/error-template.js');
+    const genericErrorTemplate = require(`${mockPath}/error-template.js`);
     const renderedGenericErrorTemplate = await lib(genericErrorTemplate, {});
     document.body.outerHTML = renderedGenericErrorTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
 
-    const notFoundErrorTemplate = require('../__mocks__/notfound-template.js');
+    const notFoundErrorTemplate = require(`${mockPath}/notfound-template.js`);
     const renderedNotFoundErrorTemplate = await lib(notFoundErrorTemplate);
     document.body.outerHTML = renderedNotFoundErrorTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
 
-    const simpleTemplate = require('../__mocks__/simple-template.js');
+    const simpleTemplate = require(`${mockPath}/simple-template.js`);
     superagent.get = jest.fn().mockReturnValue(
       responseMock(200, simpleTemplate, 'application/json')
     );
@@ -67,9 +69,9 @@ describe('# Testing a template without fragments', async () => {
 
 describe('# Testing a template with fragments using proxy', async () => {
   it('Calling the render with the template with fragments using proxy, I expect that returns the template with the fragments rendered', async () => {
-    const originalTemplate = require('../__mocks__/proxy-template.js');
-    const mockServer = require('../__mocks__/server.js')('../__mocks__/fragment.js');
-    const mockProxyServer = require('../__mocks__/proxy-server.js')('http://localhost:7000');
+    const originalTemplate = require(`${mockPath}/proxy-template.js`);
+    const mockServer = require(`${mockPath}/server.js`)('./fragment.js');
+    const mockProxyServer = require(`${mockPath}/proxy-server.js`)('http://localhost:7000');
     mockProxyServer.listen(5000);
     mockServer.listen(7000);
 
@@ -83,9 +85,9 @@ describe('# Testing a template with fragments using proxy', async () => {
 
 describe('# Testing a template with fragments', async () => {
   it('Calling the render with the template with fragments, I expect that returns the template with the fragments rendered', async () => {
-    const originalTemplate = require('../__mocks__/simple-template.js');
+    const originalTemplate = require(`${mockPath}/simple-template.js`);
     superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, require('../__mocks__/fragment.js'), mockContentType)
+      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
     const renderedTemplate = await lib(originalTemplate);
@@ -97,10 +99,10 @@ describe('# Testing a template with fragments', async () => {
 describe('# Testing a cached request', async () => {
   it('Calling the render with a cached request, I expect that returns the same template without request this fragment again', async () => {
     const cacheObject = {};
-    const originalTemplate = require('../__mocks__/cache-template.js');
+    const originalTemplate = require(`${mockPath}/cache-template.js`);
 
     superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, require('../__mocks__/fragment.js'), mockContentType)
+      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
     let renderedTemplate = await lib(originalTemplate, cacheObject);
@@ -131,10 +133,10 @@ describe('# Testing a cached request', async () => {
 
   it('Calling the render with a cached but expired request, I expect the fragment is requested again', async () => {
     const cacheObject = {};
-    const originalTemplate = require('../__mocks__/cache-template.js');
+    const originalTemplate = require(`${mockPath}/cache-template.js`);
 
     superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, require('../__mocks__/fragment.js'), mockContentType)
+      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
     let renderedTemplate = await lib(originalTemplate, cacheObject);
