@@ -136,7 +136,6 @@ You can use multiple fragments together to assembly a web application:
 </html>
 ```
 
-
 This nodejs example call the Spalatum function, passing to it a template string and get the return value as a Promise instance, which will be resolved with the parsed html:
 ```javascript
 const Spalatum = require('@cathodevel/spalatum');
@@ -158,7 +157,6 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(3000);
-
 ```
 
 ## Contributing
