@@ -1,4 +1,4 @@
-const lib = require('../../lib/index.js');
+const spalatum = require('../../lib/index.js');
 const mockPath = '../../__mocks__';
 
 beforeEach(() => {
@@ -6,9 +6,9 @@ beforeEach(() => {
 });
 
 describe('# Testing a request to a https fragment', () => {
-  it('Calling the lib with https fragments', async () => {
+  it('Calling spalatum with https fragments', async () => {
     const httpsTemplate = require(`${mockPath}/https-template.js`);
-    const renderedHttpsTemplate = await lib(httpsTemplate);
+    const renderedHttpsTemplate = await spalatum(httpsTemplate);
 
     document.body.outerHTML = renderedHttpsTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
