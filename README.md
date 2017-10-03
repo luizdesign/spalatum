@@ -10,7 +10,7 @@ Some of Spalatum features and benefits:
 
 ## Fragment
 
-We understand "Fragment" as every endpoint hosted on http(s) server that provide the content you want to include in your page. If you want to use some specific js ou css, you can use the `Link` tag in your header or footer page to provide this resources. Check our **[example app using *Spalatum*](http://gitlab.devel/frontend-platform/spalatum-scaffolding)** for the skeleton implementation.
+We understand "Fragment" as every endpoint hosted on http(s) server that provide the content you want to include in your page. If you want to use some specific js ou css, you can use the `Link` tag in your header or footer page to provide this resources. Check our **[example app using *Spalatum*](http://gitlab.devel/frontend-platform/spalatum-app-skeleton)** for the skeleton implementation.
 
 ### Fragment Tag
 You can represent a Fragment using  the `<fragment />` tag with this attributes: href, proxy, cache.
@@ -84,7 +84,7 @@ npm install @cathodevel/spalatum
 ```
 
 ## Getting Started
-To get started, you can create your own app using ```"@cathodevel/spalatum": "^VERSION"``` as dependencie in your ```package.json```; or clone the **[app skeleton using nodejs and *Spalatum* (RECOMENDED)](http://gitlab.devel/frontend-platform/spalatum-scaffolding)** that we provide.
+To get started, you can create your own app using ```"@cathodevel/spalatum": "^VERSION"``` as dependencie in your ```package.json```; or clone the **[app skeleton using nodejs and *Spalatum* (RECOMENDED)](http://gitlab.devel/frontend-platform/spalatum-app-skeleton)** that we provide.
 
 ### Example
 Given you have this template:
