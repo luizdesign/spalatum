@@ -84,7 +84,7 @@ npm install @cathodevel/spalatum
 ```
 
 ## Getting Started
-To get started, you can create your own app using ```"@cathodevel/spalatum": "^VERSION"``` as dependencie in your ```package.json```; or clone the **[app skeleton using nodejs and *Spalatum* (RECOMENDED)](http://gitlab.devel/frontend-platform/spalatum-app-skeleton)** that we provide.
+To get started, you can create your own app using `"@cathodevel/spalatum": "^VERSION"` as dependencie in your `package.json`; or clone the **[app skeleton using nodejs and *Spalatum* (RECOMENDED)](http://gitlab.devel/frontend-platform/spalatum-app-skeleton)** that we provide.
 
 ### Example
 Given you have this template:
