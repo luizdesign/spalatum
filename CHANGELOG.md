@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.0 - October/2017
+### Changed
+- Lib name to *Spalatum*
+
 ## v0.4.2 - October/2017
 ### Added
 - HTPS integration test [#20](http://gitlab.devel/watchmen/render/merge_requests/20)
