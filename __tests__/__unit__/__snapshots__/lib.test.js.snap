@@ -44,17 +44,7 @@ exports[`# Testing a cached request Calling the render with a cached request, I 
 </body>"
 `;
 
-exports[`# Testing a template with error in fragment request Calling the render with error in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `
-"<body>
-    <header>
-      <h1>Example of fragment with error on request</h1>
-    </header>
-    
-  
-</body>"
-`;
-
-exports[`# Testing a template with error in fragment request Calling the render with error in the fragment request, I expect that returns the template with the fragments rendered in blank 2`] = `
+exports[`# Testing a template with error in fragment request Calling the render with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `
 "<body>
     <header>
       <h1>Example of fragment with 404 on request</h1>
@@ -64,7 +54,17 @@ exports[`# Testing a template with error in fragment request Calling the render 
 </body>"
 `;
 
-exports[`# Testing a template with error in fragment request Calling the render with error in the fragment request, I expect that returns the template with the fragments rendered in blank 3`] = `
+exports[`# Testing a template with error in fragment request Calling the render with an generic error in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `
+"<body>
+    <header>
+      <h1>Example of fragment with error on request</h1>
+    </header>
+    
+  
+</body>"
+`;
+
+exports[`# Testing a template with error in fragment request Calling the render with an invalid content type in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `
 "<body>
     
   
