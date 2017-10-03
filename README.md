@@ -1,9 +1,9 @@
 # Spalatum
-**[Help us to choose one name to this lib](http://gitlab.devel/watchmen/spalatum/issues/2)**
+**[Help us to choose one name to this lib](http://gitlab.devel/frontend-platform/spalatum/issues/2)**
 
 Spalatum is a library that provides a middleware which you can integrate into any Node.js. This project is based on [Tailor](https://github.com/zalando/tailor).
 
-Some of Spalatum's features and benefits:
+Some of Spalatum features and benefits:
 
 * **Composes pre-rendered markup on the backend**. This is important for SEO and fastens the initial render.
 * **Enforces performance budget**. This is quite challenging otherwise, because there is no single point where you can control performance.
@@ -161,8 +161,8 @@ app.listen(3000);
 
 ## Contributing
 
-- Check the [issues](http://gitlab.devel/watchmen/spalatum/issues) to ensure that there is not someone already working on it
-- Check our [contribution guide](http://gitlab.devel/watchmen/spalatum/blob/master/CONTRIBUTING.MD)
+- Check the [issues](http://gitlab.devel/frontend-platform/spalatum/issues) to ensure that there is not someone already working on it
+- Check our [contribution guide](http://gitlab.devel/frontend-platform/spalatum/blob/master/CONTRIBUTING.MD)
 
 ### Technical prerequisites
 - [Git](https://git-scm.com/)
@@ -170,7 +170,7 @@ app.listen(3000);
 
 Clone this repository:
 ```sh
-git clone http://gitlab.devel/watchmen/spalatum
+git clone http://gitlab.devel/frontend-platform/spalatum
 ```
 
 Access the folder and install the project's dependencies:

@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.devel:watchmen/spalatum.git"
+    "url": "git@gitlab.devel:frontend-platform/spalatum.git"
   },
   "keywords": [
     "render",
     "fragments"
   ],
-  "author": "Watchmen",
+  "author": "Catho Online",
   "license": "MIT",
   "dependencies": {
     "bunyan": "^1.8.12",
