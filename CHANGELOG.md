@@ -2,7 +2,7 @@
 
 ## v0.5.0 - October/2017
 ### Changed
-- Lib name to *Spalatum*
+- Lib renamed to *Spalatum*
 
 ## v0.4.2 - October/2017
 ### Added
