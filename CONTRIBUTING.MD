@@ -44,5 +44,5 @@ Open your pull request, if you don't know how do it, check this [tutorial](https
 ## Code Style
 
 For the good manutance of the project, follow all the code styles:
-- [Editorconfig](http://gitlab.devel/watchmen/render/blob/master/.editorconfig)
-- [Eslint Airbnb](http://gitlab.devel/watchmen/render/blob/master/.eslintrc.js)
+- [Editorconfig](http://gitlab.devel/frontend-platform/spalatum/blob/master/.editorconfig)
+- [Eslint Airbnb](http://gitlab.devel/frontend-platform/spalatum/blob/master/.eslintrc.js)

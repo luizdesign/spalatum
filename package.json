@@ -1,6 +1,6 @@
 {
-  "name": "@cathodevel/render",
-  "version": "0.4.2",
+  "name": "@cathodevel/spalatum",
+  "version": "0.5.0",
   "description": "Render template and fragments",
   "main": "index.js",
   "engines": {
@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.devel:watchmen/render.git"
+    "url": "git@gitlab.devel:frontend-platform/spalatum.git"
   },
   "keywords": [
     "render",
     "fragments"
   ],
-  "author": "Watchmen",
+  "author": "Catho Online",
   "license": "MIT",
   "dependencies": {
     "bunyan": "^1.8.12",
