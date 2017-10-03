@@ -1,9 +1,9 @@
 const cachingModule = require('../../lib/fragment-caching');
 const responseMock = require('../../__mocks__/response');
 
-let mockResponseSmaller50 = 'unit test unit test unit test unit test unit test';
-let mockResponseGreather50 = `${mockResponseSmaller50} test unit test`;
-let mockContentType = 'text/html';
+const mockResponseSmaller50 = 'unit test unit test unit test unit test unit test';
+const mockResponseGreather50 = `${mockResponseSmaller50} test unit test`;
+const mockContentType = 'text/html';
 
 describe('# Testing the fragment-caching module', () => {
   describe('# Testing the canSaveCache method', () => {
@@ -46,7 +46,7 @@ describe('# Testing the fragment-caching module', () => {
     });
 
     it('Calling the module with max age different of null, httpRequest equal to 200, content size greather than 200 and content-type equal to text/html, I expect that returns true', () => {
-      let mock = responseMock(200, mockResponseGreather50, 'text/html');
+      const mock = responseMock(200, mockResponseGreather50, 'text/html');
 
       expect(cachingModule.canSaveCache('10s', mock))
         .toEqual(true);

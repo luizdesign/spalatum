@@ -5,6 +5,10 @@ module.exports = {
     'mocha': true
   },
   'globals': {
-    'cache': true
+    'cache': true,
+    'expect': true,
+    'document': true,
+    'jest': true,
+    'jasmine': true
   }
 };
