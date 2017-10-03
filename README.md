@@ -1,19 +1,19 @@
-# RenderLib (temporary name)
-**[Help us to choose one name to this lib](http://gitlab.devel/watchmen/render/issues/2)**
+# Spalatum
+**[Help us to choose one name to this lib](http://gitlab.devel/watchmen/spalatum/issues/2)**
 
-RenderLib is a library that provides a middleware which you can integrate into any Node.js. This project is based on [Tailor](https://github.com/zalando/tailor).
+Spalatum is a library that provides a middleware which you can integrate into any Node.js. This project is based on [Tailor](https://github.com/zalando/tailor).
 
-Some of RenderLib's features and benefits:
+Some of Spalatum's features and benefits:
 
 * **Composes pre-rendered markup on the backend**. This is important for SEO and fastens the initial render.
 * **Enforces performance budget**. This is quite challenging otherwise, because there is no single point where you can control performance.
 
 ## Fragment
 
-We understand "Fragment" as every endpoint hosted on http(s) server that provide the content you want to include in your page. If you want to use some specific js ou css, you can use the `Link` tag in your header or footer page to provide this resources. Check our **[example app using *Render Lib*](http://gitlab.devel/frontend-platform/render-scaffolding)** for the skeleton implementation.
+We understand "Fragment" as every endpoint hosted on http(s) server that provide the content you want to include in your page. If you want to use some specific js ou css, you can use the `Link` tag in your header or footer page to provide this resources. Check our **[example app using *Spalatum*](http://gitlab.devel/frontend-platform/spalatum-scaffolding)** for the skeleton implementation.
 
 ### Fragment Tag
-You can represent a Fragment using  the ```<fragment />``` tag with this attributes: href, proxy, cache.
+You can represent a Fragment using  the `<fragment />` tag with this attributes: href, proxy, cache.
 
 #### href *(needed)*
 Represent the endpoint that provide the content you want to include in your page.
@@ -35,7 +35,7 @@ Example:
 #### cache *(optional)*
 The presence of **cache** attribute is optional, if you use, the fragment will be cached as you specify, if you don't, the fragment will be requested each time the page is loaded.
 
-*Render Lib* represent cache lifetime as *[Momentjs](http://momentjs.com/docs/)* does.
+*Spalatum* represent cache lifetime as *[Momentjs](http://momentjs.com/docs/)* does.
 
 Example:
 
@@ -77,14 +77,14 @@ If you want to know how this cache works "under the hood", see the [cache diagra
 ---
 
 ## Instalation
-To install *Render Lib*, use the command below:
+To install *Spalatum*, use the command below:
 ```sh
 # You can use yarn, as well
-npm install @cathodevel/render
+npm install @cathodevel/spalatum
 ```
 
 ## Getting Started
-To get started, you can create your own app using ```"@cathodevel/render": "^VERSION"``` as dependencie in your ```package.json```; or clone the **[app skeleton using nodejs and *Render Lib* (RECOMENDED)](http://gitlab.devel/frontend-platform/render-scaffolding)** that we provide.
+To get started, you can create your own app using ```"@cathodevel/spalatum": "^VERSION"``` as dependencie in your ```package.json```; or clone the **[app skeleton using nodejs and *Spalatum* (RECOMENDED)](http://gitlab.devel/frontend-platform/spalatum-scaffolding)** that we provide.
 
 ### Example
 Given you have this template:
@@ -101,7 +101,7 @@ And the route http://example.fragment.com/ responds with:
   <h1>This is a Fragment</h1>
 </header>
 ```
-The Render will return:
+Spalatum will return:
 ```html
 <html>
   <body>
@@ -137,9 +137,9 @@ You can use multiple fragments together to assembly a web application:
 ```
 
 
-This nodejs example call the Render function, passing to it a template string and get the return value as a Promise instance, which will be resolved with the parsed html:
+This nodejs example call the Spalatum function, passing to it a template string and get the return value as a Promise instance, which will be resolved with the parsed html:
 ```javascript
-const Render = require('@cathodevel/render');
+const Spalatum = require('@cathodevel/spalatum');
 const express = require('express');
 
 const app = express();
@@ -153,7 +153,7 @@ app.get('/', async (req, res) => {
     </html>
   `;
 
-  const templateResult = await Render(template);
+  const templateResult = await Spalatum(template);
   res.send(templateResult);
 });
 
@@ -163,8 +163,8 @@ app.listen(3000);
 
 ## Contributing
 
-- Check the [issues](http://gitlab.devel/watchmen/render/issues) to ensure that there is not someone already working on it
-- Check our [contribution guide](http://gitlab.devel/watchmen/render/blob/master/CONTRIBUTING.MD)
+- Check the [issues](http://gitlab.devel/watchmen/spalatum/issues) to ensure that there is not someone already working on it
+- Check our [contribution guide](http://gitlab.devel/watchmen/spalatum/blob/master/CONTRIBUTING.MD)
 
 ### Technical prerequisites
 - [Git](https://git-scm.com/)
@@ -172,12 +172,12 @@ app.listen(3000);
 
 Clone this repository:
 ```sh
-git clone http://gitlab.devel/watchmen/render
+git clone http://gitlab.devel/watchmen/spalatum
 ```
 
 Access the folder and install the project's dependencies:
 ```sh
-cd render && npm install
+cd spalatum && npm install
 ```
 
 Before send a pull request, always runs the unit tests:
