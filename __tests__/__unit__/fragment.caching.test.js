@@ -1,6 +1,7 @@
 const moment = require('moment');
 const cachingModule = require('../../lib/fragment-caching');
 const responseMock = require('../../__mocks__/response');
+const encryption = require('../../lib/encryption');
 
 const mockResponseSmaller50 = 'unit test unit test unit test unit test unit test';
 const mockResponseGreather50 = `${mockResponseSmaller50} test unit test`;
@@ -75,8 +76,6 @@ describe('# Testing the fragment-caching module', () => {
         maxAge: '10m',
       }];
 
-      const now = moment();
-
       cacheItens.forEach(item =>
         cachingModule.save(
           item.href,
@@ -85,15 +84,23 @@ describe('# Testing the fragment-caching module', () => {
       );
 
       const cacheListResult = cachingModule.listCache();
+      const expectedTimestamp = moment().add(10, 'm').format();
 
       expect(cacheListResult.length)
         .toEqual(cacheItens.length);
 
-      expect(cacheListResult[0].timestamp)
-        .toEqual(now.add(10, 'm').format());
+      cacheListResult
+        .forEach(
+          (cacheResultItem, index) => {
+            const cacheKey = encryption.generateMd5(cacheItens[index].href);
 
-      expect(cacheListResult[0].href)
-        .toEqual(cacheItens[0].href);
+            expect(cacheResultItem.timestamp)
+              .toEqual(expectedTimestamp);
+
+            expect(cacheResultItem)
+              .toEqual(cache[cacheKey]);
+          },
+        );
     });
   });
 });
