@@ -1,9 +1,14 @@
+const moment = require('moment');
 const cachingModule = require('../../lib/fragment-caching');
 const responseMock = require('../../__mocks__/response');
 
 const mockResponseSmaller50 = 'unit test unit test unit test unit test unit test';
 const mockResponseGreather50 = `${mockResponseSmaller50} test unit test`;
 const mockContentType = 'text/html';
+
+beforeEach(() => {
+  global.cache = {};
+});
 
 describe('# Testing the fragment-caching module', () => {
   describe('# Testing the canSaveCache method', () => {
@@ -50,6 +55,45 @@ describe('# Testing the fragment-caching module', () => {
 
       expect(cachingModule.canSaveCache('10s', mock))
         .toEqual(true);
+    });
+  });
+
+  describe('# Testing the listCache method', () => {
+    it('Calling before store any cache. I expect that it returns an empty list', () => {
+      const result = cachingModule.listCache();
+
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toEqual(0);
+    });
+
+    it('Calling after store some cache items. I expect that it returns an list with related urls and ages.', () => {
+      const cacheItens = [{
+        href: 'www.foo.com.br',
+        maxAge: '10m',
+      }, {
+        href: 'www.bar.com.br',
+        maxAge: '10m',
+      }];
+
+      const now = moment();
+
+      cacheItens.forEach(item =>
+        cachingModule.save(
+          item.href,
+          item.maxAge,
+          mockResponseGreather50),
+      );
+
+      const cacheListResult = cachingModule.listCache();
+
+      expect(cacheListResult.length)
+        .toEqual(cacheItens.length);
+
+      expect(cacheListResult[0].timestamp)
+        .toEqual(now.add(10, 'm').format());
+
+      expect(cacheListResult[0].href)
+        .toEqual(cacheItens[0].href);
     });
   });
 });
