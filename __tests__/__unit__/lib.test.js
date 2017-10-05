@@ -121,7 +121,7 @@ describe('# Testing a template with a primary attribute', async () => {
     );
 
     const renderedTemplate = await spalatum(primaryTemplate);
-    expect(renderedTemplate.message).toEqual('Spalatum cant render the primary fragment (http://localhost:8000/), the returned statusCode was 500.');
+    expect(renderedTemplate.message).toEqual(`Spalatum can't render the primary fragment (http://localhost:8000/), the returned statusCode was 500.`);
     expect(renderedTemplate.statusCode).toEqual(500);
   });
 
