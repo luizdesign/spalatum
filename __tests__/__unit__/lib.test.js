@@ -7,6 +7,7 @@ const libPath = '../../lib';
 
 const spalatum = require(`${libPath}/index.js`);
 const ParameterException = require(`${libPath}/exceptions/parameterException.js`);
+const PrimaryFragmentException = require(`${libPath}/exceptions/primaryFragmentException.js`);
 const responseMock = require(`${mockPath}/response`);
 
 const originalGet = originalSuperagent.get;
@@ -101,6 +102,42 @@ describe('# Testing a template with fragments', async () => {
   });
 });
 
+describe('# Testing a template with a primary attribute', async () => {
+  it('Calling Spalatum with a template with primary attribute, I expect that returns the template with the fragments rendered', async () => {
+    const primaryTemplate = require(`${mockPath}/primary-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
+    );
+
+    const renderedTemplate = await spalatum(primaryTemplate);
+    document.body.outerHTML = renderedTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
+  });
+
+  it('Calling Spalatum with a template with primary attribute, when the fragment request returns an error, I expect that throw an error', async () => {
+    const primaryTemplate = require(`${mockPath}/primary-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(500, require(`${mockPath}/fragment.js`), mockContentType)
+    );
+
+    const renderedTemplate = await spalatum(primaryTemplate);
+    expect(renderedTemplate.message).toEqual('Spalatum cant render the primary fragment (http://localhost:8000/), the returned statusCode was 500.');
+    expect(renderedTemplate.statusCode).toEqual(500);
+  });
+
+  it('Calling Spalatum with a template with two primary attributes, I excepect that throw an error', async () => {
+    const twoPrimaryTemplate = require(`${mockPath}/two-primary-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
+    );
+
+    expect(() => spalatum(twoPrimaryTemplate))
+      .toThrow(
+        new PrimaryFragmentException('Must have only one primary fragment')
+      );
+  });
+});
+
 describe('# Testing a cached request', async () => {
   it('Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again', async () => {
     const cacheObject = {};
@@ -113,7 +150,6 @@ describe('# Testing a cached request', async () => {
     let renderedTemplate = await spalatum(originalTemplate, cacheObject);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
-
     expect(Object.keys(cacheObject).length)
       .toEqual(1);
     expect(cacheObject[Object.keys(cacheObject)[0]])

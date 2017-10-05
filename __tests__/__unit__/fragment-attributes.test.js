@@ -6,6 +6,7 @@ describe('# Testing the fragment-attributes module', () => {
       .toEqual({
         cache: null,
         href: 'localhost:3000',
+        primary: false,
         proxy: 'localhost:2000',
       });
   });
@@ -15,6 +16,7 @@ describe('# Testing the fragment-attributes module', () => {
       .toEqual({
         cache: null,
         href: 'localhost:3000',
+        primary: false,
         proxy: null,
       });
   });
@@ -24,6 +26,7 @@ describe('# Testing the fragment-attributes module', () => {
       .toEqual({
         cache: '10s',
         href: 'localhost:3000',
+        primary: false,
         proxy: null,
       });
   });
@@ -33,6 +36,17 @@ describe('# Testing the fragment-attributes module', () => {
       .toEqual({
         cache: null,
         href: 'localhost:3000',
+        primary: false,
+        proxy: null,
+      });
+  });
+
+  it('Calling the module with <fragment href="localhost:3000" primary />, I expect that returns an object with the atrributes href and primary equal true', () => {
+    expect(attributesModule('<fragment href="localhost:3000" primary />'))
+      .toEqual({
+        cache: null,
+        href: 'localhost:3000',
+        primary: true,
         proxy: null,
       });
   });
@@ -45,6 +59,7 @@ describe('# Testing the fragment-attributes module', () => {
       .toEqual({
         cache: null,
         href: 'localhost:3000',
+        primary: false,
         proxy: 'localhost:2000',
       });
   });
