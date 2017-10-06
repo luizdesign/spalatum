@@ -1,4 +1,6 @@
 const spalatum = require('../../lib/index.js');
+const PrimaryFragmentException = require('../../lib/exceptions/primaryFragmentException.js');
+
 const mockPath = '../../__mocks__';
 
 beforeEach(() => {
@@ -24,11 +26,13 @@ describe('# Testing a request to a fragment that throws an error', () => {
     expect(document.body.outerHTML).toMatchSnapshot();
   });
 
-  it('Calling spalatum with a fragment with primary attribute that status code returns a 404, I expect that returns an error object', async () => {
+  it('Calling spalatum with a fragment with primary attribute that status code returns a 404, I expect that returns an error object', () => {
     const template = require(`${mockPath}/notfound-primary-template.js`);
-    const renderedTemplate = await spalatum(template);
 
-    expect(renderedTemplate.message).toEqual(`Spalatum can't render the primary fragment (https://httpbin.org/notfound/), the returned statusCode was 404.`);
-    expect(renderedTemplate.statusCode).toEqual(404);
+    expect(spalatum(template)).rejects.toEqual(
+      new PrimaryFragmentException(
+        'Spalatum can\'t render the primary fragment (https://httpbin.org/notfound/), the returned statusCode was 404.',
+      ),
+    );
   });
 });

@@ -123,9 +123,11 @@ describe('# Testing a template with a primary attribute', async () => {
       responseMock(500, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
-    const renderedTemplate = await spalatum(primaryTemplate);
-    expect(renderedTemplate.message).toEqual(`Spalatum can't render the primary fragment (http://localhost:8000/), the returned statusCode was 500.`);
-    expect(renderedTemplate.statusCode).toEqual(500);
+    expect(spalatum(primaryTemplate)).rejects.toEqual(
+      new PrimaryFragmentException(
+        'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 500.',
+      ),
+    );
   });
 
   it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
@@ -134,9 +136,11 @@ describe('# Testing a template with a primary attribute', async () => {
       responseMock(404, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
-    const renderedTemplate = await spalatum(primaryTemplate);
-    expect(renderedTemplate.message).toEqual(`Spalatum can't render the primary fragment (http://localhost:8000/), the returned statusCode was 404.`);
-    expect(renderedTemplate.statusCode).toEqual(404);
+    expect(spalatum(primaryTemplate)).rejects.toEqual(
+      new PrimaryFragmentException(
+        'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 404.',
+      ),
+    );
   });
 
   it('Calling Spalatum with a template with two primary attributes, I excepect that throw an error', async () => {
