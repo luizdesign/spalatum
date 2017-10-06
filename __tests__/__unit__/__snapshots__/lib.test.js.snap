@@ -44,6 +44,18 @@ exports[`# Testing a cached request Calling Spalatum with a cached request, I ex
 </body>"
 `;
 
+exports[`# Testing a template with a primary attribute Calling Spalatum with a template with primary attribute, I expect that returns the template with the fragments rendered 1`] = `
+"<body>
+    <p>Primary Fragment</p>
+    <section>
+  <header>
+    <h1>This is a Fragment</h1>
+  </header>
+</section>
+  
+</body>"
+`;
+
 exports[`# Testing a template with error in fragment request Calling Spalatum with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `
 "<body>
     <header>
