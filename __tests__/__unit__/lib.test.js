@@ -47,6 +47,9 @@ describe('# Testing a template with error in fragment request', async () => {
 
   it('Calling Spalatum with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
     const notFoundErrorTemplate = require(`${mockPath}/notfound-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(404, notFoundErrorTemplate, 'text/html')
+    );
     const renderedNotFoundErrorTemplate = await spalatum(notFoundErrorTemplate);
     document.body.outerHTML = renderedNotFoundErrorTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
@@ -114,7 +117,7 @@ describe('# Testing a template with a primary attribute', async () => {
     expect(document.body.outerHTML).toMatchSnapshot();
   });
 
-  it('Calling Spalatum with a template with primary attribute, when the fragment request returns an error, I expect that throw an error', async () => {
+  it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 500, I expect that throw an error', async () => {
     const primaryTemplate = require(`${mockPath}/primary-template.js`);
     global.superagent.get = jest.fn().mockReturnValue(
       responseMock(500, require(`${mockPath}/fragment.js`), mockContentType)
@@ -123,6 +126,17 @@ describe('# Testing a template with a primary attribute', async () => {
     const renderedTemplate = await spalatum(primaryTemplate);
     expect(renderedTemplate.message).toEqual(`Spalatum can't render the primary fragment (http://localhost:8000/), the returned statusCode was 500.`);
     expect(renderedTemplate.statusCode).toEqual(500);
+  });
+
+  it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
+    const primaryTemplate = require(`${mockPath}/primary-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(404, require(`${mockPath}/fragment.js`), mockContentType)
+    );
+
+    const renderedTemplate = await spalatum(primaryTemplate);
+    expect(renderedTemplate.message).toEqual(`Spalatum can't render the primary fragment (http://localhost:8000/), the returned statusCode was 404.`);
+    expect(renderedTemplate.statusCode).toEqual(404);
   });
 
   it('Calling Spalatum with a template with two primary attributes, I excepect that throw an error', async () => {
