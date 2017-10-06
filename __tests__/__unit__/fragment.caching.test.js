@@ -67,38 +67,33 @@ describe('# Testing the fragment-caching module', () => {
       expect(result.length).toEqual(0);
     });
 
-    it('Calling after store some cache items. I expect that it returns an list with related urls and ages.', () => {
-      const cacheItens = [{
+    it('Calling after store some cache items. I expect that it returns an list with related cache information.', () => {
+      const fragmentList = [{
         href: 'www.foo.com.br',
         maxAge: '10m',
+        content: mockResponseGreather50,
       }, {
         href: 'www.bar.com.br',
         maxAge: '10m',
+        content: mockResponseGreather50,
       }];
 
-      cacheItens.forEach(item =>
-        cachingModule.save(
-          item.href,
-          item.maxAge,
-          mockResponseGreather50),
+      fragmentList.forEach(frag =>
+        cachingModule.save(frag.href, frag.maxAge, frag.content),
       );
 
-      const cacheListResult = cachingModule.listCache();
+      const cacheList = cachingModule.listCache();
       const expectedTimestamp = moment().add(10, 'm').format();
 
-      expect(cacheListResult.length)
-        .toEqual(cacheItens.length);
+      expect(cacheList.length).toEqual(fragmentList.length);
 
-      cacheListResult
-        .forEach(
-          (cacheResultItem, index) => {
-            const cacheKey = encryption.generateMd5(cacheItens[index].href);
+      cacheList.forEach((cacheItem, index) => {
+        const cacheKey = encryption.generateMd5(fragmentList[index].href);
 
-            expect(cacheResultItem.key).toEqual(cacheKey);
-            expect(cacheResultItem.content).toEqual(cache[cacheKey].content);
-            expect(cacheResultItem.timestamp).toEqual(expectedTimestamp);
-          },
-        );
+        expect(cacheItem.key).toEqual(cacheKey);
+        expect(cacheItem.content).toEqual(global.cache[cacheKey].content);
+        expect(cacheItem.timestamp).toEqual(expectedTimestamp);
+      });
     });
   });
 });
