@@ -5,9 +5,8 @@ module.exports = `<!DOCTYPE html>
     <title>Unit Test</title>
   </head>
   <body>
-    <header>
-      <h1>Example of fragment with 404 on request</h1>
-    </header>
-    <fragment href="https://httpbin.org/notfound/" />
+    <p>Primary Fragment</p>
+    <fragment href="http://localhost:8000/" primary />
+    <fragment href="http://localhost:8000/" primary />
   </body>
 </html>`;

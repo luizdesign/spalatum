@@ -1,12 +1,16 @@
 # Changelog
 
+## v0.6.0 - October/2017
+### Added
+- New fragment attribute **primary** (see more in [#2](http://gitlab.devel/frontend-platform/spalatum/merge_requests/2))
+
 ## v0.5.0 - October/2017
 ### Changed
 - Lib renamed to *Spalatum*
 
 ## v0.4.2 - October/2017
 ### Added
-- HTPS integration test [#20](http://gitlab.devel/frontend-platform/spalatum/merge_requests/20)
+- HTPS integration test
 
 ## v0.4.1 - September/2017
 ### Changed
@@ -19,7 +23,7 @@
 
 ## v0.3.0 - September/2017
 ### Added
-- Cache system based on memory (see more in [#16](http://gitlab.devel/frontend-platform/spalatum/merge_requests/16))
+- Cache system based on memory
 - New fragment attribute **cache**
 - Increase the code coverage
 
