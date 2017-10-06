@@ -133,7 +133,7 @@ describe('# Testing a template with a primary attribute', async () => {
 
     expect(() => spalatum(twoPrimaryTemplate))
       .toThrow(
-        new PrimaryFragmentException('Must have only one primary fragment')
+        new PrimaryFragmentException('Must have only one fragment tag as primary')
       );
   });
 });
