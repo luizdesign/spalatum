@@ -94,9 +94,9 @@ describe('# Testing the fragment-caching module', () => {
           (cacheResultItem, index) => {
             const cacheKey = encryption.generateMd5(cacheItens[index].href);
 
-            expect(cacheResultItem.timestamp).toEqual(expectedTimestamp);
-            expect(cacheResultItem.content).toEqual(cache[cacheKey].content);
             expect(cacheResultItem.key).toEqual(cacheKey);
+            expect(cacheResultItem.content).toEqual(cache[cacheKey].content);
+            expect(cacheResultItem.timestamp).toEqual(expectedTimestamp);
           },
         );
     });
