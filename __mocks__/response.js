@@ -8,5 +8,6 @@
 module.exports = (status, text, type) => ({
    status,
    text,
-   type
+   type,
+   ok: () => {},
 });

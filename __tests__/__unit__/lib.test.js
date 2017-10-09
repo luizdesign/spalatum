@@ -9,6 +9,7 @@ const libPath = '../../lib';
 const { getFragmentsAttributes } = require(`${libPath}/fragment-mapping`);
 const Spalatum = require(`${libPath}/index.js`);
 const ParameterException = require(`${libPath}/exceptions/parameterException.js`);
+const PrimaryFragmentException = require(`${libPath}/exceptions/primaryFragmentException.js`);
 const responseMock = require(`${mockPath}/response`);
 
 const originalGet = originalSuperagent.get;
@@ -48,6 +49,9 @@ describe('# Testing a template with error in fragment request', async () => {
 
   it('Calling Spalatum with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
     const notFoundErrorTemplate = require(`${mockPath}/notfound-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(404, notFoundErrorTemplate, 'text/html')
+    );
     const renderedNotFoundErrorTemplate = await new Spalatum(notFoundErrorTemplate).render();
     document.body.outerHTML = renderedNotFoundErrorTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
@@ -103,6 +107,57 @@ describe('# Testing a template with fragments', async () => {
   });
 });
 
+describe('# Testing a template with a primary attribute', async () => {
+  it('Calling Spalatum with a template with primary attribute, I expect that returns the template with the fragments rendered', async () => {
+    const primaryTemplate = require(`${mockPath}/primary-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
+    );
+
+    const renderedTemplate = await new Spalatum(primaryTemplate).render();
+    document.body.outerHTML = renderedTemplate;
+    expect(document.body.outerHTML).toMatchSnapshot();
+  });
+
+  it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 500, I expect that throw an error', async () => {
+    const primaryTemplate = require(`${mockPath}/primary-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(500, require(`${mockPath}/fragment.js`), mockContentType)
+    );
+
+    expect(new Spalatum(primaryTemplate).render()).rejects.toEqual(
+      new PrimaryFragmentException(
+        'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 500.',
+      ),
+    );
+  });
+
+  it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
+    const primaryTemplate = require(`${mockPath}/primary-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(404, require(`${mockPath}/fragment.js`), mockContentType)
+    );
+
+    expect(new Spalatum(primaryTemplate).render()).rejects.toEqual(
+      new PrimaryFragmentException(
+        'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 404.',
+      ),
+    );
+  });
+
+  it('Calling Spalatum with a template with two primary attributes, I excepect that throw an error', async () => {
+    const twoPrimaryTemplate = require(`${mockPath}/two-primary-template.js`);
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
+    );
+
+    expect(() => new Spalatum(twoPrimaryTemplate).render())
+      .toThrow(
+        new PrimaryFragmentException('Must have only one fragment tag as primary')
+      );
+  });
+});
+
 describe('# Testing a cached request', async () => {
   it('Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again', async () => {
     const cacheObject = {};
@@ -115,7 +170,6 @@ describe('# Testing a cached request', async () => {
     let renderedTemplate = await new Spalatum(originalTemplate, cacheObject).render();
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
-
     expect(Object.keys(cacheObject).length)
       .toEqual(2);
     expect(cacheObject[Object.keys(cacheObject)[0]])

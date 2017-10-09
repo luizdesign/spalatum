@@ -1,5 +1,4 @@
 # Spalatum
-**[Help us to choose one name to this lib](http://gitlab.devel/frontend-platform/spalatum/issues/2)**
 
 Spalatum is a library that provides a middleware which you can integrate into any Node.js. This project is based on [Tailor](https://github.com/zalando/tailor).
 
@@ -23,6 +22,23 @@ This endpoint must returns `200` as status code and `text/html` as content-type.
 Example:
 ```
 <fragment href="http://example.fragment.com/" />
+```
+
+#### primary *(optional)*
+
+Represents the main content. You can use only once primary attribute per template. If the request throws any error, will be returned an error object instead of the rendered html.
+
+Example:
+```
+<fragment href="http://example.fragment.com/" primary />
+```
+
+Error object example:
+```
+{
+    message: 'Spalatum can't render the primary fragment ({fragment.href}), the returned statusCode was {response.status}.',
+    statusCode: 500
+}
 ```
 #### proxy *(optional)*
 If your *href* need to be accessed via proxy, use the complete proxy url as *PROTOCOL*://*HOST*:*PORT*
