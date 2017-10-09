@@ -6,7 +6,8 @@ const moment = require('moment');
 const mockPath = '../../__mocks__';
 const libPath = '../../lib';
 
-const { getFragmentsAttributes } = require(`${libPath}/fragment-mapping`);
+const { fragmentsAttributes } = require(`${libPath}/fragment-mapping`);
+const fragmentCache = require(`${libPath}/fragment-caching`);
 const Spalatum = require(`${libPath}/index.js`);
 const ParameterException = require(`${libPath}/exceptions/parameterException.js`);
 const PrimaryFragmentException = require(`${libPath}/exceptions/primaryFragmentException.js`);
@@ -229,8 +230,8 @@ describe('# Testing cache methods', () => {
     const spalatum = new Spalatum(originalTemplate, cacheObject);
     await spalatum.render();
 
-    const cacheList = spalatum.getCacheList();
-    const hrefs = getFragmentsAttributes(originalTemplate).map(item => item.href);
+    const cacheList = spalatum.cacheList();
+    const attrs = fragmentsAttributes(originalTemplate);
     const expectedTimestamp = moment().add(10, 'm').format();
 
     expect(Array.isArray(cacheList)).toBeTruthy();
@@ -238,7 +239,8 @@ describe('# Testing cache methods', () => {
 
     cacheList.forEach((item, index) =>
       expect(item).toEqual(expect.objectContaining({
-        href: hrefs[index],
+        href: attrs[index].href,
+        code: fragmentCache.getCacheKey(attrs[index].href),
         timestamp: expectedTimestamp,
       })),
     );
