@@ -1,10 +1,12 @@
 const mockdate = require('mockdate');
 const originalSuperagent = require('superagent');
 const superagentProxy = require('superagent-proxy');
+const moment = require('moment');
 
 const mockPath = '../../__mocks__';
 const libPath = '../../lib';
 
+const { getFragmentsAttributes } = require(`${libPath}/fragment-mapping`);
 const Spalatum = require(`${libPath}/index.js`);
 const ParameterException = require(`${libPath}/exceptions/parameterException.js`);
 const responseMock = require(`${mockPath}/response`);
@@ -115,14 +117,14 @@ describe('# Testing a cached request', async () => {
     expect(document.body.outerHTML).toMatchSnapshot();
 
     expect(Object.keys(cacheObject).length)
-      .toEqual(1);
+      .toEqual(2);
     expect(cacheObject[Object.keys(cacheObject)[0]])
-      .toEqual(jasmine.objectContaining({
+      .toEqual(expect.objectContaining({
         content: expect.any(String),
         timestamp: expect.any(String),
       }));
 
-    expect(global.superagent.get).toHaveBeenCalledTimes(1);
+    expect(global.superagent.get).toHaveBeenCalledTimes(2);
 
     const mockedDate = new Date();
     mockedDate.setMinutes(mockedDate.getMinutes() + 5);
@@ -132,7 +134,7 @@ describe('# Testing a cached request', async () => {
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
 
-    expect(global.superagent.get).toHaveBeenCalledTimes(1);
+    expect(global.superagent.get).toHaveBeenCalledTimes(2);
   });
 
   it('Calling Spalatum with a cached but expired request, I expect the fragment is requested again', async () => {
@@ -147,7 +149,7 @@ describe('# Testing a cached request', async () => {
     document.body.outerHTML = renderedTemplate;
 
     expect(document.body.outerHTML).toMatchSnapshot();
-    expect(global.superagent.get).toHaveBeenCalledTimes(1);
+    expect(global.superagent.get).toHaveBeenCalledTimes(2);
 
     const mockedDate = new Date();
     mockedDate.setMinutes(mockedDate.getMinutes() + 11);
@@ -157,6 +159,34 @@ describe('# Testing a cached request', async () => {
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
 
-    expect(global.superagent.get).toHaveBeenCalledTimes(2);
+    expect(global.superagent.get).toHaveBeenCalledTimes(4);
+  });
+});
+
+describe('# Testing cache methods', () => {
+  it('Cache contents and retrieve its href and timestamps', async () => {
+    const cacheObject = {};
+    const originalTemplate = require(`${mockPath}/cache-template.js`);
+
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
+    );
+
+    const spalatum = new Spalatum(originalTemplate, cacheObject);
+    await spalatum.render();
+
+    const cacheList = spalatum.getCacheList();
+    const hrefs = getFragmentsAttributes(originalTemplate).map(item => item.href);
+    const expectedTimestamp = moment().add(10, 'm').format();
+
+    expect(Array.isArray(cacheList)).toBeTruthy();
+    expect(cacheList.length).toBe(Object.keys(global.cache).length);
+
+    cacheList.forEach((item, index) =>
+      expect(item).toEqual(expect.objectContaining({
+        href: hrefs[index],
+        timestamp: expectedTimestamp,
+      })),
+    );
   });
 });

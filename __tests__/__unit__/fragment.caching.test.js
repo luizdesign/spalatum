@@ -58,42 +58,4 @@ describe('# Testing the fragment-caching module', () => {
         .toEqual(true);
     });
   });
-
-  describe('# Testing the listCache method', () => {
-    it('Calling before store any cache. I expect that it returns an empty list', () => {
-      const result = cachingModule.listCache();
-
-      expect(Array.isArray(result)).toBe(true);
-      expect(result.length).toEqual(0);
-    });
-
-    it('Calling after store some cache items. I expect that it returns an list with related cache information.', () => {
-      const fragmentList = [{
-        href: 'www.foo.com.br',
-        maxAge: '10m',
-        content: mockResponseGreather50,
-      }, {
-        href: 'www.bar.com.br',
-        maxAge: '10m',
-        content: mockResponseGreather50,
-      }];
-
-      fragmentList.forEach(frag =>
-        cachingModule.save(frag.href, frag.maxAge, frag.content),
-      );
-
-      const cacheList = cachingModule.listCache();
-      const expectedTimestamp = moment().add(10, 'm').format();
-
-      expect(cacheList.length).toEqual(fragmentList.length);
-
-      cacheList.forEach((cacheItem, index) => {
-        const cacheKey = encryption.generateMd5(fragmentList[index].href);
-
-        expect(cacheItem.key).toEqual(cacheKey);
-        expect(cacheItem.content).toEqual(global.cache[cacheKey].content);
-        expect(cacheItem.timestamp).toEqual(expectedTimestamp);
-      });
-    });
-  });
 });
