@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.0 - October/2017
+### Added
+- Cache management (see more in [#1](http://gitlab.devel/frontend-platform/spalatum/merge_requests/1))
+### Changed
+- Spalatum API now its a class definition. (see more in [#1](http://gitlab.devel/frontend-platform/spalatum/merge_requests/1))
+
 ## v0.6.0 - October/2017
 ### Added
 - New fragment attribute **primary** (see more in [#2](http://gitlab.devel/frontend-platform/spalatum/merge_requests/2))
