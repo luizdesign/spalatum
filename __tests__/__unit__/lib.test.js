@@ -19,7 +19,7 @@ beforeEach(() => {
   global.superagent = originalSuperagent;
   superagentProxy(global.superagent);
   global.superagent.get = originalGet;
-  cache = {};
+  global.cache = {};
   mockdate.reset();
 });
 
@@ -217,38 +217,45 @@ describe('# Testing a cached request', async () => {
 });
 
 describe('# Testing cache methods', () => {
-  it('Cache contents and retrieve its href and timestamps', async () => {
-    const originalTemplate = require(`${mockPath}/cache-template.js`);
+  let endpoints;
+  let cacheItem;
 
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
-    );
-
-    const spalatum = new Spalatum(originalTemplate);
-    await spalatum.render();
-
-    expect(Spalatum.getCache()).toEqual(global.cache);
-  });
-
-  it('Remove a specific cache item by endpoint', async () => {
-    const endpoints = [
+  beforeEach(() => {
+    endpoints = [
       'http://localhost:9000/',
       'http://localhost:9001/',
     ];
 
-    const cacheItem = {
+    cacheItem = {
       content: 'blablabla',
       timestamp: moment().format(),
     };
 
     global.cache[endpoints[0]] = cacheItem;
     global.cache[endpoints[1]] = cacheItem;
+  });
 
+  it('Calling Spalatum getCache method, I expect the global cache content', async () => {
+    const originalTemplate = require(`${mockPath}/cache-template.js`);
+
+    global.superagent.get = jest.fn().mockReturnValue(
+      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType),
+    );
+
+    const spalatum = new Spalatum(originalTemplate);
+    await spalatum.render();
+    expect(Spalatum.getCache()).toEqual(global.cache);
+  });
+
+  it('Calling Spalatum removeCacheByEndpoint method, I expect to remove a specific cache item by endpoint', () => {
     expect(Spalatum.removeCacheByEndpoint(endpoints[0])).toBe(true);
     expect(Object.keys(Spalatum.getCache()).length).toBe(1);
-
     expect(Spalatum.removeCacheByEndpoint(endpoints[0])).toBe(false);
-
     expect(Object.keys(global.cache)[0]).toBe(endpoints[1]);
+  });
+
+  it('Calling Spalatum removeAllCache method, I expect an empty cache', () => {
+    expect(Spalatum.removeAllCache()).toEqual({});
+    expect(global.cache).toEqual({});
   });
 });
