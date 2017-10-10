@@ -6,8 +6,6 @@ const moment = require('moment');
 const mockPath = '../../__mocks__';
 const libPath = '../../lib';
 
-const { fragmentsAttributes } = require(`${libPath}/fragment-mapping`);
-const fragmentCache = require(`${libPath}/fragment-caching`);
 const Spalatum = require(`${libPath}/index.js`);
 const ParameterException = require(`${libPath}/exceptions/parameterException.js`);
 const PrimaryFragmentException = require(`${libPath}/exceptions/primaryFragmentException.js`);
@@ -220,29 +218,37 @@ describe('# Testing a cached request', async () => {
 
 describe('# Testing cache methods', () => {
   it('Cache contents and retrieve its href and timestamps', async () => {
-    const cacheObject = {};
     const originalTemplate = require(`${mockPath}/cache-template.js`);
 
     global.superagent.get = jest.fn().mockReturnValue(
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
-    const spalatum = new Spalatum(originalTemplate, cacheObject);
+    const spalatum = new Spalatum(originalTemplate);
     await spalatum.render();
 
-    const cacheList = spalatum.cacheList();
-    const attrs = fragmentsAttributes(originalTemplate);
-    const expectedTimestamp = moment().add(10, 'm').format();
+    expect(Spalatum.getCache()).toEqual(global.cache);
+  });
 
-    expect(Array.isArray(cacheList)).toBeTruthy();
-    expect(cacheList.length).toBe(Object.keys(global.cache).length);
+  it('Remove a specific cache item by endpoint', async () => {
+    const endpoints = [
+      'http://localhost:9000/',
+      'http://localhost:9001/',
+    ];
 
-    cacheList.forEach((item, index) =>
-      expect(item).toEqual(expect.objectContaining({
-        href: attrs[index].href,
-        code: fragmentCache.getCacheKey(attrs[index].href),
-        timestamp: expectedTimestamp,
-      })),
-    );
+    const cacheItem = {
+      content: 'blablabla',
+      timestamp: moment().format(),
+    };
+
+    global.cache[endpoints[0]] = cacheItem;
+    global.cache[endpoints[1]] = cacheItem;
+
+    expect(Spalatum.removeCacheByEndpoint(endpoints[0])).toBe(true);
+    expect(Object.keys(Spalatum.getCache()).length).toBe(1);
+
+    expect(Spalatum.removeCacheByEndpoint(endpoints[0])).toBe(false);
+
+    expect(Object.keys(global.cache)[0]).toBe(endpoints[1]);
   });
 });

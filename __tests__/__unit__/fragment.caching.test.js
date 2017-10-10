@@ -1,7 +1,5 @@
-const moment = require('moment');
 const cachingModule = require('../../lib/fragment-caching');
 const responseMock = require('../../__mocks__/response');
-const encryption = require('../../lib/encryption');
 
 const mockResponseSmaller50 = 'unit test unit test unit test unit test unit test';
 const mockResponseGreather50 = `${mockResponseSmaller50} test unit test`;
