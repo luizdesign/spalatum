@@ -165,7 +165,6 @@ describe('# Testing a cached request', async () => {
     global.superagent.get = jest.fn().mockReturnValue(
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
-
     let renderedTemplate = await new Spalatum(originalTemplate, cacheObject).render();
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
@@ -193,7 +192,6 @@ describe('# Testing a cached request', async () => {
   it('Calling Spalatum with a cached but expired request, I expect the fragment is requested again', async () => {
     const cacheObject = {};
     const originalTemplate = require(`${mockPath}/cache-template.js`);
-
     global.superagent.get = jest.fn().mockReturnValue(
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
