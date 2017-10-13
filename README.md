@@ -152,7 +152,7 @@ You can use multiple fragments together to assembly a web application:
 </html>
 ```
 
-This nodejs example initialize Spalatum passing to it a template string, then call the render function that return value as a Promise instance, which will be resolved with the parsed html:
+This nodejs example create a Spalatum instance, setting to it a template string, then call the render method that returns a Promise instance, which will be resolved with the parsed html or reject in error case:
 ```javascript
 const Spalatum = require('@cathodevel/spalatum');
 const express = require('express');
