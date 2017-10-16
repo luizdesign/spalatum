@@ -25,13 +25,13 @@ beforeEach(() => {
 
 describe('# Testing Spalatum configuration', () => {
   it('Calling Spalatum without the template parameter, I expect that returns a exception', () => {
-    expect(() => new Spalatum().render())
+    expect(() => Spalatum.render())
       .toThrow(
         new ParameterException('template is mandatory')
       );
   });
   it('Calling Spalatum with the template parameter different of a string, I expect that returns a exception', () => {
-    expect(() => new Spalatum(42).render())
+    expect(() => Spalatum.render(42))
       .toThrow(
         new ParameterException('template must be a string')
       );
@@ -41,7 +41,8 @@ describe('# Testing Spalatum configuration', () => {
 describe('# Testing a template with error in fragment request', async () => {
   it('Calling Spalatum with an generic error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
     const genericErrorTemplate = require(`${mockPath}/error-template.js`);
-    const renderedGenericErrorTemplate = await new Spalatum(genericErrorTemplate, {}).render();
+    const SpalatumInstance = new Spalatum({});
+    const renderedGenericErrorTemplate = await Spalatum.render(genericErrorTemplate);
     document.body.outerHTML = renderedGenericErrorTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
   });
@@ -51,7 +52,8 @@ describe('# Testing a template with error in fragment request', async () => {
     global.superagent.get = jest.fn().mockReturnValue(
       responseMock(404, notFoundErrorTemplate, 'text/html')
     );
-    const renderedNotFoundErrorTemplate = await new Spalatum(notFoundErrorTemplate).render();
+    const SpalatumInstance = new Spalatum({});
+    const renderedNotFoundErrorTemplate = await Spalatum.render(notFoundErrorTemplate);
     document.body.outerHTML = renderedNotFoundErrorTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
   });
@@ -62,7 +64,7 @@ describe('# Testing a template with error in fragment request', async () => {
       responseMock(200, simpleTemplate, 'application/json')
     );
 
-    const renderedSimpleTemplate = await new Spalatum(simpleTemplate).render();
+    const renderedSimpleTemplate = await Spalatum.render(simpleTemplate);
     document.body.outerHTML = renderedSimpleTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
   });
@@ -71,7 +73,7 @@ describe('# Testing a template with error in fragment request', async () => {
 describe('# Testing a template without fragments', async () => {
   it('Calling the lib with the template with no fragments, I expect that returns the same template', async () => {
     const originalTemplate = '<html><head></head><body><h1>Unit test</h1></body></html>';
-    const renderedTemplate = await new Spalatum(originalTemplate).render();
+    const renderedTemplate = await Spalatum.render(originalTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
   });
@@ -85,7 +87,7 @@ describe('# Testing a template with fragments using proxy', async () => {
     mockProxyServer.listen(5000);
     mockServer.listen(7000);
 
-    const renderedTemplate = await new Spalatum(originalTemplate).render();
+    const renderedTemplate = await Spalatum.render(originalTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
     mockServer.close();
@@ -100,7 +102,7 @@ describe('# Testing a template with fragments', async () => {
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
-    const renderedTemplate = await new Spalatum(originalTemplate).render();
+    const renderedTemplate = await Spalatum.render(originalTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
   });
@@ -113,7 +115,7 @@ describe('# Testing a template with a primary attribute', async () => {
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
-    const renderedTemplate = await new Spalatum(primaryTemplate).render();
+    const renderedTemplate = await Spalatum.render(primaryTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
   });
@@ -124,7 +126,7 @@ describe('# Testing a template with a primary attribute', async () => {
       responseMock(500, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
-    expect(new Spalatum(primaryTemplate).render()).rejects.toEqual(
+    expect(new Spalatum.render(primaryTemplate)).rejects.toEqual(
       new PrimaryFragmentException(
         'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 500.',
       ),
@@ -137,7 +139,7 @@ describe('# Testing a template with a primary attribute', async () => {
       responseMock(404, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
-    expect(new Spalatum(primaryTemplate).render()).rejects.toEqual(
+    expect(Spalatum.render(primaryTemplate)).rejects.toEqual(
       new PrimaryFragmentException(
         'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 404.',
       ),
@@ -150,7 +152,7 @@ describe('# Testing a template with a primary attribute', async () => {
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
-    expect(() => new Spalatum(twoPrimaryTemplate).render())
+    expect(() => Spalatum.render(twoPrimaryTemplate))
       .toThrow(
         new PrimaryFragmentException('Must have only one fragment tag as primary')
       );
@@ -165,7 +167,8 @@ describe('# Testing a cached request', async () => {
     global.superagent.get = jest.fn().mockReturnValue(
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
-    let renderedTemplate = await new Spalatum(originalTemplate, cacheObject).render();
+    const SpalatumInstance = new Spalatum(cacheObject);
+    let renderedTemplate = await Spalatum.render(originalTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
     expect(Object.keys(cacheObject).length)
@@ -182,7 +185,7 @@ describe('# Testing a cached request', async () => {
     mockedDate.setMinutes(mockedDate.getMinutes() + 5);
     mockdate.set(mockedDate);
 
-    renderedTemplate = await new Spalatum(originalTemplate, cacheObject).render();
+    renderedTemplate = await Spalatum.render(originalTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
 
@@ -196,7 +199,8 @@ describe('# Testing a cached request', async () => {
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
 
-    let renderedTemplate = await new Spalatum(originalTemplate, cacheObject).render();
+    const SpalatumInstance = new Spalatum(cacheObject);
+    let renderedTemplate = await Spalatum.render(originalTemplate);
     document.body.outerHTML = renderedTemplate;
 
     expect(document.body.outerHTML).toMatchSnapshot();
@@ -206,7 +210,7 @@ describe('# Testing a cached request', async () => {
     mockedDate.setMinutes(mockedDate.getMinutes() + 11);
     mockdate.set(mockedDate);
 
-    renderedTemplate = await new Spalatum(originalTemplate, cacheObject).render();
+    renderedTemplate = await Spalatum.render(originalTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
 
@@ -240,8 +244,8 @@ describe('# Testing cache methods', () => {
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType),
     );
 
-    const spalatum = new Spalatum(originalTemplate);
-    await spalatum.render();
+    const spalatum = new Spalatum();
+    await Spalatum.render(originalTemplate);
     expect(Spalatum.getCache()).toEqual(global.cache);
   });
 
