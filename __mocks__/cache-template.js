@@ -6,5 +6,6 @@ module.exports = `<!DOCTYPE html>
   </head>
   <body>
     <fragment href="http://localhost:9000/" cache="10m" />
+    <fragment href="http://localhost:9001/" cache="10m" />
   </body>
 </html>`;

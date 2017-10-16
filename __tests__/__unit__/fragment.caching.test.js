@@ -5,6 +5,10 @@ const mockResponseSmaller50 = 'unit test unit test unit test unit test unit test
 const mockResponseGreather50 = `${mockResponseSmaller50} test unit test`;
 const mockContentType = 'text/html';
 
+beforeEach(() => {
+  global.cache = {};
+});
+
 describe('# Testing the fragment-caching module', () => {
   describe('# Testing the canSaveCache method', () => {
     it('Calling the module with max age null, I expect that returns false', () => {

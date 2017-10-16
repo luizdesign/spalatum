@@ -152,7 +152,7 @@ You can use multiple fragments together to assembly a web application:
 </html>
 ```
 
-This nodejs example call the Spalatum function, passing to it a template string and get the return value as a Promise instance, which will be resolved with the parsed html:
+This nodejs example create a Spalatum instance, setting to it a template string, then call the render method that returns a Promise instance, which will be resolved with the parsed html or reject in error case:
 ```javascript
 const Spalatum = require('@cathodevel/spalatum');
 const express = require('express');
@@ -168,11 +168,90 @@ app.get('/', async (req, res) => {
     </html>
   `;
 
-  const templateResult = await Spalatum(template);
+  const spalatum = new Spalatum(template);
+  const templateResult = await spalatum.render();
   res.send(templateResult);
 });
 
 app.listen(3000);
+```
+
+## Caching
+
+When you use the `fragment` tag and add a `cache` attribute, internally, the Spalatum create a `cache` global object that store: href (as key), content, timestamp.
+
+```
+  global.cache = {
+    '[href]': {
+      content: '[encrypted_fragment_content]',
+      timestamp: '[cache_expiration_time]'
+    }
+  }
+```
+
+If you want, you can manage the cache inside your Spalatum instance.
+
+### Cache Management
+
+There are some methods that you can use to manage Spalatum cache: getCache, removeCacheByEndpoint, removeAllCache.
+
+#### Spalatum.getCache
+Returns the global cache object.
+
+```
+  {
+    'http://localhost:9000/': {
+      content: 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kN2w5MWduV0EzSQ==',
+      timestamp: '2017-10-10T15:10:33-03:00'
+    },
+    'http://localhost:9001/': {
+      content: 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1KNXdmNlVNWkVZNA==',
+      timestamp: '2017-10-10T15:10:33-03:00'
+    }
+  }
+```
+
+#### Spalatum.removeCacheByEndpoint(`endpoint`)
+Remove a specific cache item by endpoint.
+
+Given you have some `cache`:
+```
+  {
+    'http://localhost:9000/': {
+      ...
+    },
+    'http://localhost:9001/': {
+      ...
+    }
+  }
+```
+
+When you call the method `Spalatum.removeCacheByEndpoint('http://localhost:9000/')`, this specified endpoint will be removed and the cache object will be:
+```
+  {
+    'http://localhost:9001/': {
+      ...
+    }
+  }
+```
+
+#### Spalatum.removeAllCache()
+
+Remove all cache items from global.cache object.
+
+Given you have this `cache`:
+```
+  {
+    'http://localhost:9000/': {
+      ...
+    }
+  }
+```
+
+When you call the method `Spalatum.removeAllCache()`, all cached endpoints will be removed and the cache object will be:
+
+```
+  {}
 ```
 
 ## Contributing

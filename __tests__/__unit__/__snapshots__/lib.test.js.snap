@@ -7,12 +7,22 @@ exports[`# Testing a cached request Calling Spalatum with a cached but expired r
     <h1>This is a Fragment</h1>
   </header>
 </section>
+    <section>
+  <header>
+    <h1>This is a Fragment</h1>
+  </header>
+</section>
   
 </body>"
 `;
 
 exports[`# Testing a cached request Calling Spalatum with a cached but expired request, I expect the fragment is requested again 2`] = `
 "<body>
+    <section>
+  <header>
+    <h1>This is a Fragment</h1>
+  </header>
+</section>
     <section>
   <header>
     <h1>This is a Fragment</h1>
@@ -29,12 +39,22 @@ exports[`# Testing a cached request Calling Spalatum with a cached request, I ex
     <h1>This is a Fragment</h1>
   </header>
 </section>
+    <section>
+  <header>
+    <h1>This is a Fragment</h1>
+  </header>
+</section>
   
 </body>"
 `;
 
 exports[`# Testing a cached request Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again 2`] = `
 "<body>
+    <section>
+  <header>
+    <h1>This is a Fragment</h1>
+  </header>
+</section>
     <section>
   <header>
     <h1>This is a Fragment</h1>
