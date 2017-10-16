@@ -6,8 +6,8 @@
 
 ### Changed
 - Spalatum API now its a class definition. (see more in [#1](http://gitlab.devel/frontend-platform/spalatum/merge_requests/1))
-- Spalatum is a **constructor**, that have four methods:
-  -- **render**: make http request to fragment href and returns the parsed html.
+- Spalatum is a **constructor**, that have four static methods:
+  -- **render**: Recieve a template with fragments and make http request to fragment href and returns the parsed html.
   -- **getCache**: returns cache object
   -- **removeCacheByEndpoint**: remove a specific cache item by endpoint.
   -- **removeAllCache**: remove all cache items from the cache object
