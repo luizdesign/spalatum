@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.0 - October/2017
+### Changed
+- Remove all references from global.cache and it's now a cache Class to manage the cache
+
 ## v1.0.0 - October/2017
 ### Added
 - Cache management (see more in [#1](http://gitlab.devel/frontend-platform/spalatum/merge_requests/1))
