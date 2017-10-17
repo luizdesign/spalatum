@@ -159,18 +159,20 @@ describe('# Testing a template with a primary attribute', async () => {
 });
 
 describe('# Testing a cached request', async () => {
-  it('Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again', async () => {
-    const originalTemplate = require(`${mockPath}/cache-template.js`);
+  const cacheTemplate = require(`${mockPath}/cache-template.js`);
 
+  beforeEach(() => {
     global.superagent.get = jest.fn().mockReturnValue(
       responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
     );
+  });
 
-    let renderedTemplate = await spalatum.render(originalTemplate);
+  it('Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again', async () => {
+    let renderedTemplate = await spalatum.render(cacheTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
-    expect(Object.keys(spalatum.getCache()).length)
-      .toEqual(2);
+    expect(Object.keys(spalatum.getCache()).length).toEqual(2);
+
     expect(spalatum.getCache()[Object.keys(spalatum.getCache())[0]])
       .toEqual(expect.objectContaining({
         content: expect.any(String),
@@ -183,20 +185,24 @@ describe('# Testing a cached request', async () => {
     mockedDate.setMinutes(mockedDate.getMinutes() + 5);
     mockdate.set(mockedDate);
 
-    renderedTemplate = await spalatum.render(originalTemplate);
+    renderedTemplate = await spalatum.render(cacheTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
 
     expect(global.superagent.get).toHaveBeenCalledTimes(2);
   });
 
-  it('Calling Spalatum with a cached but expired request, I expect the fragment is requested again', async () => {
-    const originalTemplate = require(`${mockPath}/cache-template.js`);
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType)
-    );
+  it('Calling Spalatum with different templates that share same fragments endpoints, I expect they are stored in the same cache object', async () => {
+    const singleCacheTemplate = require(`${mockPath}/single-cache-template.js`);
 
-    let renderedTemplate = await spalatum.render(originalTemplate);
+    await spalatum.render(cacheTemplate);
+    await spalatum.render(singleCacheTemplate);
+
+    expect(global.superagent.get).toHaveBeenCalledTimes(2);
+  });
+
+  it('Calling Spalatum with a cached but expired request, I expect the fragment is requested again', async () => {
+    let renderedTemplate = await spalatum.render(cacheTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
     expect(global.superagent.get).toHaveBeenCalledTimes(2);
@@ -205,7 +211,7 @@ describe('# Testing a cached request', async () => {
     mockedDate.setMinutes(mockedDate.getMinutes() + 11);
     mockdate.set(mockedDate);
 
-    renderedTemplate = await spalatum.render(originalTemplate);
+    renderedTemplate = await spalatum.render(cacheTemplate);
     document.body.outerHTML = renderedTemplate;
     expect(document.body.outerHTML).toMatchSnapshot();
 
@@ -218,6 +224,8 @@ describe('# Testing cache methods', () => {
   let cacheItem;
 
   beforeEach(() => {
+    const cache = spalatum.getCache();
+
     endpoints = [
       'http://localhost:9000/',
       'http://localhost:9001/',
@@ -228,19 +236,9 @@ describe('# Testing cache methods', () => {
       timestamp: moment().format(),
     };
 
-    spalatum.getCache()[endpoints[0]] = cacheItem;
-    spalatum.getCache()[endpoints[1]] = cacheItem;
-  });
-
-  it('Calling Spalatum getCache method, I expect the global cache content', async () => {
-    const originalTemplate = require(`${mockPath}/cache-template.js`);
-
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, require(`${mockPath}/fragment.js`), mockContentType),
-    );
-
-    await spalatum.render(originalTemplate);
-    expect(spalatum.getCache()).toEqual(spalatum.getCache());
+    endpoints.forEach((item) => {
+      cache[item] = cacheItem;
+    });
   });
 
   it('Calling Spalatum removeCacheByEndpoint method, I expect to remove a specific cache item by endpoint', () => {
