@@ -154,7 +154,7 @@ You can use multiple fragments together to assembly a web application:
 
 This nodejs example create a Spalatum instance, setting to it a cache object, then call the render method passing to it a template string that returns a Promise instance, which will be resolved with the parsed html or reject in error case:
 ```javascript
-const Spalatum = require('@cathodevel/spalatum');
+const spalatum = require('@cathodevel/spalatum');
 const express = require('express');
 
 const app = express();
@@ -168,9 +168,7 @@ app.get('/', async (req, res) => {
     </html>
   `;
 
-  const cacheObject = {};
-  const SpalatumInstance = new Spalatum(cacheObject);
-  const templateResult = await Spalatum.render(template);
+  const templateResult = await spalatum.render(template);
   res.send(templateResult);
 });
 
@@ -179,10 +177,10 @@ app.listen(3000);
 
 ## Caching
 
-When you use the `fragment` tag and add a `cache` attribute, internally, the Spalatum create a `cache` global object that store: href (as key), content, timestamp.
+When you use the `fragment` tag and add a `cache` attribute, internally, the Spalatum create a `cache` object that store: href (as key), content, timestamp.
 
 ```
-  global.cache = {
+  cacheObject = {
     '[href]': {
       content: '[encrypted_fragment_content]',
       timestamp: '[cache_expiration_time]'
@@ -194,10 +192,10 @@ If you want, you can manage the cache inside your Spalatum instance.
 
 ### Cache Management
 
-There are some methods that you can use to manage Spalatum cache: getCache, removeCacheByEndpoint, removeAllCache.
+There are some methods that you can use to manage Spalatum cache: getCache, clearCacheItem, clearAllCache.
 
 #### Spalatum.getCache
-Returns the global cache object.
+Returns the cache object.
 
 ```
   {
@@ -212,7 +210,7 @@ Returns the global cache object.
   }
 ```
 
-#### Spalatum.removeCacheByEndpoint(`endpoint`)
+#### Spalatum.clearCacheItem(`endpoint`)
 Remove a specific cache item by endpoint.
 
 Given you have some `cache`:
@@ -227,7 +225,7 @@ Given you have some `cache`:
   }
 ```
 
-When you call the method `Spalatum.removeCacheByEndpoint('http://localhost:9000/')`, this specified endpoint will be removed and the cache object will be:
+When you call the method `Spalatum.clearCacheItem('http://localhost:9000/')`, this specified endpoint will be removed and the cache object will be:
 ```
   {
     'http://localhost:9001/': {
@@ -236,9 +234,9 @@ When you call the method `Spalatum.removeCacheByEndpoint('http://localhost:9000/
   }
 ```
 
-#### Spalatum.removeAllCache()
+#### Spalatum.clearAllCache()
 
-Remove all cache items from global.cache object.
+Remove all cache items from cacheObject.
 
 Given you have this `cache`:
 ```
@@ -249,7 +247,7 @@ Given you have this `cache`:
   }
 ```
 
-When you call the method `Spalatum.removeAllCache()`, all cached endpoints will be removed and the cache object will be:
+When you call the method `Spalatum.clearAllCache()`, all cached endpoints will be removed and the cache object will be:
 
 ```
   {}
