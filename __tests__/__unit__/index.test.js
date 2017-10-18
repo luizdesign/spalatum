@@ -19,27 +19,36 @@ const mockProxyServer = require('../../__mocks__/proxy-server.js')('http://local
 const originalGet = originalSuperagent.get;
 const mockContentType = 'text/html';
 
+const mockGet = (status, result, type) => {
+  global.superagent.get = jest.fn().mockReturnValue(
+    responseMock(status, result, type),
+  );
+};
+
 beforeEach(() => {
+  // Clear testing data
   document.body.outerHTML = null;
-  global.superagent = originalSuperagent;
-  superagentProxy(global.superagent);
-  global.superagent.get = originalGet;
   spalatum.clearAllCache();
   mockdate.reset();
 });
 
+afterEach(() => {
+  // Reseting superagent
+  global.superagent = originalSuperagent;
+  global.superagent.get = originalGet;
+  superagentProxy(global.superagent);
+});
+
 describe('# Testing Spalatum configuration', () => {
   it('Calling Spalatum without the template parameter, I expect that returns a exception', () => {
-    expect(() => spalatum.render())
-      .toThrow(
-        new ParameterException('template is mandatory'),
-      );
+    expect(() => spalatum.render()).toThrow(
+      new ParameterException('template is mandatory'),
+    );
   });
   it('Calling Spalatum with the template parameter different of a string, I expect that returns a exception', () => {
-    expect(() => spalatum.render(42))
-      .toThrow(
-        new ParameterException('template must be a string'),
-      );
+    expect(() => spalatum.render(42)).toThrow(
+      new ParameterException('template must be a string'),
+    );
   });
 });
 
@@ -50,19 +59,13 @@ describe('# Testing a template with error in fragment request', async () => {
   });
 
   it('Calling Spalatum with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(404, templates.notFoundTemplate, 'text/html'),
-    );
-
+    mockGet(404, templates.notFoundTemplate, 'text/html');
     document.body.outerHTML = await spalatum.render(templates.notFoundTemplate);
     expect(document.body.outerHTML).toMatchSnapshot();
   });
 
   it('Calling Spalatum with an invalid content type in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, templates.simpleTemplate, 'application/json'),
-    );
-
+    mockGet(200, templates.simpleTemplate, 'application/json');
     document.body.outerHTML = await spalatum.render(templates.simpleTemplate);
     expect(document.body.outerHTML).toMatchSnapshot();
   });
@@ -95,10 +98,7 @@ describe('# Testing a template with fragments using proxy', async () => {
 
 describe('# Testing a template with fragments', async () => {
   it('Calling Spalatum with the template with fragments, I expect that returns the template with the fragments rendered', async () => {
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, fragmentStr, mockContentType),
-    );
-
+    mockGet(200, fragmentStr, mockContentType);
     document.body.outerHTML = await spalatum.render(templates.simpleTemplate);
     expect(document.body.outerHTML).toMatchSnapshot();
   });
@@ -106,19 +106,13 @@ describe('# Testing a template with fragments', async () => {
 
 describe('# Testing a template with a primary attribute', async () => {
   it('Calling Spalatum with a template with primary attribute, I expect that returns the template with the fragments rendered', async () => {
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, fragmentStr, mockContentType),
-    );
-
+    mockGet(200, fragmentStr, mockContentType);
     document.body.outerHTML = await spalatum.render(templates.primaryTemplate);
     expect(document.body.outerHTML).toMatchSnapshot();
   });
 
   it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 500, I expect that throw an error', async () => {
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(500, fragmentStr, mockContentType),
-    );
-
+    mockGet(500, fragmentStr, mockContentType);
     expect(spalatum.render(templates.primaryTemplate)).rejects.toEqual(
       new PrimaryFragmentException(
         'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 500.',
@@ -127,10 +121,7 @@ describe('# Testing a template with a primary attribute', async () => {
   });
 
   it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(404, fragmentStr, mockContentType),
-    );
-
+    mockGet(404, fragmentStr, mockContentType);
     expect(spalatum.render(templates.primaryTemplate)).rejects.toEqual(
       new PrimaryFragmentException(
         'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 404.',
@@ -139,10 +130,7 @@ describe('# Testing a template with a primary attribute', async () => {
   });
 
   it('Calling Spalatum with a template with two primary attributes, I excepect that throw an error', async () => {
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, fragmentStr, mockContentType),
-    );
-
+    mockGet(200, fragmentStr, mockContentType);
     expect(() => spalatum.render(templates.twoPrimaryTemplate))
       .toThrow(
         new PrimaryFragmentException('Must have only one fragment tag as primary'),
@@ -152,9 +140,7 @@ describe('# Testing a template with a primary attribute', async () => {
 
 describe('# Testing a cached request', async () => {
   beforeEach(() => {
-    global.superagent.get = jest.fn().mockReturnValue(
-      responseMock(200, fragmentStr, mockContentType),
-    );
+    mockGet(200, fragmentStr, mockContentType);
   });
 
   it('Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again', async () => {
