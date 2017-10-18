@@ -5,7 +5,7 @@ const str = fragmentTags => `<!DOCTYPE html>
     <title>Unit Test</title>
   </head>
   <body>
-    ${fragmentTags.join('\n\t')}
+    ${fragmentTags.join('\n')}
   </body>
 </html>`;
 
