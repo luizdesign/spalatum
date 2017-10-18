@@ -10,7 +10,7 @@
     "test": "node_modules/.bin/jest",
     "coverage": "node_modules/.bin/jest --coverage",
     "lint": "node_modules/.bin/eslint ./lib/** ./__*/** --ext .js",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",

@@ -26,28 +26,29 @@ const templateBuilder = (...fragments) => {
 };
 
 module.exports = {
-  simpleTemplate: templateBuilder('http://localhost:8000/'),
-  httpsTemplate: templateBuilder('https://httpbin.org/html'),
-  errorTemplate: templateBuilder('http://localhost:1000/'),
-  notFoundTemplate: templateBuilder('https://httpbin.org/notfound/'),
-  primaryTemplate: templateBuilder(
+  clean: templateBuilder(),
+  simple: templateBuilder('http://localhost:8000/'),
+  https: templateBuilder('https://httpbin.org/html'),
+  error: templateBuilder('http://localhost:1000/'),
+  notFound: templateBuilder('https://httpbin.org/notfound/'),
+  primary: templateBuilder(
     { href: 'http://localhost:8000/', primary: true },
   ),
-  singleCacheTemplate: templateBuilder(
+  singleCache: templateBuilder(
     { href: 'http://localhost:9000/', cache: '10m' },
   ),
-  proxyTemplate: templateBuilder(
+  proxy: templateBuilder(
     { href: 'http://localhost:7000/', proxy: 'http://localhost:5000/' },
   ),
-  notFoundPrimaryTemplate: templateBuilder(
+  notFoundPrimary: templateBuilder(
     { href: 'https://httpbin.org/notfound/', primary: true },
     { href: 'https://httpbin.org/' },
   ),
-  twoPrimaryTemplate: templateBuilder(
+  twoPrimary: templateBuilder(
     { href: 'http://localhost:8000/', primary: true },
     { href: 'http://localhost:8000/', primary: true },
   ),
-  cacheTemplate: templateBuilder(
+  cache: templateBuilder(
     { href: 'http://localhost:9000/', cache: '10m' },
     { href: 'http://localhost:9001/', cache: '10m' },
   ),
