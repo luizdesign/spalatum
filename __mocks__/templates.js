@@ -1,4 +1,4 @@
-const templateStr = fragmentTags => `<!DOCTYPE html>
+const str = fragmentTags => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,7 +9,7 @@ const templateStr = fragmentTags => `<!DOCTYPE html>
   </body>
 </html>`;
 
-const templateBuilder = (...fragments) => {
+const builder = (...fragments) => {
   const fragmentTags = fragments.map((f) => {
     if ((typeof f) === 'string') {
       return `<fragment href="${f}" />`;
@@ -22,7 +22,7 @@ const templateBuilder = (...fragments) => {
     />`;
   });
 
-  return templateStr(fragmentTags);
+  return str(fragmentTags);
 };
 
 const primary = true;
@@ -31,29 +31,29 @@ const proxy = 'http://localhost:5000/';
 const href = 'http://localhost:8000/';
 
 module.exports = {
-  clean: templateBuilder(),
-  simple: templateBuilder(href),
-  https: templateBuilder('https://httpbin.org/html'),
-  error: templateBuilder('http://localhost:1000/'),
-  notFound: templateBuilder('https://httpbin.org/notfound/'),
-  primary: templateBuilder(
+  clean: builder(),
+  simple: builder(href),
+  https: builder('https://httpbin.org/html'),
+  error: builder('http://localhost:1000/'),
+  notFound: builder('https://httpbin.org/notfound/'),
+  primary: builder(
     { href, primary },
   ),
-  proxy: templateBuilder(
+  proxy: builder(
     { href: 'http://localhost:7000/', proxy },
   ),
-  singleCache: templateBuilder(
+  singleCache: builder(
     { href: 'http://localhost:9000/', cache },
   ),
-  cache: templateBuilder(
+  cache: builder(
     { href: 'http://localhost:9000/', cache },
     { href: 'http://localhost:9001/', cache },
   ),
-  notFoundPrimary: templateBuilder(
+  notFoundPrimary: builder(
     { href: 'https://httpbin.org/notfound/', primary },
     { href: 'https://httpbin.org/' },
   ),
-  twoPrimary: templateBuilder(
+  twoPrimary: builder(
     { href, primary },
     { href, primary },
   ),
