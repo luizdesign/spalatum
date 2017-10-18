@@ -5,7 +5,7 @@ const str = fragmentTags => `<!DOCTYPE html>
     <title>Unit Test</title>
   </head>
   <body>
-    ${fragmentTags.join('\n')}
+    ${fragmentTags}
   </body>
 </html>`;
 
@@ -23,7 +23,7 @@ const builder = (...fragments) => {
     />`;
   });
 
-  return str(fragmentTags);
+  return str(fragmentTags.join('\n'));
 };
 
 const primary = true;
