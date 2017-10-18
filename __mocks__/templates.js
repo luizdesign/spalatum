@@ -15,7 +15,8 @@ const builder = (...fragments) => {
       return `<fragment href="${f}" />`;
     }
 
-    return `<fragment href="${f.href}"
+    return `<fragment
+      href="${f.href}"
       ${f.primary ? 'primary' : ''}
       ${f.cache ? `cache="${f.cache}"` : ''}
       ${f.proxy ? `proxy="${f.proxy}"` : ''}
