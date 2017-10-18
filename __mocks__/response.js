@@ -6,8 +6,8 @@
  * @return {Object}
  */
 module.exports = (status, text, type) => ({
-   status,
-   text,
-   type,
-   ok: () => {},
+  status,
+  text,
+  type,
+  ok: () => {},
 });
