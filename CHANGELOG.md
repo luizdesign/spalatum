@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.0.0 - October/2017
+### Changed
+- Remove all references from global.cache and it's now a cache Class to manage the cache
+- Spalatum is now an object with methods (see more in [#4](http://gitlab.devel/frontend-platform/spalatum/merge_requests/4)):
+  -- **render**: Recieve a template with fragments and make http request to fragment href and returns the parsed html.
+  -- **getCache**: returns cache object
+  -- **clearCacheItem**: clear a specific cache item by endpoint.
+  -- **clearAllCache**: clear all cache items from the cache object
+
 ## v1.0.0 - October/2017
 ### Added
 - Cache management (see more in [#1](http://gitlab.devel/frontend-platform/spalatum/merge_requests/1))
