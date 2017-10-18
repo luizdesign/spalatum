@@ -1,7 +1,8 @@
 const httpProxy = require('http-proxy');
-const MockProxyServer = (target) =>
+
+const MockProxyServer = target =>
   httpProxy.createServer({
-    target
+    target,
   });
 
 module.exports = MockProxyServer;
