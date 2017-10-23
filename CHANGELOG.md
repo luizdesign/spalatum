@@ -1,9 +1,10 @@
 # Changelog
 
-## v2.0.1 - October/2017
+## v2.1.0 - October/2017
 ### Added
 - Add an specific header to Spalatum requests. (see more in [#7](http://gitlab.devel/frontend-platform/spalatum/merge_requests/7))
 - Add logger to log every requests made by Spalatum. (see more in [#6](http://gitlab.devel/frontend-platform/spalatum/merge_requests/6))
+- Refactor Unit and Integration tests (see more in [#5](http://gitlab.devel/frontend-platform/spalatum/merge_requests/5))
 
 ## v2.0.0 - October/2017
 ### Changed
