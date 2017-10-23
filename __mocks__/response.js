@@ -10,4 +10,5 @@ module.exports = (status, text, type) => ({
   text,
   type,
   ok: () => {},
+  set() { return this; },
 });

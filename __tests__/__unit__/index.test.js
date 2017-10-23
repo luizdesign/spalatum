@@ -30,9 +30,7 @@ beforeEach(() => {
   document.body.outerHTML = null;
   spalatum.clearAllCache();
   mockdate.reset();
-});
 
-afterEach(() => {
   // Reseting superagent
   global.superagent = originalSuperagent;
   global.superagent.get = originalGet;
@@ -100,6 +98,17 @@ describe('# Testing a template with fragments', async () => {
     mockGet(200, fragmentStr, mockContentType);
     document.body.outerHTML = await spalatum.render(templates.simple);
     expect(document.body.outerHTML).toMatchSnapshot();
+  });
+
+  it('Calling Spalatum with a template with fragments, I expect that an specific header with the package name is set', async () => {
+    const mock = responseMock(200, fragmentStr, mockContentType);
+    mock.set = jest.fn().mockReturnThis();
+
+    global.superagent.get = jest.fn().mockReturnValue(mock);
+
+    await spalatum.render(templates.simple);
+
+    expect(mock.set).toHaveBeenCalledWith('spalatum-referer', process.env.npm_package_name);
   });
 });
 
