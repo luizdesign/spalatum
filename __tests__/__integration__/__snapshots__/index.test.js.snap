@@ -2,9 +2,6 @@
 
 exports[`# Testing a request to a fragment that throws an error Calling spalatum with a fragment that status code returns a 404, I expect that returns fragments rendered in blank 1`] = `
 "<body>
-    <header>
-      <h1>Example of fragment with 404 on request</h1>
-    </header>
     
   
 </body>"
