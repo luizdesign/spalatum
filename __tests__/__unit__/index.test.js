@@ -18,11 +18,13 @@ const mockProxyServer = require('../../__mocks__/proxy-server.js')('http://local
 
 const originalGet = originalSuperagent.get;
 const mockContentType = 'text/html';
+const mockSet = jest.fn().mockReturnThis();
 
 const mockGet = (status, result, type) => {
-  global.superagent.get = jest.fn().mockReturnValue(
-    responseMock(status, result, type),
-  );
+  const mock = responseMock(status, result, type);
+  mock.set = mockSet;
+
+  global.superagent.get = jest.fn().mockReturnValue(mock);
 };
 
 beforeEach(() => {
@@ -93,22 +95,12 @@ describe('# Testing a template with fragments using proxy', async () => {
   });
 });
 
-describe('# Testing a template with fragments', async () => {
-  it('Calling Spalatum with the template with fragments, I expect that returns the template with the fragments rendered', async () => {
+describe('# Testing a template with fragments', () => {
+  it('Calling Spalatum with the template with fragments, I expect that returns the template with the fragments rendered and an specific header with the package name is set', async () => {
     mockGet(200, fragmentStr, mockContentType);
     document.body.outerHTML = await spalatum.render(templates.simple);
     expect(document.body.outerHTML).toMatchSnapshot();
-  });
-
-  it('Calling Spalatum with a template with fragments, I expect that an specific header with the package name is set', async () => {
-    const mock = responseMock(200, fragmentStr, mockContentType);
-    mock.set = jest.fn().mockReturnThis();
-
-    global.superagent.get = jest.fn().mockReturnValue(mock);
-
-    await spalatum.render(templates.simple);
-
-    expect(mock.set).toHaveBeenCalledWith('spalatum-referer', process.env.npm_package_name);
+    expect(mockSet).toHaveBeenCalledWith('spalatum-referer', process.env.npm_package_name);
   });
 });
 
