@@ -96,7 +96,7 @@ exports[`# Testing a template with error in fragment request Calling Spalatum wi
 </body>"
 `;
 
-exports[`# Testing a template with fragments Calling Spalatum with the template with fragments, I expect that returns the template with the fragments rendered 1`] = `
+exports[`# Testing a template with fragments Calling Spalatum with the template with fragments, I expect that returns the template with the fragments rendered and an specific header with the package name is set 1`] = `
 "<body>
     <section>
   <header>
