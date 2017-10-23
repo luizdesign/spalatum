@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.1 - October/2017
+### Added
+- Add an specific header to Spalatum requests. (see more in [#7](http://gitlab.devel/frontend-platform/spalatum/merge_requests/7))
+- Add logger to log every requests made by Spalatum. (see more in [#6](http://gitlab.devel/frontend-platform/spalatum/merge_requests/6))
+
 ## v2.0.0 - October/2017
 ### Changed
 - Remove all references from global.cache and it's now a cache Class to manage the cache
