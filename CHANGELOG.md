@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.1 - October/2017
+### Changed
+- Change log date format to ISO (see more in [#8](http://gitlab.devel/frontend-platform/spalatum/merge_requests/8))
+
 ## v2.1.0 - October/2017
 ### Added
 - Add an specific header to Spalatum requests. (see more in [#7](http://gitlab.devel/frontend-platform/spalatum/merge_requests/7))

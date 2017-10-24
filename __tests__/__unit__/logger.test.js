@@ -14,7 +14,7 @@ describe('# Testing spalatum request log format', () => {
       headers: {
         'content-length': '1000',
         'content-type': 'text/html',
-        date: '10/10/2017',
+        date: 'Tue, 24 Oct 2017 16:55:59 GMT',
       },
       ok: 'true',
       statusCode: '200',
@@ -23,7 +23,7 @@ describe('# Testing spalatum request log format', () => {
     const expectedLogObject = {
       'content-length': '1000',
       'content-type': 'text/html',
-      date: '10/10/2017',
+      date: '2017-10-24T16:55:59.000Z',
       method: 'GET',
       reqok: 'true',
       'response-time': expect.any(String),
