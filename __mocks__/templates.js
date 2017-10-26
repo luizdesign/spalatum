@@ -1,7 +1,7 @@
 const str = fragmentTags => `<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Unit Test</title>
   </head>
   <body>
@@ -12,15 +12,14 @@ const str = fragmentTags => `<!DOCTYPE html>
 const builder = (...fragments) => {
   const fragmentTags = fragments.map((f) => {
     if ((typeof f) === 'string') {
-      return `<fragment href="${f}" />`;
+      return `<fragment href="${f}"/>`;
     }
 
     return `<fragment
       href="${f.href}"
       ${f.primary ? 'primary' : ''}
       ${f.cache ? `cache="${f.cache}"` : ''}
-      ${f.proxy ? `proxy="${f.proxy}"` : ''}
-    />`;
+      ${f.proxy ? `proxy="${f.proxy}"` : ''}/>`;
   });
 
   return str(fragmentTags.join('\n'));
