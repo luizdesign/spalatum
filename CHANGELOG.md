@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.2.0 - October/2017
+### Added
+- Remove duplicated assets in a template (see more in [#9](http://gitlab.devel/frontend-platform/spalatum/merge_requests/9))
+
 ## v2.1.1 - October/2017
 ### Changed
 - Change log date format to ISO (see more in [#8](http://gitlab.devel/frontend-platform/spalatum/merge_requests/8))
