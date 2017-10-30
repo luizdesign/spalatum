@@ -2,7 +2,7 @@
 
 exports[`Javascript assets filter When execute the module with a minified template with duplicated javascript assets, I expect it remove subsequent duplicates 1`] = `"<html><head></head><body><span>unit test</span><script src=\\"foo.com/react.js\\"></script><script src=\\"foo.com/asset.js\\"></script></body></html>"`;
 
-exports[`Javascript assets filter When execute the module with a template with duplicated javascript assets with attributes and dirty content, I expect it remove subsequent duplicates without removing others content and  attributes 1`] = `"<html><head></head><body><section><script src=\\"foo.com/asset.js\\"></script><header><script async src=\\"foo.com/react.js\\"></script><h1>Unit test</h1></header></section></body></html>"`;
+exports[`Javascript assets filter When execute the module with a template with duplicated javascript assets with attributes and dirty content, I expect it remove subsequent duplicates without removing others content and attributes 1`] = `"<html><head></head><body><section><script src=\\"foo.com/asset.js\\"></script><header><script async src=\\"foo.com/react.js\\"></script><h1>Unit test</h1></header></section></body></html>"`;
 
 exports[`Javascript assets filter When execute the module with a template with duplicated javascript assets, I expect it remove subsequent duplicates 1`] = `"<html><head></head><body><section><header><script src=\\"foo.com/react.js\\"></script><script src=\\"foo.com/asset.js\\"></script></header></section></body></html>"`;
 

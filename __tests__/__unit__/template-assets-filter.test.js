@@ -36,7 +36,7 @@ describe('Javascript assets filter', () => {
     expect(document.outerHTML).toMatchSnapshot();
   });
 
-  it('When execute the module with a template with duplicated javascript assets with attributes and dirty content, I expect it remove subsequent duplicates without removing others content and  attributes', () => {
+  it('When execute the module with a template with duplicated javascript assets with attributes and dirty content, I expect it remove subsequent duplicates without removing others content and attributes', () => {
     const template = `<section>
       <script src="foo.com/asset.js"></script>
       <header>
