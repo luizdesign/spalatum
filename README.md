@@ -1,20 +1,27 @@
 # Spalatum
 
-Spalatum is a library that provides a middleware which you can integrate into any Node.js. This project is based on [Tailor](https://github.com/zalando/tailor).
+Spalatum is a library that provides a middleware which you can integrate into any Node.js. With Spalatum you can get multiple external fragments and serve all together in your html page. This project is based on [Tailor](https://github.com/zalando/tailor).
 
 Some of Spalatum features and benefits:
 
 * **Composes pre-rendered markup on the backend**. This is important for SEO and fastens the initial render.
 * **Enforces performance budget**. This is quite challenging otherwise, because there is no single point where you can control performance.
+* **Cache Management** - When you use `cache` attribute in `<fragment>` tag, your app performace will be improved. With spalatum's cache management  we give you the power to see what is cached, delete some specific endpoint or just purge all cached fragment.
+* **Remove duplicated assets** - Spalatum avoid multiple requests for an external Javascript or CSS, preserving only the first. So, if you have 2 or more fragments importing the same JS/CSS lib, we will remove all duplicated call starting from the second.
+* **Minify HTML code** - Spalatum delivery a minified html code, it's good for performance.
 
-## Fragment
+## Before start
 
-We understand "Fragment" as every endpoint hosted on http(s) server that provide the content you want to include in your page. If you want to use some specific js ou css, you can use the `Link` tag in your header or footer page to provide this resources. Check our **[example app using *Spalatum*](http://gitlab.devel/frontend-platform/spalatum-app-skeleton)** for the skeleton implementation.
+Before start, you must understand Fragment.
 
-### Fragment Tag
+### Fragment
+
+We understand "Fragment" as every endpoint hosted on http(s) server that provide the content you want to include in your page. If you want to use some specific js or css, you can use `script`, `style`, `Link` or any other tags in your template page to provide this resources. Check our **[example app using *Spalatum*](http://gitlab.devel/frontend-platform/spalatum-app-skeleton)** for the skeleton implementation.
+
+#### Fragment Tag
 You can represent a Fragment using  the `<fragment />` tag with this attributes: href, proxy, cache.
 
-#### href *(needed)*
+##### href *(needed)*
 Represent the endpoint that provide the content you want to include in your page.
 
 This endpoint must returns `200` as status code and `text/html` as content-type. Otherwise it will not be rendered.
@@ -24,7 +31,7 @@ Example:
 <fragment href="http://example.fragment.com/" />
 ```
 
-#### primary *(optional)*
+##### primary *(optional)*
 
 Represents the main content. You can use only once primary attribute per template. If the request throws any error, will be returned an error object instead of the rendered html.
 
@@ -48,7 +55,7 @@ Example:
 <fragment href="http://example.fragment.com/" proxy="https://127.0.0.1:8081" />
 ```
 
-#### cache *(optional)*
+##### cache *(optional)*
 The presence of **cache** attribute is optional, if you use, the fragment will be cached as you specify, if you don't, the fragment will be requested each time the page is loaded.
 
 *Spalatum* represent cache lifetime as *[Momentjs](http://momentjs.com/docs/)* does.
@@ -72,17 +79,17 @@ So, if you need to cache some fragment, you can use the *cache* attribute to rep
 
 Example:
 
-#### Caching the fragment for 10 minutes:
+##### Caching the fragment for 10 minutes:
 ```
 <fragment href="http://example.fragment.com/" cache="10m" />
 ```
 
-#### Caching the fragment for 10 days:
+##### Caching the fragment for 10 days:
 ```
 <fragment href="http://example.fragment.com/" cache="10d" />
 ```
 
-#### No Cache:
+##### No Cache:
 If you don't want to use cache, just ommit the attribute:
 ```
 <fragment href="http://example.fragment.com/" />
@@ -93,7 +100,13 @@ If you want to know how this cache works "under the hood", see the [cache diagra
 ---
 
 ## Instalation
-To install *Spalatum*, use the command below:
+*IMPORTANT:* To install *Spalatum*, you must to add a _**.npmrc**_ file at project root with this content:
+
+```
+registry="http://armazem.devel:4873/"
+```
+
+Then, use the command below to add *Spalatum* as your project dependencie:
 ```sh
 # You can use yarn, as well
 npm install @cathodevel/spalatum

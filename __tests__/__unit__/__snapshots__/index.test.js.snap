@@ -1,122 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`# Testing a cached request Calling Spalatum with a cached but expired request, I expect the fragment is requested again 1`] = `
-"<body>
-    <section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-<section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-  
-</body>"
-`;
+exports[`# Testing a cached request Calling Spalatum with a cached but expired request, I expect the fragment is requested again 1`] = `"<body><section><header><h1>This is a Fragment</h1></header></section><section><header><h1>This is a Fragment</h1></header></section></body>"`;
 
-exports[`# Testing a cached request Calling Spalatum with a cached but expired request, I expect the fragment is requested again 2`] = `
-"<body>
-    <section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-<section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-  
-</body>"
-`;
+exports[`# Testing a cached request Calling Spalatum with a cached but expired request, I expect the fragment is requested again 2`] = `"<body><section><header><h1>This is a Fragment</h1></header></section><section><header><h1>This is a Fragment</h1></header></section></body>"`;
 
-exports[`# Testing a cached request Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again 1`] = `
-"<body>
-    <section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-<section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-  
-</body>"
-`;
+exports[`# Testing a cached request Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again 1`] = `"<body><section><header><h1>This is a Fragment</h1></header></section><section><header><h1>This is a Fragment</h1></header></section></body>"`;
 
-exports[`# Testing a cached request Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again 2`] = `
-"<body>
-    <section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-<section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-  
-</body>"
-`;
+exports[`# Testing a cached request Calling Spalatum with a cached request, I expect that returns the same template without request this fragment again 2`] = `"<body><section><header><h1>This is a Fragment</h1></header></section><section><header><h1>This is a Fragment</h1></header></section></body>"`;
 
-exports[`# Testing a template with a primary attribute Calling Spalatum with a template with primary attribute, I expect that returns the template with the fragments rendered 1`] = `
-"<body>
-    <section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-  
-</body>"
-`;
+exports[`# Testing a template with a primary attribute Calling Spalatum with a template with primary attribute, I expect that returns the template with the fragments rendered 1`] = `"<body><section><header><h1>This is a Fragment</h1></header></section></body>"`;
 
-exports[`# Testing a template with error in fragment request Calling Spalatum with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `
-"<body>
-    
-  
-</body>"
-`;
+exports[`# Testing a template with error in fragment request Calling Spalatum with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `"<body></body>"`;
 
-exports[`# Testing a template with error in fragment request Calling Spalatum with an generic error in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `
-"<body>
-    
-  
-</body>"
-`;
+exports[`# Testing a template with error in fragment request Calling Spalatum with an generic error in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `"<body></body>"`;
 
-exports[`# Testing a template with error in fragment request Calling Spalatum with an invalid content type in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `
-"<body>
-    
-  
-</body>"
-`;
+exports[`# Testing a template with error in fragment request Calling Spalatum with an invalid content type in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `"<body></body>"`;
 
-exports[`# Testing a template with fragments Calling Spalatum with the template with fragments, I expect that returns the template with the fragments rendered and an specific header with the package name is set 1`] = `
-"<body>
-    <section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-  
-</body>"
-`;
+exports[`# Testing a template with fragments Calling Spalatum with the template with fragments, I expect that returns the template with the fragments rendered and an specific header with the package name is set 1`] = `"<body><section><header><h1>This is a Fragment</h1></header></section></body>"`;
 
-exports[`# Testing a template with fragments using proxy Calling Spalatum with the template with fragments using proxy, I expect that returns the template with the fragments rendered 1`] = `
-"<body>
-    <section>
-  <header>
-    <h1>This is a Fragment</h1>
-  </header>
-</section>
-  
-</body>"
-`;
+exports[`# Testing a template with fragments using proxy Calling Spalatum with the template with fragments using proxy, I expect that returns the template with the fragments rendered 1`] = `"<body><section><header><h1>This is a Fragment</h1></header></section></body>"`;
 
 exports[`# Testing a template without fragments Calling the lib with the template with no fragments, I expect that returns the same template 1`] = `
 "<body>

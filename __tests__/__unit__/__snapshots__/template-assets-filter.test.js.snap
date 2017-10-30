@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Javascript assets filter When execute the module with a minified template with duplicated javascript assets, I expect it remove subsequent duplicates 1`] = `"<html><head></head><body><span>unit test</span><script src=\\"foo.com/react.js\\"></script><script src=\\"foo.com/asset.js\\"></script></body></html>"`;
+
+exports[`Javascript assets filter When execute the module with a template with duplicated javascript assets with attributes and dirty content, I expect it remove subsequent duplicates without removing others content and attributes 1`] = `"<html><head></head><body><section><script src=\\"foo.com/asset.js\\"></script><header><script async src=\\"foo.com/react.js\\"></script><h1>Unit test</h1></header></section></body></html>"`;
+
+exports[`Javascript assets filter When execute the module with a template with duplicated javascript assets, I expect it remove subsequent duplicates 1`] = `"<html><head></head><body><section><header><script src=\\"foo.com/react.js\\"></script><script src=\\"foo.com/asset.js\\"></script></header></section></body></html>"`;
+
+exports[`Javascript assets filter When execute the module with a template with no assets, I expect it doesn't change the content 1`] = `"<!DOCTYPE html><html lang=\\"en\\"><head><meta charset=\\"UTF-8\\"><title>Unit Test</title></head><body><fragment href=\\"http://localhost:8000/\\"></fragment></body></html>"`;
+
+exports[`Javascript assets filter When execute the module with an empty template, I expect it return an default empty html string 1`] = `"<html><head></head><body></body></html>"`;
+
+exports[`Javascript assets filter When execute the module with no template, I expect it return an default empty html string 1`] = `"<html><head></head><body></body></html>"`;
+
+exports[`Styles assets filter When execute the module with a minified template with duplicated css assets, I expect it remove subsequent duplicates 1`] = `"<html><head></head><body><span>unit test</span><link href=\\"foo.com/react.css\\"><link href=\\"foo.com/asset.css\\"></body></html>"`;
+
+exports[`Styles assets filter When execute the module with a template with duplicated css assets with attributes and dirty content, I expect it remove subsequent duplicates without removing others content and attributes 1`] = `"<html><head></head><body><section><link type=\\"text/css\\" href=\\"foo.com/react.css\\" rel=\\"stylesheet\\" media=\\"print\\"><header><link href=\\"foo.com/asset.css\\"><p>Unit test</p></header></section></body></html>"`;
+
+exports[`Styles assets filter When execute the module with a template with duplicated css assets, I expect it remove subsequent duplicate 1`] = `"<html><head></head><body><section><header><link href=\\"foo.com/react.css\\" rel=\\"stylesheet\\" media=\\"print\\"><link href=\\"foo.com/asset.css\\"></header></section></body></html>"`;
