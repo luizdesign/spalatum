@@ -100,7 +100,7 @@ If you want to know how this cache works "under the hood", see the [cache diagra
 ---
 
 ## Instalation
-To install *Spalatum*, add _**.npmrc**_ file with this content:
+*IMPORTANT:* To install *Spalatum*, you must to add a _**.npmrc**_ file at project root with this content:
 
 ```
 registry="http://armazem.devel:4873/"
