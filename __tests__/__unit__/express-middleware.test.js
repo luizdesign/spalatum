@@ -1,4 +1,4 @@
-const spalatum = require('../../lib');
+const { spalatum } = require('../../lib');
 const superagent = require('../../lib/fragment-request');
 const middleware = require('../../lib/express-middleware');
 

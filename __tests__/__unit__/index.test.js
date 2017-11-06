@@ -5,7 +5,7 @@ const expressMiddleware = require('../../lib/express-middleware');
 const moment = require('moment');
 
 // Lib components
-const spalatum = require('../../lib/index.js');
+const { spalatum } = require('../../lib/index.js');
 const ParameterException = require('../../lib/exceptions/parameterException.js');
 const PrimaryFragmentException = require('../../lib/exceptions/primaryFragmentException.js');
 

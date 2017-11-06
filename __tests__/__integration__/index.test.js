@@ -1,4 +1,4 @@
-const spalatum = require('../../lib/index.js');
+const { spalatum } = require('../../lib/index.js');
 const PrimaryFragmentException = require('../../lib/exceptions/primaryFragmentException.js');
 const templates = require('../../__mocks__/templates');
 
