@@ -30,6 +30,7 @@
     "mockdate": "^2.0.2",
     "moment": "^2.18.1",
     "superagent": "^3.6.0",
+    "superagent-defaults": "^0.1.14",
     "superagent-proxy": "^1.0.2",
     "superagent-use": "^0.1.0"
   },
