@@ -10,7 +10,4 @@ module.exports = (status, text, type) => ({
   text,
   type,
   ok: () => {},
-  header: {
-    'spalatum-referer': process.env.npm_package_name,
-  },
 });
