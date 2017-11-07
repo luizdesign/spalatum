@@ -1,18 +1,24 @@
-const { spalatum } = require('../../lib');
-const superagent = require('../../lib/fragment-request');
-const middleware = require('../../lib/express-middleware');
+const { spalatum, middleware } = require('../../lib');
+const superagent = require('../../lib/request-client');
 
 // Mock utils
 const templates = require('../../__mocks__/templates.js');
 const mockServer = require('../../__mocks__/server.js')('./fragment.js');
-const mockRequest = require('../../__mocks__/request');
 const mockResponse = require('../../__mocks__/response');
 
+const mockRequest = {
+  headers: {
+    cookie: 'foo',
+  },
+};
+
+const next = jest.fn();
+
 describe('# When calling express middleware', () => {
-  const next = jest.fn();
   beforeEach(() => {
     superagent.set = jest.spyOn(superagent, 'set');
     mockServer.listen(8000);
+    middleware(mockRequest, mockResponse, next);
   });
 
   afterEach(() => {
@@ -21,12 +27,10 @@ describe('# When calling express middleware', () => {
 
   it(`Should call the "next" callback function,
     passed as the third argument`, () => {
-    middleware(mockRequest, mockResponse, next);
     expect(next).toHaveBeenCalledTimes(1);
   });
 
   it('Should set headers on the request object', async () => {
-    middleware(mockRequest, mockResponse, next);
     await spalatum.render(templates.simple);
     expect(superagent.set).toHaveBeenCalledWith(mockRequest.headers);
   });

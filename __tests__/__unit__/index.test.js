@@ -1,11 +1,10 @@
 // External dependencies
 const mockdate = require('mockdate');
-const originalSuperagent = require('../../lib/fragment-request');
-const expressMiddleware = require('../../lib/express-middleware');
+const originalSuperagent = require('../../lib/request-client');
 const moment = require('moment');
 
 // Lib components
-const { spalatum } = require('../../lib/index.js');
+const { spalatum } = require('../../lib');
 const ParameterException = require('../../lib/exceptions/parameterException.js');
 const PrimaryFragmentException = require('../../lib/exceptions/primaryFragmentException.js');
 
@@ -15,13 +14,10 @@ const fragmentStr = require('../../__mocks__/fragment.js');
 const templates = require('../../__mocks__/templates.js');
 const mockServer = require('../../__mocks__/server.js')('./fragment.js');
 const mockProxyServer = require('../../__mocks__/proxy-server.js')('http://localhost:7000');
-const mockRequest = require('../../__mocks__/request');
-const mockResponse = require('../../__mocks__/response');
-
 
 const originalGet = originalSuperagent.get;
 const mockContentType = 'text/html';
-const mockSet = jest.spyOn(originalSuperagent, 'set');
+const mockSet = jest.fn().mockReturnThis();
 
 const mockGet = (status, result, type) => {
   const mock = responseMock(status, result, type);
@@ -98,9 +94,8 @@ describe('# Testing a template with fragments using proxy', async () => {
 });
 
 describe('# Testing a template with fragments', () => {
-  const next = jest.fn();
   it('Calling Spalatum with the template with fragments, I expect that returns the template with the fragments rendered and an specific header with the package name is set', async () => {
-    expressMiddleware(mockRequest, mockResponse, next);
+    mockGet(200, fragmentStr, mockContentType);
     document.body.outerHTML = await spalatum.render(templates.simple);
     expect(document.body.outerHTML).toMatchSnapshot();
     expect(mockSet).toHaveBeenCalledWith('spalatum-referer', process.env.npm_package_name);
