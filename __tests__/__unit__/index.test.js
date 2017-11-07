@@ -1,10 +1,11 @@
 // External dependencies
+const http = require('http');
 const mockdate = require('mockdate');
 const originalSuperagent = require('../../lib/request-client');
 const moment = require('moment');
 
 // Lib components
-const { spalatum } = require('../../lib');
+const { spalatum, spalatumMiddleware } = require('../../lib');
 const ParameterException = require('../../lib/exceptions/parameterException.js');
 const PrimaryFragmentException = require('../../lib/exceptions/primaryFragmentException.js');
 
@@ -12,7 +13,8 @@ const PrimaryFragmentException = require('../../lib/exceptions/primaryFragmentEx
 const responseMock = require('../../__mocks__/response');
 const fragmentStr = require('../../__mocks__/fragment.js');
 const templates = require('../../__mocks__/templates.js');
-const mockServer = require('../../__mocks__/server.js')('./fragment.js');
+const fragment = require('../../__mocks__/fragment');
+const mockFragmentServer = require('../../__mocks__/server.js')('./fragment.js');
 const mockProxyServer = require('../../__mocks__/proxy-server.js')('http://localhost:7000');
 
 const originalGet = originalSuperagent.get;
@@ -79,7 +81,7 @@ describe('# Testing a template without fragments', async () => {
 describe('# Testing a template with fragments using proxy', async () => {
   beforeEach(() => {
     mockProxyServer.listen(5000);
-    mockServer.listen(7000);
+    mockFragmentServer.listen(7000);
   });
 
   it('Calling Spalatum with the template with fragments using proxy, I expect that returns the template with the fragments rendered', async () => {
@@ -88,7 +90,7 @@ describe('# Testing a template with fragments using proxy', async () => {
   });
 
   afterEach(() => {
-    mockServer.close();
+    mockFragmentServer.close();
     mockProxyServer.close();
   });
 });
@@ -216,5 +218,37 @@ describe('# Testing cache methods', () => {
   it('Calling Spalatum removeAllCache method, I expect an empty cache', () => {
     expect(spalatum.clearAllCache()).toEqual({});
     expect(spalatum.getCache()).toEqual({});
+  });
+});
+
+describe('# Testing the middleware', () => {
+  const serverCb = jest.fn((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(fragment);
+    res.end();
+  });
+  const server = http.createServer(serverCb);
+  const mockRequest = { headers: { cookie: 'foo' } };
+
+  beforeEach(async () => {
+    server.listen(8000);
+    global.superagent.set = jest.fn(global.superagent.set);
+    spalatumMiddleware(mockRequest, responseMock, jest.fn());
+    await spalatum.render(templates.simple);
+  });
+
+  afterEach(() => server.close());
+
+  it('Should set headers on the request object', async () => {
+    expect(global.superagent.set).toHaveBeenCalledWith(mockRequest.headers);
+  });
+
+  it(`Calling Spalatum within the middleware,
+    I expect that correct headers are passed to destination server`, () => {
+    expect(serverCb).toHaveBeenCalledWith(expect.objectContaining({
+      headers: expect.objectContaining({
+        cookie: mockRequest.headers.cookie,
+      }),
+    }), expect.anything());
   });
 });

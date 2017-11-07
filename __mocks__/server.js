@@ -1,5 +1,3 @@
-/* eslint global-require: 0, import/no-dynamic-require: 0 */
-
 const http = require('http');
 
 const MockServer = filePath =>
@@ -10,7 +8,7 @@ const MockServer = filePath =>
         'Content-Type': 'text/html',
       },
     );
-    res.write(require(filePath));
+    res.write(require(filePath)); /* eslint global-require: 0, import/no-dynamic-require: 0 */
     res.end();
   });
 
