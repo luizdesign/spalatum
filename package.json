@@ -1,6 +1,6 @@
 {
   "name": "@cathodevel/spalatum",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Render template and fragments",
   "main": "index.js",
   "engines": {
@@ -10,7 +10,8 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "lint": "eslint ./lib/** ./__*/** --ext .js",
-    "precommit": "npm-run-all lint coverage"
+    "precommit": "npm run lint",
+    "prepush": "npm run coverage"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "mockdate": "^2.0.2",
     "moment": "^2.18.1",
     "superagent": "^3.6.0",
+    "superagent-defaults": "^0.1.14",
     "superagent-proxy": "^1.0.2"
   },
   "devDependencies": {
@@ -40,8 +42,7 @@
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
     "husky": "^0.14.3",
-    "jest": "^20.0.4",
-    "npm-run-all": "^4.1.1"
+    "jest": "^20.0.4"
   },
   "jest": {
     "modulePathIgnorePatterns": [
