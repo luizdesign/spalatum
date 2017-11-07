@@ -1,4 +1,7 @@
 # Changelog
+## v3.0.0 - October/2017
+### Added
+- An express middleware to pass request headers to fragment requests
 
 ## v2.2.0 - October/2017
 ### Added
