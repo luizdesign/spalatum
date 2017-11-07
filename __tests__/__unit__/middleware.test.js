@@ -1,4 +1,4 @@
-const { spalatum, expressMiddleware } = require('../../lib');
+const { spalatum, spalatumMiddleware } = require('../../lib');
 const superagent = require('../../lib/request-client');
 
 // Mock utils
@@ -18,7 +18,7 @@ describe('# When calling express middleware', () => {
   beforeEach(() => {
     superagent.set = jest.spyOn(superagent, 'set');
     mockServer.listen(8000);
-    expressMiddleware(mockRequest, mockResponse, next);
+    spalatumMiddleware(mockRequest, mockResponse, next);
   });
 
   afterEach(() => {
