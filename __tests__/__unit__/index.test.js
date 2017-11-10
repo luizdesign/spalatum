@@ -28,6 +28,12 @@ const mockGet = (status, result, type) => {
   global.superagent.get = jest.fn().mockReturnValue(mock);
 };
 
+const serverCb = jest.fn((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write(fragment);
+  res.end();
+});
+
 beforeEach(() => {
   // Clear testing data
   document.body.outerHTML = null;
@@ -108,6 +114,21 @@ describe('# Testing a template with fragments', () => {
     document.body.outerHTML = await spalatum.render(templates.https);
     expect(document.body.outerHTML).toMatchSnapshot();
     expect(mockSet).toHaveBeenCalledWith('host', 'httpbin.org');
+  });
+
+  it('Calling Spalatum with a template with fragments, I expect that the destination server recieve the header "Host" setted with the fragment hostname', async () => {
+    const server = http.createServer(serverCb);
+    server.listen(8000);
+    global.superagent.set = jest.fn(global.superagent.set);
+    await spalatum.render(templates.simple);
+
+    expect(serverCb).toHaveBeenCalledWith(expect.objectContaining({
+      headers: expect.objectContaining({
+        host: 'localhost',
+      }),
+    }), expect.anything());
+
+    server.close();
   });
 });
 
@@ -229,11 +250,6 @@ describe('# Testing cache methods', () => {
 });
 
 describe('# Testing the middleware', () => {
-  const serverCb = jest.fn((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(fragment);
-    res.end();
-  });
   const server = http.createServer(serverCb);
   const mockRequest = { headers: { cookie: 'foo' } };
 
