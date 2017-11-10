@@ -102,6 +102,13 @@ describe('# Testing a template with fragments', () => {
     expect(document.body.outerHTML).toMatchSnapshot();
     expect(mockSet).toHaveBeenCalledWith('spalatum-referer', process.env.npm_package_name);
   });
+
+  it('Calling Spalatum with a template with fragments, I expect that returns a template with fragments rendered and the header "Host" setted with the fragment hostname', async () => {
+    mockGet(200, fragmentStr, mockContentType);
+    document.body.outerHTML = await spalatum.render(templates.https);
+    expect(document.body.outerHTML).toMatchSnapshot();
+    expect(mockSet).toHaveBeenCalledWith('host', 'httpbin.org');
+  });
 });
 
 describe('# Testing a template with a primary attribute', async () => {
