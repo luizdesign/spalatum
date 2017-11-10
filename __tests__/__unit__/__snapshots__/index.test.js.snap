@@ -16,6 +16,8 @@ exports[`# Testing a template with error in fragment request Calling Spalatum wi
 
 exports[`# Testing a template with error in fragment request Calling Spalatum with an invalid content type in the fragment request, I expect that returns the template with the fragments rendered in blank 1`] = `"<body></body>"`;
 
+exports[`# Testing a template with fragments Calling Spalatum with a template with fragments, I expect that returns a template with fragments rendered and the header "Host" setted with the fragment hostname 1`] = `"<body><section><header><h1>This is a Fragment</h1></header></section></body>"`;
+
 exports[`# Testing a template with fragments Calling Spalatum with the template with fragments, I expect that returns the template with the fragments rendered and an specific header with the package name is set 1`] = `"<body><section><header><h1>This is a Fragment</h1></header></section></body>"`;
 
 exports[`# Testing a template with fragments using proxy Calling Spalatum with the template with fragments using proxy, I expect that returns the template with the fragments rendered 1`] = `"<body><section><header><h1>This is a Fragment</h1></header></section></body>"`;
