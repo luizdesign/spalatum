@@ -8,6 +8,7 @@ describe('# Testing spalatum request log format', () => {
         path: '/unit/test/',
       },
       host: 'http://localhost/',
+      headers: {},
     };
 
     const response = {
@@ -40,6 +41,7 @@ describe('# Testing spalatum request log format', () => {
   it('Calling logRequestFormat with some incorrect data, I expect that returns a expected log object', () => {
     const request = {
       req: {},
+      headers: {},
     };
 
     const response = {
@@ -48,6 +50,7 @@ describe('# Testing spalatum request log format', () => {
 
     const expectedLogObject = {
       log_format: 'morgan',
+      apptype: 'fragment',
     };
 
     const formatedLog = logRequestFormat(request, response);
