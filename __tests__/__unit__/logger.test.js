@@ -8,7 +8,7 @@ describe('# Testing spalatum request log format', () => {
         path: '/unit/test/',
       },
       host: 'http://localhost/',
-      headers: {},
+      header: {},
     };
 
     const response = {
@@ -41,7 +41,7 @@ describe('# Testing spalatum request log format', () => {
   it('Calling logRequestFormat with some incorrect data, I expect that returns a expected log object', () => {
     const request = {
       req: {},
-      headers: {},
+      header: {},
     };
 
     const response = {
