@@ -30,6 +30,7 @@ describe('# Testing spalatum request log format', () => {
       urlpath: '/unit/test/',
       vhost: 'http://localhost/',
       log_format: 'morgan',
+      apptype: 'fragment',
     };
 
     const formatedLog = logRequestFormat(request, response);
