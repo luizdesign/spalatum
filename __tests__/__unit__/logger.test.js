@@ -23,10 +23,9 @@ describe('# Testing spalatum request log format', () => {
 
     const expectedLogObject = {
       bytes: '1000',
-      'content-type': 'text/html',
+      content: 'text/html',
       '@timestamp': '2017-10-24T16:55:59.000Z',
       method: 'GET',
-      reqok: 'true',
       status: '200',
       urlpath: '/unit/test/',
       vhost: 'http://localhost/',
