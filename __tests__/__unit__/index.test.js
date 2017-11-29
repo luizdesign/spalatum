@@ -256,7 +256,7 @@ describe('# Testing the middleware', () => {
   beforeEach(async () => {
     server.listen(8000);
     global.superagent.set = jest.fn(global.superagent.set);
-    spalatumMiddleware(mockRequest, responseMock, jest.fn());
+    spalatumMiddleware(mockRequest, responseMock(), jest.fn());
     await spalatum.render(templates.simple);
   });
 

@@ -10,5 +10,5 @@ module.exports = (status, text, type) => ({
   text,
   type,
   ok: () => {},
-  getHeaders: () => {},
+  getHeaders: () => ({ header: 'test' }),
 });
