@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.0.2 - November/2017
+### Added
+- Add new logs for every fragments requests
+- Change middleware to pass all kind of headers to the fragments requests
+
 ## v3.0.1 - October/2017
 ### Added
 - Always pass the host header with the fragment endpoint hostname to the request

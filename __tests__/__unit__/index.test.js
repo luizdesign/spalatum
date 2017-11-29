@@ -106,7 +106,7 @@ describe('# Testing a template with fragments', () => {
     mockGet(200, fragmentStr, mockContentType);
     document.body.outerHTML = await spalatum.render(templates.simple);
     expect(document.body.outerHTML).toMatchSnapshot();
-    expect(mockSet).toHaveBeenCalledWith('spalatum-referer', process.env.npm_package_name);
+    expect(mockSet).toHaveBeenCalledWith('user-agent', process.env.npm_package_name);
   });
 
   it('Calling Spalatum with a template with fragments, I expect that returns a template with fragments rendered and the header "Host" setted with the fragment hostname', async () => {
@@ -256,7 +256,7 @@ describe('# Testing the middleware', () => {
   beforeEach(async () => {
     server.listen(8000);
     global.superagent.set = jest.fn(global.superagent.set);
-    spalatumMiddleware(mockRequest, responseMock, jest.fn());
+    spalatumMiddleware(mockRequest, responseMock(), jest.fn());
     await spalatum.render(templates.simple);
   });
 

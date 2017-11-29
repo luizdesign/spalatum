@@ -8,6 +8,7 @@ describe('# Testing spalatum request log format', () => {
         path: '/unit/test/',
       },
       host: 'http://localhost/',
+      header: {},
     };
 
     const response = {
@@ -21,15 +22,15 @@ describe('# Testing spalatum request log format', () => {
     };
 
     const expectedLogObject = {
-      'content-length': '1000',
-      'content-type': 'text/html',
-      date: '2017-10-24T16:55:59.000Z',
+      bytes: '1000',
+      content: 'text/html',
+      '@timestamp': '2017-10-24T16:55:59.000Z',
       method: 'GET',
-      reqok: 'true',
-      'response-time': expect.any(String),
       status: '200',
-      'url-path': '/unit/test/',
+      urlpath: '/unit/test/',
       vhost: 'http://localhost/',
+      log_format: 'bunyan',
+      apptype: 'fragment',
     };
 
     const formatedLog = logRequestFormat(request, response);
@@ -39,6 +40,7 @@ describe('# Testing spalatum request log format', () => {
   it('Calling logRequestFormat with some incorrect data, I expect that returns a expected log object', () => {
     const request = {
       req: {},
+      header: {},
     };
 
     const response = {
@@ -46,15 +48,8 @@ describe('# Testing spalatum request log format', () => {
     };
 
     const expectedLogObject = {
-      'content-length': '-',
-      'content-type': '-',
-      date: '-',
-      method: '-',
-      reqok: '-',
-      'response-time': '-ms',
-      status: '-',
-      'url-path': '-',
-      vhost: '-',
+      log_format: 'bunyan',
+      apptype: 'fragment',
     };
 
     const formatedLog = logRequestFormat(request, response);
