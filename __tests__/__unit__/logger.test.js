@@ -29,7 +29,7 @@ describe('# Testing spalatum request log format', () => {
       status: '200',
       urlpath: '/unit/test/',
       vhost: 'http://localhost/',
-      log_format: 'morgan',
+      log_format: 'bunyan',
       apptype: 'fragment',
     };
 
@@ -48,7 +48,7 @@ describe('# Testing spalatum request log format', () => {
     };
 
     const expectedLogObject = {
-      log_format: 'morgan',
+      log_format: 'bunyan',
       apptype: 'fragment',
     };
 
