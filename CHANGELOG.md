@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.1.0 - December/2017
+### Removed
+- Remove html minification
+
+
 ## v3.0.2 - November/2017
 ### Added
 - Add new logs for every fragments requests
