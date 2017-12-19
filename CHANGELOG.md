@@ -2,7 +2,7 @@
 
 ## v3.1.0 - December/2017
 ### Removed
-- Remove html minification
+- Remove HTML minification
 
 
 ## v3.0.2 - November/2017
