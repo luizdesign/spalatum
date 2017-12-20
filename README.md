@@ -8,7 +8,6 @@ Some of Spalatum features and benefits:
 * **Enforces performance budget**. This is quite challenging otherwise, because there is no single point where you can control performance.
 * **Cache Management** - When you use `cache` attribute in `<fragment>` tag, your app performace will be improved. With spalatum's cache management  we give you the power to see what is cached, delete some specific endpoint or just purge all cached fragment.
 * **Remove duplicated assets** - Spalatum avoid multiple requests for an external Javascript or CSS, preserving only the first. So, if you have 2 or more fragments importing the same JS/CSS lib, we will remove all duplicated call starting from the second.
-* **Minify HTML code** - Spalatum delivery a minified html code, it's good for performance.
 * **Express Middleware to pass browser headers to fragments** - Spalatum have a built in middleware that you can use when your app needs to send browser headers to the fragment.
 
 ## Before start
