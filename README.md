@@ -1,5 +1,8 @@
 # Spalatum
 
+[![build status](http://gitlab.devel/frontend-platform/spalatum/badges/master/build.svg)](http://gitlab.devel/frontend-platform/spalatum/commits/master)
+[![coverage report](http://gitlab.devel/frontend-platform/spalatum/badges/master/coverage.svg)](http://gitlab.devel/frontend-platform/spalatum/commits/master)
+
 Spalatum is a library that provides a middleware which you can integrate into any Node.js. With Spalatum you can get multiple external fragments and serve all together in your html page. This project is based on [Tailor](https://github.com/zalando/tailor).
 
 Some of Spalatum features and benefits:
