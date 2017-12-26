@@ -9,12 +9,12 @@ cache:
 
 jest:
   script:
-    - npm coverage
+    - npm run coverage
   tags:
     - node
 
 eslint:
   script:
-    - npm lint
+    - npm run lint
   tags:
     - node
