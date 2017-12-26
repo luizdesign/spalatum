@@ -1,9 +1,15 @@
 # Changelog
 
+## v3.1.1 - December/2017
+### Added
+- Added new coverage setup
+
+### Removed
+- Removed husky precommit script
+
 ## v3.1.0 - December/2017
 ### Removed
 - Remove HTML minification
-
 
 ## v3.0.2 - November/2017
 ### Added
