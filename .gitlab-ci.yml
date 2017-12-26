@@ -1,7 +1,7 @@
 image: node:8-alpine
 
 before_script:
-  - yarn install
+  - npm install
 
 cache:
   paths:
@@ -9,12 +9,12 @@ cache:
 
 jest:
   script:
-    - yarn coverage
+    - npm coverage
   tags:
     - node
 
 eslint:
   script:
-    - yarn lint
+    - npm lint
   tags:
     - node
