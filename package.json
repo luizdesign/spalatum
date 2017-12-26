@@ -10,8 +10,7 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "lint": "eslint ./lib/** ./__*/** --ext .js",
-    "precommit": "npm run lint",
-    "prepush": "npm run coverage"
+    "prepush": "npm run lint"
   },
   "repository": {
     "type": "git",
