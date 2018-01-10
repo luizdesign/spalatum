@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.1.2 - January/2018
+### Removed
+- Remove host header that is passed to fragment request
+
 ## v3.1.1 - December/2017
 ### Added
 - Added new coverage setup
