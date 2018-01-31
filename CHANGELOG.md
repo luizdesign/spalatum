@@ -3,6 +3,8 @@
 ### Added
 - Added options to render method
 - Removed middleware and
+
+### Changed
 - Change how the lib is exported
 
 ## v3.1.2 - January/2018
@@ -30,7 +32,7 @@
 - Always pass the host header with the fragment endpoint hostname to the request
 
 ## v3.0.0 - October/2017
-### Added
+### Changed
 - An express middleware to pass request headers to fragment requests
 
 ## v2.2.0 - October/2017
