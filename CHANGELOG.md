@@ -1,11 +1,13 @@
 # Changelog
 ## v4.0.0 - January/2018
 ### Added
-- Added options to render method
-- Removed middleware and
+- Options param to render method
+
+### Removed
+- Middleware
 
 ### Changed
-- Change how the lib is exported
+- The way lib is exported
 
 ## v3.1.2 - January/2018
 ### Removed
