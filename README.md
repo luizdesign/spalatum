@@ -3,7 +3,7 @@
 [![build status](http://gitlab.devel/frontend-platform/spalatum/badges/master/build.svg)](http://gitlab.devel/frontend-platform/spalatum/commits/master)
 [![coverage report](http://gitlab.devel/frontend-platform/spalatum/badges/master/coverage.svg)](http://gitlab.devel/frontend-platform/spalatum/commits/master)
 
-Spalatum is a library that provides a middleware which you can integrate into any Node.js. With Spalatum you can get multiple external fragments and serve all together in your html page. This project is based on [Tailor](https://github.com/zalando/tailor).
+Spalatum is a library to merge different fragment sources into a single template. With Spalatum you can get multiple external fragments and serve all together in your html page. This project is based on [Tailor](https://github.com/zalando/tailor).
 
 Some of Spalatum features and benefits:
 
@@ -11,7 +11,6 @@ Some of Spalatum features and benefits:
 * **Enforces performance budget**. This is quite challenging otherwise, because there is no single point where you can control performance.
 * **Cache Management** - When you use `cache` attribute in `<fragment>` tag, your app performace will be improved. With spalatum's cache management  we give you the power to see what is cached, delete some specific endpoint or just purge all cached fragment.
 * **Remove duplicated assets** - Spalatum avoid multiple requests for an external Javascript or CSS, preserving only the first. So, if you have 2 or more fragments importing the same JS/CSS lib, we will remove all duplicated call starting from the second.
-* **Express Middleware to pass browser headers to fragments** - Spalatum have a built in middleware that you can use when your app needs to send browser headers to the fragment.
 
 ## Before start
 
@@ -100,37 +99,6 @@ If you don't want to use cache, just ommit the attribute:
 
 If you want to know how this cache works "under the hood", see the [cache diagram](https://drive.google.com/file/d/0B4FRF2kGUDbcTTlrbFNsZnNCZW8/view) for more details.
 
-
-### Express Middleware
-If you app need to pass all browser headers to a fragment, Spalatum provides a middleware to use called `spalatumMiddleware`.
-
-Example:
-
-```javascript
-const { spalatum, spalatumMiddleware } = require('@cathodevel/spalatum');
-const express = require('express');
-
-const app = express();
-/*  Middleware will be used and all browser headers will be
- *  included in every request to the fragments
- */
-app.use(spalatumMiddleware);
-
-app.get('/', async (req, res) => {
-  const template = `
-    <html>
-      <body>
-        <fragment href="www.catho.com.br" />
-      </body>
-    </html>
-  `;
-
-  const templateResult = await spalatum.render(template);
-  res.send(templateResult);
-});
-
-app.listen(3000);
-```
 
 ---
 
