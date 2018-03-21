@@ -26,4 +26,28 @@ describe('# Testing a request to a fragment that throws an error', () => {
       ),
     );
   });
+
+  it('Calling Spalatum from development with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'development';
+
+    const spalatumResponse = await spalatum.render(templates.notFoundPrimary, {});
+    expect(spalatumResponse.includes('Spalatum failed to compile')).toBe(true);
+
+    process.env.NODE_ENV = originalEnv;
+  });
+
+  it('Calling Spalatum from production with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
+    const originalEnv = process.env.NODE_ENV;
+    const errorMessage = 'Spalatum can\'t render the primary fragment (https://httpbin.org/notfound/), the returned statusCode was 404.';
+    process.env.NODE_ENV = 'production';
+
+    try {
+      await spalatum.render(templates.notFoundPrimary, {});
+    } catch (error) {
+      expect(error.message).toMatch(errorMessage);
+    }
+
+    process.env.NODE_ENV = originalEnv;
+  });
 });

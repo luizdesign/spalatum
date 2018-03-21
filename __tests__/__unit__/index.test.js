@@ -7,7 +7,6 @@ const moment = require('moment');
 const spalatum = require('../../lib');
 const ParameterException = require('../../lib/exceptions/parameterException.js');
 const PrimaryFragmentException = require('../../lib/exceptions/primaryFragmentException.js');
-const ResponseException = require('../../lib/exceptions/responseException.js');
 
 // Mock utils
 const responseMock = require('../../__mocks__/response');
@@ -69,14 +68,26 @@ describe('# Testing a template with error in fragment request', async () => {
     expect(document.body.outerHTML).toMatchSnapshot();
   });
 
-  it.only('Calling Spalatum with a template with two errors, I expect that it throw an error', async () => {
-    mockGet(404, templates.twoErrors, 'application/json');
+  it('Calling Spalatum from development environment with a not found template, I expect that return an error template', async () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'development';
 
-    expect(spalatum.render(templates.twoErrors, {})).rejects.toEqual(
-      new ResponseException(
-        'Fragment status code isn\'t successful',
-      ),
-    );
+    mockGet(404, templates.notFound, 'text/html');
+    const spalatumResponse = await spalatum.render(templates.notFound, {});
+
+    expect(spalatumResponse.includes('Spalatum failed to compile')).toBe(true);
+    process.env.NODE_ENV = originalEnv;
+  });
+
+  it('Calling Spalatum from production environment with a not found template, I expect that return an empty string', async () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'production';
+
+    mockGet(404, templates.notFound, 'text/html');
+    const spalatumResponse = await spalatum.render(templates.notFound, {});
+
+    expect(spalatumResponse.replace(/\s*/g, '').includes('<body></body>')).toBe(true);
+    process.env.NODE_ENV = originalEnv;
   });
 });
 
@@ -120,22 +131,32 @@ describe('# Testing a template with a primary attribute', async () => {
     expect(document.body.outerHTML).toMatchSnapshot();
   });
 
-  it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 500, I expect that throw an error', async () => {
+  it('Calling Spalatum from development with a template with primary attribute, when the fragment request status code returns 500, I expect that throw an error', async () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'development';
+
     mockGet(500, fragmentStr, mockContentType);
-    expect(spalatum.render(templates.primary, {})).rejects.toEqual(
-      new PrimaryFragmentException(
-        'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 500.',
-      ),
-    );
+
+    const spalatumResponse = await spalatum.render(templates.primary, {});
+    expect(spalatumResponse.includes('Spalatum failed to compile')).toBe(true);
+
+    process.env.NODE_ENV = originalEnv;
   });
 
-  it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
-    mockGet(404, fragmentStr, mockContentType);
-    expect(spalatum.render(templates.primary, {})).rejects.toEqual(
-      new PrimaryFragmentException(
-        'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 404.',
-      ),
-    );
+  it('Calling Spalatum from production with a template with primary attribute, when the fragment request status code returns 500, I expect that throw an error', async () => {
+    const originalEnv = process.env.NODE_ENV;
+    const errorMessage = 'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 500.';
+    process.env.NODE_ENV = 'production';
+
+    mockGet(500, fragmentStr, mockContentType);
+
+    try {
+      await spalatum.render(templates.primary, {});
+    } catch (error) {
+      expect(error.message).toMatch(errorMessage);
+    }
+
+    process.env.NODE_ENV = originalEnv;
   });
 
   it('Calling Spalatum with a template with two primary attributes, I excepect that throw an error', async () => {

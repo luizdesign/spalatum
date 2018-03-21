@@ -1,14 +1,13 @@
-<!DOCTYPE html>
+module.exports = (error) => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <title>Error</title>
-  </head> 
+  </head>
   <body>
     <body style="margin: 0px; max-width: 100vw;">
-        <div id="root"></div>
         <div style="width: 100%; height: 100%; box-sizing: border-box; text-align: center; background-color: rgb(255, 255, 255);">
           <div style="position: relative; display: inline-flex; flex-direction: column; height: 100%; width: 1024px; max-width: 100%; overflow-x: hidden; overflow-y: auto; padding: 0.5rem; box-sizing: border-box; text-align: left; font-family: Consolas, Menlo, monospace; font-size: 11px; line-height: 1.5; color: rgb(41, 50, 56);">
             <div style="font-size: 2em; font-family: sans-serif; color: rgb(206, 17, 38);margin: 0; flex: 0 0 auto; max-height: 50%; overflow: auto;display:flex; align-items:center">
@@ -19,8 +18,7 @@
             <a style="cursor: pointer;">
               <div style="display: block; padding: 2em; margin-top: 0.5em; margin-bottom: 0.5em; overflow-x: auto; border-radius: 0.25rem; background-color: rgba(206, 17, 38, 0.05);">
                 <code style="font-family: Consolas, Menlo, monospace;">
-                  <span>./src/App.js</span><br/>
-                  <span>Syntax error: Unexpected token, expected { (6:11)</span>
+                  ${JSON.stringify(error)}
                 </code>
               </div>
             </a>
@@ -33,3 +31,4 @@
     </body>
   </body>
 </html>
+`
