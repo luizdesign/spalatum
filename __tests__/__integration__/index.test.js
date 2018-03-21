@@ -1,9 +1,18 @@
+// Lib components
 const spalatum = require('../../lib/index.js');
-const PrimaryFragmentException = require('../../lib/exceptions/primaryFragmentException.js');
+
+// Mock utils
 const templates = require('../../__mocks__/templates');
 
+// Environment
+const originalEnv = process.env.NODE_ENV;
+
 beforeEach(() => {
+  // Clear testing data
   document.body.outerHTML = null;
+
+  // Reseting Env
+  process.env.NODE_ENV = originalEnv;
 });
 
 describe('# Testing a request to a https fragment', () => {
@@ -19,26 +28,7 @@ describe('# Testing a request to a fragment that throws an error', () => {
     expect(document.body.outerHTML).toMatchSnapshot();
   });
 
-  it('Calling spalatum with a fragment with primary attribute that status code returns a 404, I expect that returns an error object', () => {
-    expect(spalatum.render(templates.notFoundPrimary, {})).rejects.toEqual(
-      new PrimaryFragmentException(
-        'Spalatum can\'t render the primary fragment (https://httpbin.org/notfound/), the returned statusCode was 404.',
-      ),
-    );
-  });
-
-  it('Calling Spalatum from development with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
-    const originalEnv = process.env.NODE_ENV;
-    process.env.NODE_ENV = 'development';
-
-    const spalatumResponse = await spalatum.render(templates.notFoundPrimary, {});
-    expect(spalatumResponse.includes('Spalatum failed to compile')).toBe(true);
-
-    process.env.NODE_ENV = originalEnv;
-  });
-
   it('Calling Spalatum from production with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
-    const originalEnv = process.env.NODE_ENV;
     const errorMessage = 'Spalatum can\'t render the primary fragment (https://httpbin.org/notfound/), the returned statusCode was 404.';
     process.env.NODE_ENV = 'production';
 
@@ -47,7 +37,12 @@ describe('# Testing a request to a fragment that throws an error', () => {
     } catch (error) {
       expect(error.message).toMatch(errorMessage);
     }
+  });
 
-    process.env.NODE_ENV = originalEnv;
+  it('Calling Spalatum from development with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
+    process.env.NODE_ENV = 'development';
+
+    const spalatumResponse = await spalatum.render(templates.notFoundPrimary, {});
+    expect(spalatumResponse.includes('Spalatum failed to compile')).toBe(true);
   });
 });
