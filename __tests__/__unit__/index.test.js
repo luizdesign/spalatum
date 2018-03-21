@@ -32,6 +32,7 @@ const originalEnv = process.env.NODE_ENV;
 beforeEach(() => {
   // Clear testing data
   document.body.outerHTML = null;
+  process.env.NODE_ENV = originalEnv;
   spalatum.clearAllCache();
   mockdate.reset();
 
