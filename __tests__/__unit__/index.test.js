@@ -7,6 +7,7 @@ const moment = require('moment');
 const spalatum = require('../../lib');
 const ParameterException = require('../../lib/exceptions/parameterException.js');
 const PrimaryFragmentException = require('../../lib/exceptions/primaryFragmentException.js');
+const ResponseException = require('../../lib/exceptions/responseException.js');
 
 // Mock utils
 const responseMock = require('../../__mocks__/response');
@@ -66,6 +67,16 @@ describe('# Testing a template with error in fragment request', async () => {
     mockGet(200, templates.simple, 'application/json');
     document.body.outerHTML = await spalatum.render(templates.simple, {});
     expect(document.body.outerHTML).toMatchSnapshot();
+  });
+
+  it.only('Calling Spalatum with a template with two errors, I expect that it throw an error', async () => {
+    mockGet(404, templates.twoErrors, 'application/json');
+
+    expect(spalatum.render(templates.twoErrors, {})).rejects.toEqual(
+      new ResponseException(
+        'Fragment status code isn\'t successful',
+      ),
+    );
   });
 });
 
