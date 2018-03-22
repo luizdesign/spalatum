@@ -60,6 +60,8 @@ describe('# Testing a template with error in fragment request', async () => {
   it('Calling Spalatum with an generic error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
     document.body.outerHTML = await spalatum.render(templates.error, {});
     expect(document.body.outerHTML).toMatchSnapshot();
+  });
+
   it('Calling Spalatum with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
     mockGet(404, templates.notFound, 'text/html');
     document.body.outerHTML = await spalatum.render(templates.notFound, {});
