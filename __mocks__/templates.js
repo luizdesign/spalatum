@@ -57,8 +57,8 @@ module.exports = {
     { href, primary },
     { href, primary },
   ),
-  twoErrors: builder(
+  withErrorAndSuccess: builder(
     { href: 'https://httpbin.org/notfound/' },
-    { href: 'https://httpbin.org/notfound/' },
+    { href: 'https://httpbin.org/' },
   ),
 };
