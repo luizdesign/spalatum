@@ -1,6 +1,6 @@
 {
   "name": "@cathodevel/spalatum",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "Render template and fragments",
   "main": "index.js",
   "engines": {

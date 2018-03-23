@@ -1,6 +1,6 @@
 # Changelog
 
-## v4.0.1 - January/2018
+## v4.1.0 - January/2018
 ### Added
 - Error stack trace page
 
