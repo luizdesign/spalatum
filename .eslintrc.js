@@ -1,6 +1,8 @@
 module.exports = {
   'extends': 'airbnb',
-  'rules': {},
+  'rules': {
+    'no-await-in-loop': 0,
+  },
   'env': {
     'mocha': true
   },
@@ -9,6 +11,6 @@ module.exports = {
     'expect': true,
     'document': true,
     'jest': true,
-    'jasmine': true
+    'jasmine': true,
   }
 };

@@ -26,6 +26,9 @@ const mockGet = (status, result, type) => {
   global.superagent.get = jest.fn().mockReturnValue(mock);
 };
 
+// Environment
+const originalEnv = process.env.NODE_ENV;
+
 beforeEach(() => {
   // Clear testing data
   document.body.outerHTML = null;
@@ -35,6 +38,9 @@ beforeEach(() => {
   // Reseting superagent
   global.superagent = originalSuperagent;
   global.superagent.get = originalGet;
+
+  // Reseting Env
+  process.env.NODE_ENV = originalEnv;
 });
 
 describe('# Testing Spalatum configuration', () => {
@@ -47,25 +53,6 @@ describe('# Testing Spalatum configuration', () => {
     expect(() => spalatum.render(42)).toThrow(
       new ParameterException('template must be a string'),
     );
-  });
-});
-
-describe('# Testing a template with error in fragment request', async () => {
-  it('Calling Spalatum with an generic error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    document.body.outerHTML = await spalatum.render(templates.error, {});
-    expect(document.body.outerHTML).toMatchSnapshot();
-  });
-
-  it('Calling Spalatum with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    mockGet(404, templates.notFound, 'text/html');
-    document.body.outerHTML = await spalatum.render(templates.notFound, {});
-    expect(document.body.outerHTML).toMatchSnapshot();
-  });
-
-  it('Calling Spalatum with an invalid content type in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    mockGet(200, templates.simple, 'application/json');
-    document.body.outerHTML = await spalatum.render(templates.simple, {});
-    expect(document.body.outerHTML).toMatchSnapshot();
   });
 });
 
@@ -109,22 +96,17 @@ describe('# Testing a template with a primary attribute', async () => {
     expect(document.body.outerHTML).toMatchSnapshot();
   });
 
-  it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 500, I expect that throw an error', async () => {
-    mockGet(500, fragmentStr, mockContentType);
-    expect(spalatum.render(templates.primary, {})).rejects.toEqual(
-      new PrimaryFragmentException(
-        'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 500.',
-      ),
-    );
-  });
+  it('Calling Spalatum from production with a template with primary attribute, when the fragment request status code returns 500, I expect that throw an error', async () => {
+    const errorMessage = 'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 500.';
+    process.env.NODE_ENV = 'production';
 
-  it('Calling Spalatum with a template with primary attribute, when the fragment request status code returns 404, I expect that throw an error', async () => {
-    mockGet(404, fragmentStr, mockContentType);
-    expect(spalatum.render(templates.primary, {})).rejects.toEqual(
-      new PrimaryFragmentException(
-        'Spalatum can\'t render the primary fragment (http://localhost:8000/), the returned statusCode was 404.',
-      ),
-    );
+    mockGet(500, fragmentStr, mockContentType);
+
+    try {
+      await spalatum.render(templates.primary, {});
+    } catch (error) {
+      expect(error.message).toMatch(errorMessage);
+    }
   });
 
   it('Calling Spalatum with a template with two primary attributes, I excepect that throw an error', async () => {

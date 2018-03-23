@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`# Testing a request to a fragment that throws an error Calling spalatum with a fragment that status code returns a 404, I expect that returns fragments rendered in blank 1`] = `
-"<body>
-    
-  
-</body>"
-`;
-
 exports[`# Testing a request to a https fragment Calling spalatum with https fragments 1`] = `
 "<body>
     

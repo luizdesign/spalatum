@@ -1,4 +1,9 @@
 # Changelog
+
+## v4.0.1 - January/2018
+### Added
+- Error stack trace page
+
 ## v4.0.0 - January/2018
 ### Added
 - Options param to render method
