@@ -82,8 +82,6 @@ describe('# Testing a template with error in fragment request', async () => {
 
     expect(spalatumResponse.replace(/\s*/g, '').includes('<body></body>')).toBe(true);
   });
-
-  it.skip('Should fetch once when it\'s called with a not found and a successful fragment', () => {});
 });
 
 describe('# Testing a template without fragments', async () => {
