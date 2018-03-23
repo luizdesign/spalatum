@@ -56,34 +56,6 @@ describe('# Testing Spalatum configuration', () => {
   });
 });
 
-describe('# Testing a template with error in fragment request', async () => {
-  it('Calling Spalatum with an generic error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    document.body.outerHTML = await spalatum.render(templates.error, {});
-    expect(document.body.outerHTML).toMatchSnapshot();
-  });
-
-  it('Calling Spalatum with a not found error in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    mockGet(404, templates.notFound, 'text/html');
-    document.body.outerHTML = await spalatum.render(templates.notFound, {});
-    expect(document.body.outerHTML).toMatchSnapshot();
-  });
-
-  it('Calling Spalatum with an invalid content type in the fragment request, I expect that returns the template with the fragments rendered in blank', async () => {
-    mockGet(200, templates.simple, 'application/json');
-    document.body.outerHTML = await spalatum.render(templates.simple, {});
-    expect(document.body.outerHTML).toMatchSnapshot();
-  });
-
-  it('Calling Spalatum from production environment with a not found template, I expect that return an empty string', async () => {
-    process.env.NODE_ENV = 'production';
-
-    mockGet(404, templates.notFound, 'text/html');
-    const spalatumResponse = await spalatum.render(templates.notFound, {});
-
-    expect(spalatumResponse.replace(/\s*/g, '').includes('<body></body>')).toBe(true);
-  });
-});
-
 describe('# Testing a template without fragments', async () => {
   it('Calling the lib with the template with no fragments, I expect that returns the same template', async () => {
     document.body.outerHTML = await spalatum.render(templates.clean, {});
