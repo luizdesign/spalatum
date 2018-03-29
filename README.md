@@ -1,9 +1,6 @@
 # Spalatum
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
 
-[![build status](http://gitlab.devel/frontend-platform/spalatum/badges/master/build.svg)](http://gitlab.devel/frontend-platform/spalatum/commits/master)
-[![coverage report](http://gitlab.devel/frontend-platform/spalatum/badges/master/coverage.svg)](http://gitlab.devel/frontend-platform/spalatum/commits/master)
-
 Spalatum is a library to merge different fragment sources into a single template. With Spalatum you can get multiple external fragments and serve all together in your html page. This project is based on [Tailor](https://github.com/zalando/tailor).
 
 Some of Spalatum features and benefits:
