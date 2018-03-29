@@ -59,6 +59,17 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "joseluizcoe",
+      "name": "José Luiz Coe",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/32010?v=4",
+      "profile": "https://br.linkedin.com/in/joseluizcoe",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
     }
   ],
   "repoType": "github"
