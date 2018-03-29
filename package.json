@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.devel:frontend-platform/spalatum.git"
+    "url": "git@github.com:catho/spalatum.git"
   },
   "keywords": [
     "render",
     "fragments"
   ],
   "author": "Catho Online",
-  "license": "MIT",
+  "license": "GPL",
   "dependencies": {
     "bunyan": "^1.8.12",
     "cheerio": "^1.0.0-rc.2",

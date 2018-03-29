@@ -19,7 +19,7 @@ Before start, you must understand Fragment.
 
 ### Fragment
 
-We understand "Fragment" as every endpoint hosted on http(s) server that provide the content you want to include in your page. If you want to use some specific js or css, you can use `script`, `style`, `Link` or any other tags in your template page to provide this resources. Check our **[example app using *Spalatum*](http://gitlab.devel/frontend-platform/spalatum-app-skeleton)** for the skeleton implementation.
+We understand "Fragment" as every endpoint hosted on http(s) server that provide the content you want to include in your page. If you want to use some specific js or css, you can use `script`, `style`, `Link` or any other tags in your template page to provide this resources. Check our **[example app using *Spalatum*](https://github.com/catho/spalatum-app-skeleton)** for the skeleton implementation.
 
 #### Fragment Tag
 You can represent a Fragment using  the `<fragment />` tag with this attributes: href, proxy, cache.
@@ -104,20 +104,14 @@ If you want to know how this cache works "under the hood", see the [cache diagra
 ---
 
 ## Instalation
-*IMPORTANT:* To install *Spalatum*, you must to add a _**.npmrc**_ file at project root with this content:
-
-```
-registry="http://armazem.devel:4873/"
-```
-
-Then, use the command below to add *Spalatum* as your project dependencie:
+Use the command below to add *Spalatum* as your project dependencie:
 ```sh
 # You can use yarn, as well
-npm install @cathodevel/spalatum
+npm install spalatum
 ```
 
 ## Getting Started
-To get started, you can create your own app using `"@cathodevel/spalatum": "^VERSION"` as dependencie in your `package.json`; or clone the **[app skeleton using nodejs and *Spalatum* (RECOMENDED)](http://gitlab.devel/frontend-platform/spalatum-app-skeleton)** that we provide.
+To get started, you can create your own app using `"spalatum": "^VERSION"` as dependencie in your `package.json`; or clone the **[app skeleton using nodejs and *Spalatum* (RECOMENDED)](https://github.com/catho/spalatum-app-skeleton)** that we provide.
 
 ### Example
 Given you have this template:
@@ -171,7 +165,7 @@ You can use multiple fragments together to assembly a web application:
 
 This nodejs example create a Spalatum instance, setting to it a cache object, then call the render method passing to it a template string that returns a Promise instance, which will be resolved with the parsed html or reject in error case:
 ```javascript
-const { spalatum } = require('@cathodevel/spalatum');
+const spalatum = require('spalatum');
 const express = require('express');
 
 const app = express();
@@ -180,7 +174,7 @@ app.get('/', async (req, res) => {
   const template = `
     <html>
       <body>
-        <fragment href="www.catho.com.br" />
+        <fragment href="https://github.com/catho/spalatum" />
       </body>
     </html>
   `;
@@ -190,6 +184,21 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(3000);
+```
+
+Also, the render method accepts a custom header object, if you need to pass headers between all fragments.
+
+```javascript
+  ...
+
+  const headers = {
+    Cookies: 'foo=bar',
+    'Content-type': 'text/html',
+  }
+
+  const templateResult = await spalatum.render(template, { headers });
+
+  ...
 ```
 
 ## Caching
@@ -272,8 +281,8 @@ When you call the method `Spalatum.clearAllCache()`, all cached endpoints will b
 
 ## Contributing
 
-- Check the [issues](http://gitlab.devel/frontend-platform/spalatum/issues) to ensure that there is not someone already working on it
-- Check our [contribution guide](http://gitlab.devel/frontend-platform/spalatum/blob/master/CONTRIBUTING.MD)
+- Check the [issues](https://github.com/catho/spalatum/issues) to ensure that there is not someone already working on it
+- Check our [contribution guide](https://github.com/catho/spalatum/blob/master/CONTRIBUTING.MD)
 
 ### Technical prerequisites
 - [Git](https://git-scm.com/)
@@ -281,7 +290,7 @@ When you call the method `Spalatum.clearAllCache()`, all cached endpoints will b
 
 Clone this repository:
 ```sh
-git clone http://gitlab.devel/frontend-platform/spalatum
+git clone https://github.com/catho/spalatum
 ```
 
 Access the folder and install the project's dependencies:
@@ -302,7 +311,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars1.githubusercontent.com/u/755101?v=4" width="100px;"/><br /><sub><b>Daniel Silva</b></sub>](https://github.com/ddsilva)<br />[💻](https://github.com/catho/Spalatum/commits?author=ddsilva "Code") [📖](https://github.com/catho/Spalatum/commits?author=ddsilva "Documentation") [👀](#review-ddsilva "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/2933509?v=4" width="100px;"/><br /><sub><b>Luiz Kota</b></sub>](https://github.com/luizdesign)<br />[💻](https://github.com/catho/Spalatum/commits?author=luizdesign "Code") [📖](https://github.com/catho/Spalatum/commits?author=luizdesign "Documentation") [👀](#review-luizdesign "Reviewed Pull Requests") | [<img src="https://avatars3.githubusercontent.com/u/32010?v=4" width="100px;"/><br /><sub><b>José Luiz Coe</b></sub>](https://br.linkedin.com/in/joseluizcoe)<br />[💻](https://github.com/catho/Spalatum/commits?author=joseluizcoe "Code") [📖](https://github.com/catho/Spalatum/commits?author=joseluizcoe "Documentation") [👀](#review-joseluizcoe "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/6536985?v=4" width="100px;"/><br /><sub><b>Gabriel Gonçalves Daltoso</b></sub>](http://ggdaltoso.info)<br />[💻](https://github.com/catho/Spalatum/commits?author=ggdaltoso "Code") [👀](#review-ggdaltoso "Reviewed Pull Requests") | [<img src="https://avatars3.githubusercontent.com/u/4368481?v=4" width="100px;"/><br /><sub><b>Alan Oliv.</b></sub>](https://github.com/nuncaesqueca)<br />[💻](https://github.com/catho/Spalatum/commits?author=nuncaesqueca "Code") [👀](#review-nuncaesqueca "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/13424727?v=4" width="100px;"/><br /><sub><b>Allysson dos Santos</b></sub>](https://allysson.me/)<br />[💻](https://github.com/catho/Spalatum/commits?author=allyssonsantos "Code") [📖](https://github.com/catho/Spalatum/commits?author=allyssonsantos "Documentation") [👀](#review-allyssonsantos "Reviewed Pull Requests") |
+| [<img src="https://avatars1.githubusercontent.com/u/13424727?v=4" width="100px;"/><br /><sub><b>Allysson dos Santos</b></sub>](https://allysson.me/)<br />[💻](https://github.com/catho/Spalatum/commits?author=allyssonsantos "Code") [📖](https://github.com/catho/Spalatum/commits?author=allyssonsantos "Documentation") [👀](#review-allyssonsantos "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/755101?v=4" width="100px;"/><br /><sub><b>Daniel Silva</b></sub>](https://github.com/ddsilva)<br />[💻](https://github.com/catho/Spalatum/commits?author=ddsilva "Code") [📖](https://github.com/catho/Spalatum/commits?author=ddsilva "Documentation") [👀](#review-ddsilva "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/2933509?v=4" width="100px;"/><br /><sub><b>Luiz Kota</b></sub>](https://github.com/luizdesign)<br />[💻](https://github.com/catho/Spalatum/commits?author=luizdesign "Code") [📖](https://github.com/catho/Spalatum/commits?author=luizdesign "Documentation") [👀](#review-luizdesign "Reviewed Pull Requests") | [<img src="https://avatars3.githubusercontent.com/u/32010?v=4" width="100px;"/><br /><sub><b>José Luiz Coe</b></sub>](https://br.linkedin.com/in/joseluizcoe)<br />[💻](https://github.com/catho/Spalatum/commits?author=joseluizcoe "Code") [📖](https://github.com/catho/Spalatum/commits?author=joseluizcoe "Documentation") [👀](#review-joseluizcoe "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/6536985?v=4" width="100px;"/><br /><sub><b>Gabriel Gonçalves Daltoso</b></sub>](http://ggdaltoso.info)<br />[💻](https://github.com/catho/Spalatum/commits?author=ggdaltoso "Code") [📖](https://github.com/catho/Spalatum/commits?author=ggdaltoso "Documentation") [👀](#review-ggdaltoso "Reviewed Pull Requests") | [<img src="https://avatars3.githubusercontent.com/u/4368481?v=4" width="100px;"/><br /><sub><b>Alan Oliv.</b></sub>](https://github.com/nuncaesqueca)<br />[💻](https://github.com/catho/Spalatum/commits?author=nuncaesqueca "Code") [👀](#review-nuncaesqueca "Reviewed Pull Requests") |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
