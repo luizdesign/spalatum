@@ -16,6 +16,17 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "allyssonsantos",
+      "name": "Allysson dos Santos",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/13424727?v=4",
+      "profile": "https://github.com/allyssonsantos",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
     }
   ],
   "repoType": "github"
