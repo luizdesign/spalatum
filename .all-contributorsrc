@@ -38,6 +38,17 @@
         "doc",
         "review"
       ]
+    },
+    {
+      "login": "luizdesign",
+      "name": "Luiz Kota",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2933509?v=4",
+      "profile": "https://github.com/luizdesign",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
     }
   ],
   "repoType": "github"
