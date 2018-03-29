@@ -7,7 +7,7 @@ commit:
       - '#[0-9]+'
 approvals:
   minimum: 2
-  ignore: none
+  ignore: pr_opener
   pattern: "^(:\\+1:|👍)$"
   veto:
     pattern: "^(:\\-1:|👎)$"
