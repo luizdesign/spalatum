@@ -49,6 +49,16 @@
         "doc",
         "review"
       ]
+    },
+    {
+      "login": "nuncaesqueca",
+      "name": "Alan Oliv.",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/4368481?v=4",
+      "profile": "https://github.com/nuncaesqueca",
+      "contributions": [
+        "code",
+        "review"
+      ]
     }
   ],
   "repoType": "github"
