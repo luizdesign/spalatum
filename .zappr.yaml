@@ -11,6 +11,10 @@ approvals:
   pattern: "^(:\\+1:|👍)$"
   veto:
     pattern: "^(:\\-1:|👎)$"
+  from:
+    orgs:
+      - catho
+    collaborators: true
 specification:
   title:
     minimum-length:
