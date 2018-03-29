@@ -1,0 +1,22 @@
+{
+  "projectName": "Spalatum",
+  "projectOwner": "catho",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "ggdaltoso",
+      "name": "Gabriel Gonçalves Daltoso",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6536985?v=3",
+      "profile": "http://ggdaltoso.info",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    }
+  ],
+  "repoType": "github"
+}
