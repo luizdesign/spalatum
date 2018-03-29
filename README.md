@@ -1,4 +1,5 @@
 # Spalatum
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
 
 [![build status](http://gitlab.devel/frontend-platform/spalatum/badges/master/build.svg)](http://gitlab.devel/frontend-platform/spalatum/commits/master)
 [![coverage report](http://gitlab.devel/frontend-platform/spalatum/badges/master/coverage.svg)](http://gitlab.devel/frontend-platform/spalatum/commits/master)
@@ -294,3 +295,15 @@ npm test
 # or
 npm run coverage
 ```
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars1.githubusercontent.com/u/755101?v=4" width="100px;"/><br /><sub><b>Daniel Silva</b></sub>](https://github.com/ddsilva)<br />[💻](https://github.com/catho/Spalatum/commits?author=ddsilva "Code") [📖](https://github.com/catho/Spalatum/commits?author=ddsilva "Documentation") [👀](#review-ddsilva "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/2933509?v=4" width="100px;"/><br /><sub><b>Luiz Kota</b></sub>](https://github.com/luizdesign)<br />[💻](https://github.com/catho/Spalatum/commits?author=luizdesign "Code") [📖](https://github.com/catho/Spalatum/commits?author=luizdesign "Documentation") [👀](#review-luizdesign "Reviewed Pull Requests") | [<img src="https://avatars3.githubusercontent.com/u/32010?v=4" width="100px;"/><br /><sub><b>José Luiz Coe</b></sub>](https://br.linkedin.com/in/joseluizcoe)<br />[💻](https://github.com/catho/Spalatum/commits?author=joseluizcoe "Code") [📖](https://github.com/catho/Spalatum/commits?author=joseluizcoe "Documentation") [👀](#review-joseluizcoe "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/6536985?v=4" width="100px;"/><br /><sub><b>Gabriel Gonçalves Daltoso</b></sub>](http://ggdaltoso.info)<br />[💻](https://github.com/catho/Spalatum/commits?author=ggdaltoso "Code") [👀](#review-ggdaltoso "Reviewed Pull Requests") | [<img src="https://avatars3.githubusercontent.com/u/4368481?v=4" width="100px;"/><br /><sub><b>Alan Oliv.</b></sub>](https://github.com/nuncaesqueca)<br />[💻](https://github.com/catho/Spalatum/commits?author=nuncaesqueca "Code") [👀](#review-nuncaesqueca "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/13424727?v=4" width="100px;"/><br /><sub><b>Allysson dos Santos</b></sub>](https://allysson.me/)<br />[💻](https://github.com/catho/Spalatum/commits?author=allyssonsantos "Code") [📖](https://github.com/catho/Spalatum/commits?author=allyssonsantos "Documentation") [👀](#review-allyssonsantos "Reviewed Pull Requests") |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!

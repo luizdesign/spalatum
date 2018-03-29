@@ -1,33 +1,14 @@
 {
   "projectName": "Spalatum",
   "projectOwner": "catho",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
     "README.md"
   ],
   "imageSize": 100,
   "commit": true,
   "contributors": [
-    {
-      "login": "ggdaltoso",
-      "name": "Gabriel Gonçalves Daltoso",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/6536985?v=4",
-      "profile": "http://ggdaltoso.info",
-      "contributions": [
-        "code",
-        "review"
-      ]
-    },
-    {
-      "login": "allyssonsantos",
-      "name": "Allysson dos Santos",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/13424727?v=4",
-      "profile": "https://github.com/allyssonsantos",
-      "contributions": [
-        "code",
-        "doc",
-        "review"
-      ]
-    },
     {
       "login": "ddsilva",
       "name": "Daniel Silva",
@@ -51,6 +32,27 @@
       ]
     },
     {
+      "login": "joseluizcoe",
+      "name": "José Luiz Coe",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/32010?v=4",
+      "profile": "https://br.linkedin.com/in/joseluizcoe",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "ggdaltoso",
+      "name": "Gabriel Gonçalves Daltoso",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6536985?v=4",
+      "profile": "http://ggdaltoso.info",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
       "login": "nuncaesqueca",
       "name": "Alan Oliv.",
       "avatar_url": "https://avatars3.githubusercontent.com/u/4368481?v=4",
@@ -61,16 +63,15 @@
       ]
     },
     {
-      "login": "joseluizcoe",
-      "name": "José Luiz Coe",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/32010?v=4",
-      "profile": "https://br.linkedin.com/in/joseluizcoe",
+      "login": "allyssonsantos",
+      "name": "Allysson dos Santos",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/13424727?v=4",
+      "profile": "https://allysson.me/",
       "contributions": [
         "code",
         "doc",
         "review"
       ]
     }
-  ],
-  "repoType": "github"
+  ]
 }
