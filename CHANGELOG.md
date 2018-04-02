@@ -44,22 +44,22 @@
 
 ## v2.2.0 - October/2017
 ### Added
-- Remove duplicated assets in a template (see more in [#9](http://gitlab.devel/frontend-platform/spalatum/merge_requests/9))
+- Remove duplicated assets in a template
 
 ## v2.1.1 - October/2017
 ### Changed
-- Change log date format to ISO (see more in [#8](http://gitlab.devel/frontend-platform/spalatum/merge_requests/8))
+- Change log date format to ISO
 
 ## v2.1.0 - October/2017
 ### Added
-- Add an specific header to Spalatum requests. (see more in [#7](http://gitlab.devel/frontend-platform/spalatum/merge_requests/7))
-- Add logger to log every requests made by Spalatum. (see more in [#6](http://gitlab.devel/frontend-platform/spalatum/merge_requests/6))
-- Tests Refactoring (see more in [#5](http://gitlab.devel/frontend-platform/spalatum/merge_requests/5))
+- Add an specific header to Spalatum requests.
+- Add logger to log every requests made by Spalatum.
+- Tests Refactoring
 
 ## v2.0.0 - October/2017
 ### Changed
 - Remove all references from global.cache and it's now a cache Class to manage the cache
-- Spalatum is now an object with methods (see more in [#4](http://gitlab.devel/frontend-platform/spalatum/merge_requests/4)):
+- Spalatum is now an object with methods
   -- **render**: Recieve a template with fragments and make http request to fragment href and returns the parsed html.
   -- **getCache**: returns cache object
   -- **clearCacheItem**: clear a specific cache item by endpoint.
@@ -67,10 +67,10 @@
 
 ## v1.0.0 - October/2017
 ### Added
-- Cache management (see more in [#1](http://gitlab.devel/frontend-platform/spalatum/merge_requests/1))
+- Cache management
 
 ### Changed
-- Spalatum API now its a class definition. (see more in [#1](http://gitlab.devel/frontend-platform/spalatum/merge_requests/1))
+- Spalatum API now its a class definition.
 - Spalatum is a **constructor**, that have four static methods:
   -- **render**: Recieve a template with fragments and make http request to fragment href and returns the parsed html.
   -- **getCache**: returns cache object
@@ -79,7 +79,7 @@
 
 ## v0.6.0 - October/2017
 ### Added
-- New fragment attribute **primary** (see more in [#2](http://gitlab.devel/frontend-platform/spalatum/merge_requests/2))
+- New fragment attribute **primary**
 
 ## v0.5.0 - October/2017
 ### Changed
