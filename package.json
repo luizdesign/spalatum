@@ -9,6 +9,7 @@
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage",
+    "codecov": "cat coverage/lcov.info | npx codecov",
     "lint": "eslint ./lib/** ./__*/** --ext .js",
     "prepush": "npm run lint"
   },
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
+    "codecov": "^3.0.0",
     "eslint": "^3.14.1",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-plugin-import": "^2.2.0",
