@@ -1,5 +1,5 @@
 # Spalatum
-[![Build Status](https://travis-ci.org/catho/spalatum.svg?branch=master)](https://travis-ci.org/catho/spalatum) [![Coverage Status](https://coveralls.io/repos/github/luizdesign/spalatum/badge.svg?branch=master)](https://coveralls.io/github/luizdesign/spalatum?branch=master) [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
+[![Build Status](https://travis-ci.org/catho/spalatum.svg?branch=master)](https://travis-ci.org/catho/spalatum) [![Coverage Status](https://coveralls.io/repos/github/catho/spalatum/badge.svg?branch=master)](https://coveralls.io/github/catho/spalatum?branch=master) [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
 
 Spalatum is a library to merge different fragment sources into a single template. With Spalatum you can get multiple external fragments and serve all together in your html page. This project is based on [Tailor](https://github.com/zalando/tailor).
 
