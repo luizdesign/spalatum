@@ -2,7 +2,8 @@ language: node_js
 node_js:
   - "node"
 install:
-  - npm install
+  - yarn
+cache: yarn
 script:
   - npm run coverage
 after_script:
