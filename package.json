@@ -22,14 +22,14 @@
     "fragments"
   ],
   "author": "Catho Online",
-  "license": "GPL",
+  "license": "GPL-3.0-only",
   "dependencies": {
     "bunyan": "^1.8.12",
     "cheerio": "^1.0.0-rc.2",
     "http-proxy": "^1.16.2",
     "mockdate": "^2.0.2",
-    "moment": "^2.18.1",
-    "superagent": "^3.6.0",
+    "moment": "^2.22.0",
+    "superagent": "^3.8.2",
     "superagent-defaults": "^0.1.14",
     "superagent-proxy": "^1.0.2"
   },
