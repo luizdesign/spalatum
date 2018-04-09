@@ -36,15 +36,9 @@ module.exports = {
   https: builder('https://httpbin.org/html'),
   error: builder('http://localhost:1000/'),
   notFound: builder('https://httpbin.org/notfound/'),
-  primary: builder(
-    { href, primary },
-  ),
-  proxy: builder(
-    { href: 'http://localhost:7000/', proxy },
-  ),
-  singleCache: builder(
-    { href: 'http://localhost:9000/', cache },
-  ),
+  primary: builder({ href, primary }),
+  proxy: builder({ href: 'http://localhost:7000/', proxy }),
+  singleCache: builder({ href: 'http://localhost:9000/', cache }),
   cache: builder(
     { href: 'http://localhost:9000/', cache },
     { href: 'http://localhost:9001/', cache },
