@@ -45,14 +45,10 @@ beforeEach(() => {
 
 describe('# Testing Spalatum configuration', () => {
   it('Calling Spalatum without the template parameter, I expect that returns a exception', () => {
-    expect(() => spalatum.render()).toThrow(
-      new ParameterException('template is mandatory'),
-    );
+    expect(() => spalatum.render()).toThrow(new ParameterException('template is mandatory'));
   });
   it('Calling Spalatum with the template parameter different of a string, I expect that returns a exception', () => {
-    expect(() => spalatum.render(42)).toThrow(
-      new ParameterException('template must be a string'),
-    );
+    expect(() => spalatum.render(42)).toThrow(new ParameterException('template must be a string'));
   });
 });
 
@@ -112,9 +108,7 @@ describe('# Testing a template with a primary attribute', async () => {
   it('Calling Spalatum with a template with two primary attributes, I excepect that throw an error', async () => {
     mockGet(200, fragmentStr, mockContentType);
     expect(() => spalatum.render(templates.twoPrimary, {}))
-      .toThrow(
-        new PrimaryFragmentException('Must have only one fragment tag as primary'),
-      );
+      .toThrow(new PrimaryFragmentException('Must have only one fragment tag as primary'));
   });
 });
 
