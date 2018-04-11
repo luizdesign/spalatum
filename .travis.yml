@@ -4,7 +4,8 @@ node_js:
   - "8"
   - "7.10"
 install:
-  - npm install
+  - yarn
+cache: yarn
 script:
   - npm run coverage
 after_script:
