@@ -33,7 +33,6 @@
     "superagent-proxy": "^1.0.2"
   },
   "devDependencies": {
-    "mockdate": "^2.0.2",
     "babel-preset-es2015": "^6.24.1",
     "codecov": "^3.0.0",
     "eslint": "^4.19.1",
@@ -42,7 +41,8 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "husky": "^0.14.3",
-    "jest": "^22.4.3"
+    "jest": "^22.4.3",
+    "mockdate": "^2.0.2"
   },
   "jest": {
     "modulePathIgnorePatterns": [
